@@ -5,7 +5,7 @@ const appDirectories = new AppDirectory({
 	appName: app.isPackaged ? "Lovely Inbox (Dev)" : "Lovely Inbox",
 });
 
-interface IConfig {
+interface IApplicationConfig {
 	isDev: boolean;
 
 	directories: {
@@ -16,7 +16,7 @@ interface IConfig {
 	};
 }
 
-export const Config: ReadOnly<IConfig> = {
+export const ApplicationConfig: ReadOnly<IApplicationConfig> = {
 	isDev: app.isPackaged,
 
 	directories: {

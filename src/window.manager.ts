@@ -1,7 +1,7 @@
 import { app, BrowserWindow } from "electron";
 
 import icon from "../images/icons.ico";
-import { Config } from "./config";
+import { ApplicationConfig } from "./config";
 import logger from "./logger";
 
 interface IWindowOptions {
