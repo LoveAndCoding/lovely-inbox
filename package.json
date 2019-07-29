@@ -1,0 +1,100 @@
+{
+	"name": "lovely-inbox",
+	"productName": "lovely-inbox",
+	"version": "1.0.0",
+	"description": "A lovely little inbox app",
+	"main": ".webpack/main",
+	"scripts": {
+		"start": "electron-forge start",
+		"package": "electron-forge package",
+		"make": "electron-forge make",
+		"publish": "electron-forge publish",
+		"lint": "echo \"No linting configured\""
+	},
+	"keywords": [],
+	"author": "Android",
+	"license": "MIT",
+	"config": {
+		"forge": {
+			"packagerConfig": {},
+			"makers": [
+				{
+					"name": "@electron-forge/maker-squirrel",
+					"config": {
+						"name": "lovely_inbox_2"
+					}
+				},
+				{
+					"name": "@electron-forge/maker-zip",
+					"platforms": [
+						"darwin"
+					]
+				},
+				{
+					"name": "@electron-forge/maker-deb",
+					"config": {}
+				},
+				{
+					"name": "@electron-forge/maker-rpm",
+					"config": {}
+				}
+			],
+			"plugins": [
+				[
+					"@electron-forge/plugin-webpack",
+					{
+						"mainConfig": "./webpack.main.config.js",
+						"renderer": {
+							"config": "./webpack.renderer.config.js",
+							"entryPoints": [
+								{
+									"html": "./templates/index.html",
+									"js": "./src/renderer.tsx",
+									"additionalChunks": [
+										"./styles/base.less"
+									],
+									"name": "main_window"
+								}
+							]
+						}
+					}
+				]
+			]
+		}
+	},
+	"dependencies": {
+		"@types/react": "^16.8.23",
+		"@types/react-dom": "^16.8.4",
+		"@types/react-router-dom": "^4.3.4",
+		"appdirectory": "^0.1.0",
+		"electron-squirrel-startup": "^1.0.0",
+		"keytar": "^4.12.0",
+		"react": "^16.8.6",
+		"react-dom": "^16.8.6",
+		"react-redux": "^7.1.0",
+		"react-router-dom": "^5.0.1",
+		"redux": "^4.0.1",
+		"source-sans-pro": "^2.45.0"
+	},
+	"devDependencies": {
+		"@electron-forge/cli": "6.0.0-beta.39",
+		"@electron-forge/maker-deb": "6.0.0-beta.39",
+		"@electron-forge/maker-rpm": "6.0.0-beta.39",
+		"@electron-forge/maker-squirrel": "6.0.0-beta.39",
+		"@electron-forge/maker-zip": "6.0.0-beta.39",
+		"@electron-forge/plugin-webpack": "6.0.0-beta.39",
+		"@marshallofsound/webpack-asset-relocator-loader": "^0.5.0",
+		"css-loader": "^3.0.0",
+		"electron": "5.0.6",
+		"file-loader": "^4.0.0",
+		"less": "^3.9.0",
+		"less-loader": "^5.0.0",
+		"mini-css-extract-plugin": "^0.7.0",
+		"node-loader": "^0.6.0",
+		"redux-devtools": "^3.5.0",
+		"source-map-loader": "^0.2.4",
+		"ts-loader": "^6.0.4",
+		"tslint": "^5.18.0",
+		"typescript": "^3.5.2"
+	}
+}
