@@ -54,6 +54,14 @@
 										"./styles/base.less"
 									],
 									"name": "main_window"
+								},
+								{
+									"html": "./templates/onboarding.html",
+									"js": "./src/renderer.tsx",
+									"additionalChunks": [
+										"./styles/base.less"
+									],
+									"name": "onboarding"
 								}
 							]
 						}

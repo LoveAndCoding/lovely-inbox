@@ -1,35 +1,25 @@
 import { app, BrowserWindow, Tray } from "electron";
 
 import { Config } from "./config";
-import icons from "../images/icons.ico";
+import WindowManager from "./window.manager";
 
-let mainWindow: Electron.BrowserWindow;
-let mainWindowTrayIcon: Electron.Tray;
+const windower = new WindowManager(
+	MAIN_WINDOW_WEBPACK_ENTRY,
+	ONBOARDING_WEBPACK_ENTRY,
+);
 
-function createWindow() {
-	// Create the browser window.
-	mainWindow = new BrowserWindow({
-		height: 700,
-		width: 1000,
-		title: "Lovely Inbox",
-	});
-
-	// Create the tray icon
-	// mainWindowTrayIcon = new Tray(icons);
-
-	// and load the index.html of the app.
-	mainWindow.loadURL(MAIN_WINDOW_WEBPACK_ENTRY);
-
-	// Emitted when the window is closed.
-	mainWindow.on("closed", () => {
-		// Dereference the window object, usually you would store windows
-		// in an array if your app supports multi windows, this is the time
-		// when you should delete the corresponding element.
-		mainWindow = null;
-	});
+/**
+ * bringAppUp
+ *
+ * Initializes and brings up the application window
+ */
+function bringAppUp() {
+	// TODO(alexis): Load onboarding material instead if the user has not
+	// configured the app
+	windower.openInbox();
 }
 
-app.on("ready", createWindow);
+app.on("ready", bringAppUp);
 
 // Quit when all windows are closed.
 app.on("window-all-closed", () => {
@@ -44,6 +34,6 @@ app.on("activate", () => {
 	// On OS X it"s common to re-create a window in the app when the
 	// dock icon is clicked and there are no other windows open.
 	if (mainWindow === null) {
-		createWindow();
+		bringAppUp();
 	}
 });
