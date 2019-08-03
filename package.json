@@ -57,7 +57,7 @@
 								},
 								{
 									"html": "./templates/onboarding.html",
-									"js": "./src/renderer.tsx",
+									"js": "./src/onboarding.tsx",
 									"additionalChunks": [
 										"./styles/base.less"
 									],
@@ -74,6 +74,7 @@
 		"@types/react": "^16.8.23",
 		"@types/react-dom": "^16.8.4",
 		"@types/react-router-dom": "^4.3.4",
+		"aphrodite": "^2.3.1",
 		"appdirectory": "^0.1.0",
 		"electron-squirrel-startup": "^1.0.0",
 		"keytar": "^4.12.0",
@@ -82,6 +83,7 @@
 		"react-redux": "^7.1.0",
 		"react-router-dom": "^5.0.1",
 		"redux": "^4.0.1",
+		"source-code-pro": "^2.30.1",
 		"source-sans-pro": "^2.45.0",
 		"winston": "^3.2.1"
 	},

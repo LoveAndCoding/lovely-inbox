@@ -1,5 +1,6 @@
 import { app, BrowserWindow, Tray } from "electron";
 
+import { UserConfig } from "./config";
 import logger from "./logger";
 import WindowManager from "./window.manager";
 
@@ -16,7 +17,13 @@ const windower = new WindowManager(
 function bringAppUp() {
 	// TODO(alexis): Load onboarding material instead if the user has not
 	// configured the app
-	windower.openInbox();
+	if (UserConfig.completedOnBoarding) {
+		logger.info("User has completed onboarding; Load Inbox");
+		windower.openInbox();
+	} else {
+		logger.info("User has not completed onboarding; Run them through it");
+		windower.openOnboarding();
+	}
 }
 
 app.on("ready", bringAppUp);

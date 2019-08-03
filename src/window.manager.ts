@@ -1,14 +1,10 @@
-import { app, BrowserWindow } from "electron";
+import { app, BrowserWindow, BrowserWindowConstructorOptions } from "electron";
 
 import icon from "../images/icons.ico";
 import { ApplicationConfig } from "./config";
 import logger from "./logger";
 
-interface IWindowOptions {
-	title: string;
-	width: number;
-	height: number;
-}
+interface IWindowOptions extends BrowserWindowConstructorOptions {}
 
 export default class WindowManager {
 	private windows: BrowserWindow[];
@@ -19,14 +15,12 @@ export default class WindowManager {
 	}
 
 	public create(url: string): BrowserWindow;
-	public create(url: string, options: WindowOptions): BrowserWindow {
-		options = options || {};
-		const window = new BrowserWindow({
-			height: options.height || 720,
-			icon,
-			title: options.title || "Lovely Inbox",
-			width: options.width || 1280,
-		});
+	public create(url: string, options: IWindowOptions): BrowserWindow {
+		options = Object.assign(
+			{ height: 720, title: "Lovely Inbox", width: 1280 },
+			options,
+		);
+		const window = new BrowserWindow(options);
 
 		window.loadURL(url);
 
@@ -57,6 +51,14 @@ export default class WindowManager {
 	public openOnboarding() {
 		const onBoardingWindow = (this.mainWindow = this.create(
 			this.onboardingUrl,
+			{
+				frame: false,
+				fullscreenable: false,
+				height: 600,
+				maximizable: false,
+				resizable: false,
+				width: 600,
+			},
 		));
 		this.mainWindow.on("closed", () => {
 			if (onBoardingWindow === this.mainWindow) {
