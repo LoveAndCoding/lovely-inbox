@@ -2,9 +2,24 @@ import * as AppDirectory from "appdirectory";
 import * as path from "path";
 import * as winston from "winston";
 
-import { ApplicationConfig } from "./config";
+// NOTE(alexis): To bypass loading all of our config, which may use our logger,
+// we load the ApplicationConfig directly
+import { ApplicationConfig } from "./config/application";
 
-export default winston.createLogger({
+// TODO(alexis): Due to a bug in how this is loaded, we have to load these
+// logger formats manually
+const combine = require("logform/combine");
+const printf = require("logform/printf");
+const timestamp = require("logform/timestamp");
+
+const logger = winston.createLogger({
+	format: combine(
+		timestamp(),
+		printf(
+			({ level, message, timestamp }) =>
+				`${timestamp} [${level.toUpperCase()}]: ${message}`,
+		),
+	),
 	transports: [
 		ApplicationConfig.isDev
 			? new winston.transports.Console()
@@ -17,3 +32,7 @@ export default winston.createLogger({
 			  }),
 	],
 });
+
+logger.debug("Logger Initialized");
+
+export default logger;

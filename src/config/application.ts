@@ -17,7 +17,7 @@ interface IApplicationConfig {
 }
 
 export const ApplicationConfig: ReadOnly<IApplicationConfig> = {
-	isDev: app.isPackaged,
+	isDev: !app.isPackaged,
 
 	directories: {
 		cache: appDirectories.userCache(),
