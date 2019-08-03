@@ -88,7 +88,7 @@ export default class FileStorage extends Storage {
 		}
 	}
 
-	protected writeCacheToDisk() {
+	protected writeCacheToDisk(): Promise<boolean> {
 		return new Promise((resolve, reject) => {
 			fs.writeFile(
 				this.path,
@@ -98,7 +98,7 @@ export default class FileStorage extends Storage {
 					if (err) {
 						return reject(err);
 					}
-					resolve();
+					resolve(true);
 				},
 			);
 		});

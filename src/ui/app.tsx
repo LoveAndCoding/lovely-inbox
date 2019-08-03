@@ -1,5 +1,5 @@
 import * as React from "react";
-import { HashRouter as Router, Route, Link } from "react-router-dom";
+import { HashRouter as Router, Link, Route } from "react-router-dom";
 
 function Index() {
 	return <h2>Home</h2>;
