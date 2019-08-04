@@ -1,25 +1,18 @@
+import { faWindowMinimize } from "@fortawesome/pro-light-svg-icons";
+import { remote } from "electron";
 import * as React from "react";
 
-import MenuStyles from "./styles";
+import WindowBarButton from "./button";
 
-interface IMinimizeProps {
-	disabled: boolean;
-	onLightBackground: boolean;
-}
+export default class WindowMinimize extends WindowBarButton {
+	protected get icon() {
+		return faWindowMinimize;
+	}
+	protected get text() {
+		return "Minimize Window";
+	}
 
-export default class WindowMinimize extends React.Component<IMinimizeProps> {
-	public render() {
-		return (
-			<button
-				className={
-					this.props.onLightBackground
-						? MenuStyles.buttonDark
-						: MenuStyles.button
-				}
-				title="Minimize Window"
-			>
-				_
-			</button>
-		);
+	protected handleClick() {
+		remote.getCurrentWindow().minimize();
 	}
 }

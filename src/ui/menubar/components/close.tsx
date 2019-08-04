@@ -1,25 +1,17 @@
+import { faTimes } from "@fortawesome/pro-light-svg-icons";
 import * as React from "react";
 
-import MenuStyles from "./styles";
+import WindowBarButton from "./button";
 
-interface ICloseProps {
-	disabled: boolean;
-	onLightBackground: boolean;
-}
+export default class WindowClose extends WindowBarButton {
+	protected get icon() {
+		return faTimes;
+	}
+	protected get text() {
+		return "Close Window";
+	}
 
-export default class WindowClose extends React.Component<ICloseProps> {
-	public render() {
-		return (
-			<button
-				className={
-					this.props.onLightBackground
-						? MenuStyles.buttonDark
-						: MenuStyles.button
-				}
-				title="Close Window"
-			>
-				X
-			</button>
-		);
+	protected handleClick() {
+		window.close();
 	}
 }

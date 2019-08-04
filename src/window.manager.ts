@@ -17,7 +17,15 @@ export default class WindowManager {
 	public create(url: string): BrowserWindow;
 	public create(url: string, options: IWindowOptions): BrowserWindow {
 		options = Object.assign(
-			{ height: 720, title: "Lovely Inbox", width: 1280 },
+			{
+				height: 720,
+				title: "Lovely Inbox",
+				webPreferences: {
+					nodeIntegration: true,
+					enableRemoteModule: true,
+				},
+				width: 1280,
+			},
 			options,
 		);
 		const window = new BrowserWindow(options);
