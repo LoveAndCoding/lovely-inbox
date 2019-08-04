@@ -19,11 +19,11 @@ export default class OnboardMenuBar extends React.Component {
 
 const styles = StyleSheet.create({
 	bar: {
+		"-webkit-app-region": "drag",
+		"-webkit-user-select": "none",
+		"backgroundColor": "transparent",
 		"display": "flex",
 		"textAlign": "right",
-		"backgroundColor": "transparent",
-		"-webkit-user-select": "none",
-		"-webkit-app-region": "drag",
 
 		"& button": {
 			"-webkit-app-region": "no-drag",

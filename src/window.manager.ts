@@ -4,8 +4,6 @@ import icon from "../images/icons.ico";
 import { ApplicationConfig } from "./config";
 import logger from "./logger";
 
-interface IWindowOptions extends BrowserWindowConstructorOptions {}
-
 export default class WindowManager {
 	private windows: BrowserWindow[];
 	private mainWindow: BrowserWindow;
@@ -15,14 +13,17 @@ export default class WindowManager {
 	}
 
 	public create(url: string): BrowserWindow;
-	public create(url: string, options: IWindowOptions): BrowserWindow {
+	public create(
+		url: string,
+		options: BrowserWindowConstructorOptions,
+	): BrowserWindow {
 		options = Object.assign(
 			{
 				height: 720,
 				title: "Lovely Inbox",
 				webPreferences: {
-					nodeIntegration: true,
 					enableRemoteModule: true,
+					nodeIntegration: true,
 				},
 				width: 1280,
 			},

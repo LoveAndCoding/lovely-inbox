@@ -4,7 +4,7 @@ baseStyles; // We need to access it to get this to insert
 
 import * as ReactDOM from "react-dom";
 
-import app from "./ui/app.tsx";
+import app from "./ui/app";
 
 const mainEl = document.getElementById("root");
 

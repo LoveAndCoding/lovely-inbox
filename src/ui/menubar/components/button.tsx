@@ -5,12 +5,12 @@ import * as React from "react";
 
 import { COLORS, css, FONTS, StyleSheet } from "../../styles";
 
-interface IMinimizeProps {
+interface IButtonProps {
 	disabled: boolean;
 }
 
 export default abstract class WindowBarButton extends React.Component<
-	IMinimizeProps
+	IButtonProps
 > {
 	protected abstract get icon(): IconDefinition;
 	protected abstract get text(): string;
@@ -41,8 +41,8 @@ const styles = StyleSheet.create({
 		"fontWeight": 900,
 		"padding": "4px 8px",
 		"textAlign": "center",
-		"width": 38,
 		"userSelect": "none",
+		"width": 38,
 
 		"&:active, &:focus, &:hover": {
 			backgroundColor: COLORS.black,
