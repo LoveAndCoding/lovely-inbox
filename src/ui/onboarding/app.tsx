@@ -1,6 +1,7 @@
 import * as React from "react";
 import { HashRouter as Router, Link, Route } from "react-router-dom";
 
+import { css, StyleSheet } from "../styles";
 import OnboardMenuBar from "./components/menubar";
 
 function Index() {
@@ -18,7 +19,7 @@ function Users() {
 function AppRouter() {
 	return (
 		<Router>
-			<div>
+			<div className={css(styles.page)}>
 				<OnboardMenuBar />
 				<nav>
 					<ul>
@@ -43,3 +44,9 @@ function AppRouter() {
 }
 
 export default AppRouter;
+
+const styles = StyleSheet.create({
+	page: {
+		height: "100vh",
+	},
+});

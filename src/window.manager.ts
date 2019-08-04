@@ -60,12 +60,13 @@ export default class WindowManager {
 		const onBoardingWindow = (this.mainWindow = this.create(
 			this.onboardingUrl,
 			{
+				backgroundColor: "#D63854",
 				frame: false,
 				fullscreenable: false,
 				height: 600,
 				maximizable: false,
 				resizable: false,
-				width: 600,
+				width: 400,
 			},
 		));
 		this.mainWindow.on("closed", () => {

@@ -66,6 +66,9 @@ const { StyleSheet, css } = Aphrodite.extend([
 ]);
 
 const COLORS = {
+	BRAND: {
+		red: "#D63854",
+	},
 	black: "#100A06",
 	offBlack: "#2f2c24",
 	offWhite: "#efeae7",
