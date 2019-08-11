@@ -1,7 +1,12 @@
 /**
  * Aphrodite + Our Extensions
  */
-import { StyleSheet as Aphrodite } from "aphrodite";
+import {
+	CSSInputTypes,
+	StyleDeclaration,
+	StyleDeclarationMap,
+	StyleSheet as Aphrodite,
+} from "aphrodite";
 
 const { StyleSheet, css } = Aphrodite.extend([
 	{
@@ -80,5 +85,13 @@ const FONTS = {
 	standard: "inherit",
 };
 
-export { COLORS, FONTS, StyleSheet, css };
+export {
+	COLORS,
+	FONTS,
+	CSSInputTypes,
+	StyleDeclaration,
+	StyleDeclarationMap,
+	StyleSheet,
+	css,
+};
 export default Aphrodite;

@@ -1,18 +1,19 @@
 import * as React from "react";
 
+import Spring from "../../components/spring";
+import View from "../../components/view";
 import WindowClose from "../../menubar/components/close";
 import WindowMinimize from "../../menubar/components/minimize";
-import WindowTitle from "../../menubar/components/title";
 import { COLORS, css, StyleSheet } from "../../styles";
 
 export default class OnboardMenuBar extends React.Component {
 	public render() {
 		return (
-			<div className={css(styles.bar)}>
-				<WindowTitle />
+			<View styles={[styles.bar]}>
+				<Spring />
 				<WindowMinimize />
 				<WindowClose />
-			</div>
+			</View>
 		);
 	}
 }
@@ -21,9 +22,7 @@ const styles = StyleSheet.create({
 	bar: {
 		"-webkit-app-region": "drag",
 		"-webkit-user-select": "none",
-		"backgroundColor": "transparent",
-		"display": "flex",
-		"textAlign": "right",
+		"flexDirection": "row",
 
 		"& button": {
 			"-webkit-app-region": "no-drag",
