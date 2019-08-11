@@ -75,9 +75,10 @@ const COLORS = {
 		red: "#D63854",
 	},
 	black: "#100A06",
+	darkBlue: "#01223F",
 	offBlack: "#2f2c24",
 	offWhite: "#efeae7",
-	white: "#F4F0EF",
+	white: "#FFFAF6",
 };
 
 const FONTS = {

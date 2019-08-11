@@ -1,8 +1,9 @@
 import * as React from "react";
 import { HashRouter as Router, Link, Route } from "react-router-dom";
 
+import View from "../layout/components/view";
 import { css, StyleSheet } from "../styles";
-import OnboardMenuBar from "./components/menubar";
+import InitialOnboardScreen from "./initial.screen";
 
 function Index() {
 	return <h2>Home</h2>;
@@ -19,26 +20,9 @@ function Users() {
 function AppRouter() {
 	return (
 		<Router>
-			<div className={css(styles.page)}>
-				<OnboardMenuBar />
-				<nav>
-					<ul>
-						<li>
-							<Link to="/">Home</Link>
-						</li>
-						<li>
-							<Link to="/about/">About</Link>
-						</li>
-						<li>
-							<Link to="/users/">Users</Link>
-						</li>
-					</ul>
-				</nav>
-
-				<Route path="/" exact component={Index} />
-				<Route path="/about/" component={About} />
-				<Route path="/users/" component={Users} />
-			</div>
+			<View styles={[styles.page]}>
+				<Route path="/" exact component={InitialOnboardScreen} />
+			</View>
 		</Router>
 	);
 }
@@ -48,5 +32,6 @@ export default AppRouter;
 const styles = StyleSheet.create({
 	page: {
 		height: "100vh",
+		overflow: "hidden",
 	},
 });

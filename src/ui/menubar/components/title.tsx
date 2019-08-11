@@ -10,7 +10,7 @@ export default class WindowTitle extends React.Component<{}> {
 
 const styles = StyleSheet.create({
 	text: {
-		color: COLORS.white,
+		color: COLORS.black,
 		display: "block",
 		flexGrow: 1,
 		fontSize: 16,

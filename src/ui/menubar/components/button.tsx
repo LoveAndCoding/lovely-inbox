@@ -34,7 +34,7 @@ const styles = StyleSheet.create({
 	button: {
 		"background": "transparent",
 		"border": "0px",
-		"color": COLORS.white,
+		"color": COLORS.black,
 		"cursor": "pointer",
 		"display": "block",
 		"fontSize": 16,
@@ -45,7 +45,7 @@ const styles = StyleSheet.create({
 		"width": 38,
 
 		"&:active, &:focus, &:hover": {
-			backgroundColor: COLORS.black,
+			backgroundColor: COLORS.offWhite,
 		},
 	},
 });
