@@ -1,6 +1,6 @@
 import * as React from "react";
 
-import { css, CSSInputTypes, StyleSheet } from "../styles";
+import { css, CSSInputTypes, StyleSheet } from "../../styles";
 
 export enum ViewTags {
 	aside = "aside",
@@ -11,14 +11,14 @@ export enum ViewTags {
 }
 
 type ViewProps = {
-	tag: ViewTags;
 	styles: CSSInputTypes[];
+	tag: ViewTags;
 } & React.HTMLAttributes;
 
 export default class View extends React.Component<ViewProps> {
 	private static defaultProps = {
-		tag: ViewTags.div,
 		styles: [],
+		tag: ViewTags.div,
 	};
 
 	public render() {

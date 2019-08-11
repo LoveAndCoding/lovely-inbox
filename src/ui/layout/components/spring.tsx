@@ -1,6 +1,6 @@
 import * as React from "react";
 
-import { css, CSSInputTypes, StyleSheet } from "../styles";
+import { css, CSSInputTypes, StyleSheet } from "../../styles";
 import View from "./view";
 
 export default class Spring extends React.Component<{}> {

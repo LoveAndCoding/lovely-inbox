@@ -1,6 +1,6 @@
 import * as React from "react";
 
-import { css, CSSInputTypes, StyleSheet } from "../styles";
+import { css, CSSInputTypes, StyleSheet } from "../../styles";
 import View from "./view";
 
 export enum StrutSizes {

@@ -1,7 +1,7 @@
 import * as React from "react";
 
-import Spring from "../../components/spring";
-import View from "../../components/view";
+import Spring from "../../layout/components/spring";
+import View from "../../layout/components/view";
 import WindowClose from "../../menubar/components/close";
 import WindowMinimize from "../../menubar/components/minimize";
 import { COLORS, css, StyleSheet } from "../../styles";
