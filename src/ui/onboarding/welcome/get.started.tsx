@@ -48,7 +48,7 @@ export default class GettingStartedMessaging extends React.Component {
 
 const styles = StyleSheet.create({
 	allText: {
-		paddingBottom: 15,
+		paddingBottom: 10,
 		paddingLeft: 30,
 		paddingRight: 30,
 		paddingTop: 25,
@@ -68,9 +68,11 @@ const styles = StyleSheet.create({
 	},
 	pointerImage: {
 		"-webkit-user-select": "none",
+		"bottom": 62,
 		"display": "block",
 		"height": 110,
 		"pointerEvents": "none",
+		"position": "absolute",
 		"width": 162,
 	},
 	welcome: {

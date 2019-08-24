@@ -5,6 +5,7 @@ import { css, CSSInputTypes, StyleSheet } from "../../styles";
 export enum ViewTags {
 	aside = "aside",
 	div = "div",
+	form = "form",
 	main = "main",
 	nav = "nav",
 	section = "section",

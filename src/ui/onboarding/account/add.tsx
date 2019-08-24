@@ -1,5 +1,15 @@
+import { faArrowRight } from "@fortawesome/pro-light-svg-icons";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import * as React from "react";
 
+import LovelyButton, {
+	ButtonColors,
+	ButtonSizes,
+} from "../../forms/components/button";
+import EmailTextField, {
+	InputFieldSizes,
+} from "../../forms/components/email.text.field";
+import Spring from "../../layout/components/spring";
 import View, { ViewTags } from "../../layout/components/view";
 import { COLORS, css, StyleSheet } from "../../styles";
 
@@ -19,6 +29,20 @@ export default class OnboardAccountAdd extends React.Component {
 					/>
 					Lovely Inbox
 				</h1>
+
+				<View tag={ViewTags.form} styles={[styles.form]}>
+					<EmailTextField size={InputFieldSizes.large} />
+					<View styles={[styles.buttonBar]}>
+						<Spring />
+						<LovelyButton size={ButtonSizes.large}>
+							<span className={css(styles.buttonText)}>Next</span>
+							<FontAwesomeIcon
+								icon={faArrowRight}
+								className={css(styles.buttonIcon)}
+							/>
+						</LovelyButton>
+					</View>
+				</View>
 			</View>
 		);
 	}
@@ -58,5 +82,35 @@ const styles = StyleSheet.create({
 		marginRight: "auto",
 		pointerEvents: "none",
 		width: 200,
+	},
+	form: {
+		margin: 20,
+	},
+	buttonBar: {
+		flexDirection: "row",
+	},
+	buttonText: {
+		flex: 1,
+	},
+	buttonIcon: {
+		// The FA Icon seems to look better centered rather than at baseline
+		"alignSelf": "center",
+
+		"button:active > &, button:focus > &, button:hover > &": {
+			animationDirection: "alternate",
+			animationDuration: "0.3s",
+			animationFillMode: "forwards",
+			animationIterationCount: "3",
+			animationName: [
+				{
+					from: {
+						transform: "translate(0px, 0px)",
+					},
+					to: {
+						transform: "translate(6px, 0px)",
+					},
+				},
+			],
+		},
 	},
 });
