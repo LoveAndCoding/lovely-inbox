@@ -49,10 +49,6 @@ export default class EmailTextField extends React.Component<EmailFieldProps> {
 }
 
 const styles = StyleSheet.create({
-	label: {
-		display: "block",
-		marginBottom: 8,
-	},
 	input: {
 		"backgroundColor": COLORS.white,
 		"border": 0,
@@ -70,14 +66,22 @@ const styles = StyleSheet.create({
 			},
 		},
 	},
+	label: {
+		display: "block",
+		marginBottom: 8,
+	},
+
+	// Sizes
 	small: {
 		fontSize: 14,
 		padding: "4px 8px",
 	},
+
 	medium: {
 		fontSize: 16,
 		padding: "8px 12px",
 	},
+
 	large: {
 		fontSize: 20,
 		padding: "14px 20px",

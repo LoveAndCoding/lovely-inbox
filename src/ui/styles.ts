@@ -74,13 +74,16 @@ const COLORS = {
 	BRAND: {
 		red: "#D63854",
 	},
+
 	black: "#100A06",
-	black80: "rgba(16, 10, 6, 0.8)",
-	black60: "rgba(16, 10, 6, 0.6)",
-	black40: "rgba(16, 10, 6, 0.4)",
 	black20: "rgba(16, 10, 6, 0.2)",
-	darkBlue: "#01223F",
+	black40: "rgba(16, 10, 6, 0.4)",
+	black60: "rgba(16, 10, 6, 0.6)",
+	black80: "rgba(16, 10, 6, 0.8)",
 	offBlack: "#2f2c24",
+
+	darkBlue: "#01223F",
+
 	offWhite: "#efeae7",
 	white: "#FFFAF6",
 };

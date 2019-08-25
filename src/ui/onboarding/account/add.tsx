@@ -59,38 +59,8 @@ const styles = StyleSheet.create({
 		marginleft: 3,
 		zIndex: 1,
 	},
-	dragbar: {
-		"-webkit-app-region": "drag",
-		"-webkit-user-select": "none",
-		"height": 30,
-		"left": 0,
-		"position": "absolute",
-		"right": 0,
-		"top": 0,
-	},
-	header: {
-		"-webkit-user-select": "none",
-		"fontSize": 48,
-		"fontWeight": 200,
-		"margin": "auto",
-	},
-	logoImage: {
-		display: "block",
-		height: 200,
-		marginBottom: -30,
-		marginLeft: "auto",
-		marginRight: "auto",
-		pointerEvents: "none",
-		width: 200,
-	},
-	form: {
-		margin: 20,
-	},
 	buttonBar: {
 		flexDirection: "row",
-	},
-	buttonText: {
-		flex: 1,
 	},
 	buttonIcon: {
 		// The FA Icon seems to look better centered rather than at baseline
@@ -112,5 +82,35 @@ const styles = StyleSheet.create({
 				},
 			],
 		},
+	},
+	buttonText: {
+		flex: 1,
+	},
+	dragbar: {
+		"-webkit-app-region": "drag",
+		"-webkit-user-select": "none",
+		"height": 30,
+		"left": 0,
+		"position": "absolute",
+		"right": 0,
+		"top": 0,
+	},
+	form: {
+		margin: 20,
+	},
+	header: {
+		"-webkit-user-select": "none",
+		"fontSize": 48,
+		"fontWeight": 200,
+		"margin": "auto",
+	},
+	logoImage: {
+		display: "block",
+		height: 200,
+		marginBottom: -30,
+		marginLeft: "auto",
+		marginRight: "auto",
+		pointerEvents: "none",
+		width: 200,
 	},
 });
