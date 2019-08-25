@@ -1,0 +1,4 @@
+{
+  "*.{ts,tsx}": ["tslint --fix", "prettier --fix", "git add"],
+  "{yarn.lock,package.json}": "yarn audit"
+}

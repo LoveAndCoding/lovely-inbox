@@ -106,6 +106,7 @@
 		"file-loader": "^4.0.0",
 		"less": "^3.9.0",
 		"less-loader": "^5.0.0",
+		"lint-staged": "^9.2.3",
 		"mini-css-extract-plugin": "^0.7.0",
 		"node-loader": "^0.6.0",
 		"redux-devtools": "^3.5.0",
@@ -113,5 +114,10 @@
 		"ts-loader": "^6.0.4",
 		"tslint": "^5.18.0",
 		"typescript": "^3.5.2"
+	},
+	"husky": {
+		"hooks": {
+			"pre-commit": "lint-staged"
+		}
 	}
 }
