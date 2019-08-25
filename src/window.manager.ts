@@ -1,6 +1,11 @@
-import { app, BrowserWindow, BrowserWindowConstructorOptions } from "electron";
+import {
+	app,
+	BrowserWindow,
+	BrowserWindowConstructorOptions,
+	nativeImage,
+} from "electron";
 
-import icon from "../images/icons.ico";
+import * as icon from "../images/icon.light.red@2x.png";
 import { ApplicationConfig } from "./config";
 import logger from "./logger";
 
@@ -20,6 +25,7 @@ export default class WindowManager {
 		options = Object.assign(
 			{
 				height: 720,
+				icon: nativeImage.createFromDataURL(icon),
 				title: "Lovely Inbox",
 				webPreferences: {
 					enableRemoteModule: true,

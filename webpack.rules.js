@@ -43,7 +43,15 @@ module.exports = [
 		],
 	},
 	{
-		test: /\.(ico|png|jpe?g|gif|svg|eot|otf|woff2?|ttf)$/,
+		test: /\.(ico|png|jpe?g|gif|svg)$/,
+		use: [
+			{
+				loader: "url-loader",
+			},
+		],
+	},
+	{
+		test: /\.(eot|otf|woff2?|ttf)$/,
 		use: [
 			{
 				loader: "file-loader",
