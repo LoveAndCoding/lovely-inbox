@@ -24,4 +24,4 @@ jobs:
         yarn test
       env:
         CI: true
-        FA_AUTH_TOKEN: ${{ FA_AUTH_TOKEN }}
+        FA_AUTH_TOKEN: ${{ secrets.FA_AUTH_TOKEN }}
