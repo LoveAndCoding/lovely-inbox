@@ -19,11 +19,11 @@ export enum ButtonColors {
 }
 
 type LovelyButtonProps = {
-	size: ButtonSizes;
-	color: ButtonColors;
+	size?: ButtonSizes;
+	color?: ButtonColors;
 } & IClickable;
 
-export default class LovelyButton extends React.Component<Button> {
+export default class LovelyButton extends React.Component<LovelyButtonProps> {
 	protected static defaultProps = {
 		color: ButtonColors.dark,
 		size: ButtonSizes.medium,

@@ -1,0 +1,28 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`<LovelyButton> Color rendering class changed via prop 1`] = `
+<button
+  className="button_1bs4i0o-o_O-medium_e28yzh-o_O-light_13slhe1"
+  type="button"
+>
+  Light Button
+</button>
+`;
+
+exports[`<LovelyButton> Default props render correctly 1`] = `
+<button
+  className="button_1bs4i0o-o_O-medium_e28yzh-o_O-dark_xzwfai"
+  type="button"
+>
+  Default Button
+</button>
+`;
+
+exports[`<LovelyButton> Size rendering class changed via prop 1`] = `
+<button
+  className="button_1bs4i0o-o_O-xsmall_ba50ph-o_O-dark_xzwfai"
+  type="button"
+>
+  XSmall Button
+</button>
+`;
