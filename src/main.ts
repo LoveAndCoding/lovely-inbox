@@ -15,8 +15,6 @@ const windower = new WindowManager(
  * Initializes and brings up the application window
  */
 function bringAppUp() {
-	// TODO(alexis): Load onboarding material instead if the user has not
-	// configured the app
 	if (UserConfig.completedOnBoarding) {
 		logger.info("User has completed onboarding; Load Inbox");
 		windower.openInbox();
