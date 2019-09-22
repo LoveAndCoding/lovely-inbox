@@ -2,9 +2,9 @@
  * Aphrodite + Our Extensions
  */
 import {
-	CSSInputTypes,
 	StyleDeclaration,
 	StyleDeclarationMap,
+	StyleDeclarationValue,
 	StyleSheet as Aphrodite,
 } from "aphrodite";
 
@@ -54,7 +54,7 @@ const { StyleSheet, css } = Aphrodite.extend([
 			}
 
 			const selectList = selector.split(",");
-			const generated = [];
+			const generated: string[] = [];
 			selectList.forEach((sel) => {
 				const selGen = generateSubtreeStyles(sel);
 				if (selGen) {
@@ -65,10 +65,14 @@ const { StyleSheet, css } = Aphrodite.extend([
 			if (generated.length === 0) {
 				return null;
 			}
-			return generated;
+			return generated.join(" ");
 		},
 	},
 ]);
+
+export type CSSInputTypes = StyleDeclarationValue | false | void | null;
+export type StyleDeclaration = StyleDeclaration;
+export type StyleDeclarationMap = StyleDeclarationMap;
 
 const COLORS = {
 	BRAND: {
@@ -93,13 +97,5 @@ const FONTS = {
 	standard: "inherit",
 };
 
-export {
-	COLORS,
-	FONTS,
-	CSSInputTypes,
-	StyleDeclaration,
-	StyleDeclarationMap,
-	StyleSheet,
-	css,
-};
+export { COLORS, FONTS, StyleSheet, css };
 export default Aphrodite;
