@@ -19,9 +19,10 @@ jobs:
         node-version: ${{ matrix.node-version }}
     - name: yarn install and test
       run: |
+        npm config set "//npm.fontawesome.com/:_authToken" $FA_AUTH_TOKEN
         npm install -g yarn
         yarn install
         yarn test
       env:
         CI: true
-        NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
+        FA_AUTH_TOKEN: ${{ FA_AUTH_TOKEN }}
