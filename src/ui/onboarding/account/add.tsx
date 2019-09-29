@@ -2,20 +2,23 @@ import { faArrowRight } from "@fortawesome/pro-light-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import * as React from "react";
 
-import LovelyButton, {
-	ButtonColors,
-	ButtonSizes,
-} from "../../forms/components/button";
-import EmailTextField, {
-	InputFieldSizes,
-} from "../../forms/components/email.text.field";
+import { ButtonColors, ButtonSizes } from "../../forms/components/button";
+import { InputFieldSizes } from "../../forms/components/email.text.field";
 import Spring from "../../layout/components/spring";
 import View, { ViewTags } from "../../layout/components/view";
 import { COLORS, css, StyleSheet } from "../../styles";
+import EmailInputField from "../containers/email.input";
+import EmailNextButton from "../containers/email.next.button";
 
 import * as LogoUrl from "../../../../images/icon.dark.svg";
 
 export default class OnboardAccountAdd extends React.Component {
+	constructor(props) {
+		super(props);
+
+		this.handleSubmit = this.handleSubmit.bind(this);
+	}
+
 	public render() {
 		return (
 			<View tag={ViewTags.section} styles={[styles.add]}>
@@ -30,21 +33,32 @@ export default class OnboardAccountAdd extends React.Component {
 					Lovely Inbox
 				</h1>
 
-				<View tag={ViewTags.form} styles={[styles.form]}>
-					<EmailTextField size={InputFieldSizes.large} />
+				<View
+					tag={ViewTags.form}
+					styles={[styles.form]}
+					onSubmit={this.handleSubmit}
+				>
+					<EmailInputField size={InputFieldSizes.large} />
 					<View styles={[styles.buttonBar]}>
 						<Spring />
-						<LovelyButton size={ButtonSizes.large}>
+						<EmailNextButton size={ButtonSizes.large} type="submit">
 							<span className={css(styles.buttonText)}>Next</span>
 							<FontAwesomeIcon
 								icon={faArrowRight}
 								className={css(styles.buttonIcon)}
 							/>
-						</LovelyButton>
+						</EmailNextButton>
 					</View>
 				</View>
 			</View>
 		);
+	}
+
+	private handleSubmit(event: Event) {
+		event.preventDefault();
+		if (this.props.onNext) {
+			this.props.onNext();
+		}
 	}
 }
 
