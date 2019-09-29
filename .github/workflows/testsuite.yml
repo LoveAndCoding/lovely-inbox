@@ -12,16 +12,19 @@ jobs:
 
         steps:
             - uses: actions/checkout@v1
-            - name: Use Yarn ${{ matrix.node-version }}
+            - name: Use Node ${{ matrix.node-version }}
               uses: actions/setup-node@v1
               with:
                   node-version: ${{ matrix.node-version }}
-            - name: yarn install and test
+            - name: Install Deps
               run: |
                   npm config set "//npm.fontawesome.com/:_authToken" "${FA_AUTH_TOKEN}"
                   npm install -g yarn
                   yarn install
+              env:
+                  FA_AUTH_TOKEN: ${{ secrets.FA_AUTH_TOKEN }}
+            - name: Test
+              run: |
                   yarn test
               env:
                   CI: true
-                  FA_AUTH_TOKEN: ${{ secrets.FA_AUTH_TOKEN }}
