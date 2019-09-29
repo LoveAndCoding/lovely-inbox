@@ -11,10 +11,23 @@ export enum ViewTags {
 	section = "section",
 }
 
-type ViewProps = {
-	styles: CSSInputTypes[];
-	tag: ViewTags;
-} & React.HTMLAttributes;
+type ViewProps =
+	| ({
+			styles: CSSInputTypes[];
+			tag: ViewTags.form;
+	  } & React.HTMLAttributes<HTMLFormElement>)
+	| ({
+			styles: CSSInputTypes[];
+			tag: ViewTags.div;
+	  } & React.HTMLAttributes<HTMLDivElement>)
+	| ({
+			styles: CSSInputTypes[];
+			tag:
+				| ViewTags.aside
+				| ViewTags.main
+				| ViewTags.nav
+				| ViewTags.section;
+	  } & React.HTMLAttributes<HTMLElement>);
 
 export default class View extends React.Component<ViewProps> {
 	private static defaultProps = {
