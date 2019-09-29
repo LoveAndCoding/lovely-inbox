@@ -1,8 +1,10 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`<LovelyButton> Color rendering class changed via prop 1`] = `
+exports[`<LovelyButton> Color rendering changed via prop 1`] = `
 <button
   className="button_1bs4i0o-o_O-medium_e28yzh-o_O-light_13slhe1"
+  disabled={false}
+  onClick={[Function]}
   type="button"
 >
   Light Button
@@ -12,17 +14,43 @@ exports[`<LovelyButton> Color rendering class changed via prop 1`] = `
 exports[`<LovelyButton> Default props render correctly 1`] = `
 <button
   className="button_1bs4i0o-o_O-medium_e28yzh-o_O-dark_xzwfai"
+  disabled={false}
+  onClick={[Function]}
   type="button"
 >
   Default Button
 </button>
 `;
 
-exports[`<LovelyButton> Size rendering class changed via prop 1`] = `
+exports[`<LovelyButton> Disabled rendering changed via prop 1`] = `
+<button
+  className="button_1bs4i0o-o_O-medium_e28yzh-o_O-dark_xzwfai-o_O-disabled_1lrpyjs"
+  disabled={true}
+  onClick={[Function]}
+  type="button"
+>
+  Submit Button
+</button>
+`;
+
+exports[`<LovelyButton> Size rendering changed via prop 1`] = `
 <button
   className="button_1bs4i0o-o_O-xsmall_ba50ph-o_O-dark_xzwfai"
+  disabled={false}
+  onClick={[Function]}
   type="button"
 >
   XSmall Button
+</button>
+`;
+
+exports[`<LovelyButton> Type rendering changed via prop 1`] = `
+<button
+  className="button_1bs4i0o-o_O-medium_e28yzh-o_O-dark_xzwfai"
+  disabled={false}
+  onClick={[Function]}
+  type="submit"
+>
+  Submit Button
 </button>
 `;

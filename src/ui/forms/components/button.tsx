@@ -18,16 +18,26 @@ export enum ButtonColors {
 	light = "light",
 }
 
-type LovelyButtonProps = {
+export type LovelyButtonProps = {
 	size?: ButtonSizes;
 	color?: ButtonColors;
-} & IClickable;
+	disabled?: boolean;
+	type?: "button" | "submit";
+} & IClickable<HTMLButtonElement>;
 
 export default class LovelyButton extends React.Component<LovelyButtonProps> {
 	protected static defaultProps = {
 		color: ButtonColors.dark,
+		disabled: false,
 		size: ButtonSizes.medium,
+		type: "button",
 	};
+
+	constructor(props: LovelyButtonProps) {
+		super(props);
+
+		this.handleClick = this.handleClick.bind(this);
+	}
 
 	public render() {
 		return (
@@ -36,12 +46,22 @@ export default class LovelyButton extends React.Component<LovelyButtonProps> {
 					styles.button,
 					styles[this.props.size],
 					styles[this.props.color],
+					this.props.disabled && styles.disabled,
 				)}
-				type="button"
+				disabled={this.props.disabled}
+				onClick={this.handleClick}
+				type={this.props.type}
 			>
 				{this.props.children}
 			</button>
 		);
+	}
+
+	private handleClick(event: React.MouseEvent<HTMLButtonElement>) {
+		const { disabled, onPress } = this.props;
+		if (!disabled && onPress) {
+			onPress(event);
+		}
 	}
 }
 
@@ -118,5 +138,9 @@ const styles = StyleSheet.create({
 		"&:active, &:focus, &:hover": {
 			backgroundColor: COLORS.offWhite,
 		},
+	},
+
+	disabled: {
+		opacity: 0.6,
 	},
 });

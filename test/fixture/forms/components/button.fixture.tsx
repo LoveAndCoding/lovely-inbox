@@ -9,24 +9,22 @@ import LovelyButton, {
 describe("<LovelyButton>", () => {
 	test("Default props render correctly", () => {
 		// Arrange
-		const onPress = (): void => null;
 
 		// Act
 		const tree = TestRenderer.create(
-			<LovelyButton onPress={onPress}>Default Button</LovelyButton>,
+			<LovelyButton>Default Button</LovelyButton>,
 		).toJSON();
 
 		// Assert
 		expect(tree).toMatchSnapshot();
 	});
 
-	test("Color rendering class changed via prop", () => {
+	test("Color rendering changed via prop", () => {
 		// Arrange
-		const onPress = (): void => null;
 
 		// Act
 		const tree = TestRenderer.create(
-			<LovelyButton color={ButtonColors.light} onPress={onPress}>
+			<LovelyButton color={ButtonColors.light}>
 				Light Button
 			</LovelyButton>,
 		).toJSON();
@@ -35,15 +33,38 @@ describe("<LovelyButton>", () => {
 		expect(tree).toMatchSnapshot();
 	});
 
-	test("Size rendering class changed via prop", () => {
+	test("Size rendering changed via prop", () => {
 		// Arrange
-		const onPress = (): void => null;
 
 		// Act
 		const tree = TestRenderer.create(
-			<LovelyButton size={ButtonSizes.xsmall} onPress={onPress}>
+			<LovelyButton size={ButtonSizes.xsmall}>
 				XSmall Button
 			</LovelyButton>,
+		).toJSON();
+
+		// Assert
+		expect(tree).toMatchSnapshot();
+	});
+
+	test("Type rendering changed via prop", () => {
+		// Arrange
+
+		// Act
+		const tree = TestRenderer.create(
+			<LovelyButton type="submit">Submit Button</LovelyButton>,
+		).toJSON();
+
+		// Assert
+		expect(tree).toMatchSnapshot();
+	});
+
+	test("Disabled rendering changed via prop", () => {
+		// Arrange
+
+		// Act
+		const tree = TestRenderer.create(
+			<LovelyButton disabled={true}>Submit Button</LovelyButton>,
 		).toJSON();
 
 		// Assert

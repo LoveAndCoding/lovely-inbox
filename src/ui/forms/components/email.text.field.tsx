@@ -12,7 +12,7 @@ export enum InputFieldSizes {
 	xlarge = "xlarge",
 }
 
-type EmailFieldProps = {
+export type EmailFieldProps = {
 	size: InputFieldSizes;
 } & ITypeable &
 	IValidatable;
@@ -23,12 +23,14 @@ export default class EmailTextField extends React.Component<EmailFieldProps> {
 	};
 	private readonly inputId: string;
 
-	constructor(props) {
+	constructor(props: EmailFieldProps) {
 		super(props);
 
 		// Increment our global ID unique value and stash locally
 		INPUT_ID_VAL++;
 		this.inputId = `email-text-input-${INPUT_ID_VAL}`;
+
+		this.handleChange = this.handleChange.bind(this);
 	}
 
 	public render() {
@@ -40,11 +42,19 @@ export default class EmailTextField extends React.Component<EmailFieldProps> {
 				<input
 					className={css(styles.input, styles[this.props.size])}
 					id={this.inputId}
+					onChange={this.handleChange}
 					placeholder="kairi@destiny.island"
 					type="email"
 				/>
 			</React.Fragment>
 		);
+	}
+
+	private handleChange(event: React.ChangeEvent<HTMLInputElement>) {
+		if (this.props.onChange) {
+			const val = event.target.value.trim();
+			this.props.onChange(val, event);
+		}
 	}
 }
 
