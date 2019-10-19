@@ -13,12 +13,14 @@ export enum InputFieldSizes {
 }
 
 export type EmailFieldProps = {
+	required?: boolean;
 	size: InputFieldSizes;
 } & ITypeable &
 	IValidatable;
 
 export default class EmailTextField extends React.Component<EmailFieldProps> {
 	protected static defaultProps = {
+		required: false,
 		size: InputFieldSizes.medium,
 	};
 	private readonly inputId: string;
@@ -45,6 +47,7 @@ export default class EmailTextField extends React.Component<EmailFieldProps> {
 					onChange={this.handleChange}
 					placeholder="kairi@destiny.island"
 					type="email"
+					required={this.props.required}
 				/>
 			</React.Fragment>
 		);

@@ -38,7 +38,10 @@ export default class OnboardAccountAdd extends React.Component {
 					styles={[styles.form]}
 					onSubmit={this.handleSubmit}
 				>
-					<EmailInputField size={InputFieldSizes.large} />
+					<EmailInputField
+						size={InputFieldSizes.large}
+						required={true}
+					/>
 					<View styles={[styles.buttonBar]}>
 						<Spring />
 						<EmailNextButton size={ButtonSizes.large} type="submit">
