@@ -29,11 +29,11 @@ export default class GettingStartedMessaging extends React.Component {
 					and get you up and running in no time
 				</p>
 
-				<p className={paraStyle}>First, what’s you’re email address?</p>
+				<p className={paraStyle}>First, what’s your email address?</p>
 
 				<p className={sideNoteStyle}>
-					(and if you want to add another account, we’ll help with
-					that too)
+					(if you have more than one, we'll help with the rest in a
+					bit)
 				</p>
 
 				<img
