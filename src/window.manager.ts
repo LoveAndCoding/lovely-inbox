@@ -2,9 +2,13 @@ import {
 	app,
 	BrowserWindow,
 	BrowserWindowConstructorOptions,
+	ipcMain,
+	IpcMessageEvent,
 	nativeImage,
 } from "electron";
+import * as path from "path";
 
+import * as WindowPreloadScript from "file-loader!./window.preload.js";
 import * as icon from "../images/icon.light.red@2x.png";
 import { ApplicationConfig } from "./config";
 import logger from "./logger";
@@ -28,8 +32,11 @@ export default class WindowManager {
 				icon: nativeImage.createFromDataURL(icon),
 				title: "Lovely Inbox",
 				webPreferences: {
-					enableRemoteModule: true,
-					nodeIntegration: true,
+					contextIsolation: true,
+					enableRemoteModule: false,
+					nodeIntegration: false,
+					preload: path.join(__dirname, WindowPreloadScript),
+					sandbox: true,
 				},
 				width: 1280,
 			},
@@ -40,7 +47,14 @@ export default class WindowManager {
 		window.loadURL(url);
 
 		this.windows.push(window);
+		const minimize = (event: IpcMessageEvent) => {
+			if (window.webContents === event.sender) {
+				window.minimize();
+			}
+		};
+		ipcMain.on("window-minimize", minimize);
 		window.on("closed", () => {
+			ipcMain.removeListener("window-minimize", minimize);
 			const idx = this.windows.indexOf(window);
 			if (idx < 0) {
 				logger.warn("Closed window not found in WindowManager");
