@@ -1,8 +1,6 @@
 const { ipcRenderer } = require("electron");
 
-console.log("here 1");
 process.once("loaded", () => {
-	console.log("here 2");
 	window.addEventListener("message", (event) => {
 		if (event.source !== window) {
 			return;
