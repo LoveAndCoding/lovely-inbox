@@ -32,8 +32,8 @@ export default class GettingStartedMessaging extends React.Component {
 				<p className={paraStyle}>First, what’s your email address?</p>
 
 				<p className={sideNoteStyle}>
-					(if you have more than one, we'll help with the rest in a
-					bit)
+					(if you have several, pick one and we'll work on the rest of
+					them later)
 				</p>
 
 				<img
