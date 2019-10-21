@@ -1,6 +1,6 @@
 import * as React from "react";
 import { Provider } from "react-redux";
-import { HashRouter as Router, Route } from "react-router-dom";
+import { MemoryRouter as Router, Route } from "react-router-dom";
 import { createStore } from "redux";
 
 import View from "../layout/components/view";
