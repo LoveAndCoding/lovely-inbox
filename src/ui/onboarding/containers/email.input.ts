@@ -8,7 +8,7 @@ import { OnboardingState } from "../reducers";
 const mapStateToProps = (state: OnboardingState, ownProps: EmailFieldProps) => {
 	return {
 		...ownProps,
-		email: state.emailAddress ? state.emailAddress.address : "",
+		defaultValue: state.emailAddress ? state.emailAddress.address : "",
 	};
 };
 

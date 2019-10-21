@@ -43,6 +43,7 @@ export default class EmailTextField extends React.Component<EmailFieldProps> {
 				</label>
 				<input
 					className={css(styles.input, styles[this.props.size])}
+					defaultValue={this.props.defaultValue}
 					id={this.inputId}
 					onChange={this.handleChange}
 					placeholder="kairi@destiny.island"

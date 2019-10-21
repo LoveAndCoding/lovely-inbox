@@ -1,6 +1,7 @@
 import * as React from "react";
 
 export interface ITypeable<ElementType = HTMLInputElement> {
+	readonly defaultValue?: string;
 	readonly onFocus?: (event: React.FormEvent<ElementType>) => void;
 	readonly onBlur?: (event: React.FormEvent<ElementType>) => void;
 	readonly onChange?: (
