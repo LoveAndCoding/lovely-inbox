@@ -104,7 +104,7 @@ const styles = StyleSheet.create({
 
 	large: {
 		fontSize: 20,
-		minWidth: 180,
+		minWidth: 160,
 		padding: "14px 20px",
 	},
 
