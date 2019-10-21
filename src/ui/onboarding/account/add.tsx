@@ -7,6 +7,7 @@ import { InputFieldSizes } from "../../forms/components/email.text.field";
 import Spring from "../../layout/components/spring";
 import View, { ViewTags } from "../../layout/components/view";
 import { COLORS, css, StyleSheet } from "../../styles";
+import ActionPaneSmall from "../components/action.pane.small";
 import EmailInputField from "../containers/email.input";
 import EmailNextButton from "../containers/email.next.button";
 
@@ -21,9 +22,7 @@ export default class OnboardAccountAdd extends React.Component {
 
 	public render() {
 		return (
-			<View tag={ViewTags.section} styles={[styles.add]}>
-				<div className={css(styles.dragbar)} aria-hidden={true} />
-
+			<ActionPaneSmall>
 				<h1 className={css(styles.header)}>
 					<img
 						src={LogoUrl}
@@ -53,7 +52,7 @@ export default class OnboardAccountAdd extends React.Component {
 						</EmailNextButton>
 					</View>
 				</View>
-			</View>
+			</ActionPaneSmall>
 		);
 	}
 
@@ -66,16 +65,6 @@ export default class OnboardAccountAdd extends React.Component {
 }
 
 const styles = StyleSheet.create({
-	add: {
-		backgroundColor: COLORS.BRAND.red,
-		boxShadow: `1px 2px 4px rgba(20, 11, 4, 0.6)`,
-		color: COLORS.white,
-		flexBasis: 380,
-		flexShrink: 0,
-		fontSize: 24,
-		marginleft: 3,
-		zIndex: 1,
-	},
 	buttonBar: {
 		flexDirection: "row",
 	},
@@ -102,15 +91,6 @@ const styles = StyleSheet.create({
 	},
 	buttonText: {
 		flex: 1,
-	},
-	dragbar: {
-		"-webkit-app-region": "drag",
-		"-webkit-user-select": "none",
-		"height": 30,
-		"left": 0,
-		"position": "absolute",
-		"right": 0,
-		"top": 0,
 	},
 	form: {
 		margin: 20,
