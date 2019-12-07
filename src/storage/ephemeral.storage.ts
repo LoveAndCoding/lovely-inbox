@@ -25,8 +25,9 @@ export default class EphemeralStorage<T> extends Storage {
 		return !this.storage.has(key);
 	}
 
-	public get(key: string): T | void {
-		return this.storage.get(key);
+	public get(key: string): T | void;
+	public get(key: string, defaultValue: T): T {
+		return this.storage.has(key) ? this.storage.get(key) : defaultValue;
 	}
 
 	public clear() {

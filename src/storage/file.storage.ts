@@ -65,7 +65,11 @@ export default class FileStorage extends Storage {
 		return this.writeCacheToDisk();
 	}
 
-	public get<T>(key: string): T {
+	public get<T>(key: string): T | void;
+	public get<T>(key: string, defaultValue: T): T {
+		if (!key in this.localCache) {
+			return defaultValue;
+		}
 		return this.localCache[key] as T;
 	}
 

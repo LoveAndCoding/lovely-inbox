@@ -28,6 +28,7 @@ export default abstract class Storage {
 
 	public abstract save<T>(key: string, value: T): boolean | Promise;
 	public abstract delete(key: string): boolean | Promise;
-	public abstract get<T>(key: string): T;
+	public abstract get<T>(key: string): T | void;
+	public abstract get<T>(key: string, defaultValue: T): T;
 	public abstract clear(): boolean | Promise;
 }

@@ -15,7 +15,10 @@ class UserConfigStore implements IUserConfig {
 	}
 
 	get completedOnBoarding(): boolean {
-		return this.userConfigStorage.get<boolean>("completedOnboarding");
+		return this.userConfigStorage.get<boolean>(
+			"completedOnboarding",
+			false,
+		);
 	}
 }
 

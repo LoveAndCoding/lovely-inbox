@@ -16,6 +16,26 @@ export default class SecureStorage extends FileStorage {
 			return this.writeCacheToDisk();
 		});
 	}
+
+	public get(key: string): Promise<string> | void;
+	public get(key: string, defaultValue: string): Promise<string> {
+		// Check for not in, since we may still want to return empty strings
+		if (!key in this.localCache) {
+			// While I can't imagine a scenario where a default value makes
+			// sense for what we'd like to encrypt, included anyway just in case
+			return typeof defaultValue !== "undefined"
+				? Promise.resolve(defaultValue)
+				: defaultValue;
+		}
+
+		// An empty string doesn't need to be decrypted, just return
+		if (!this.localCache[key]) {
+			return Promise.resolve(this.localCache[key] as string);
+		}
+
+		return this.decrypt(this.localCache[key]);
+	}
+
 	private encrypt(value: string) {
 		return encryptTextValue(value, SECURE_STORAGE_KEY_NAME);
 	}
