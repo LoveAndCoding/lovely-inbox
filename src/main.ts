@@ -2,7 +2,7 @@ import { app, BrowserWindow, Tray } from "electron";
 
 import { UserConfig } from "./config";
 import logger from "./logger";
-import WindowManager from "./window.manager";
+import WindowManager from "./window/window.manager";
 
 const windower = new WindowManager(
 	MAIN_WINDOW_WEBPACK_ENTRY,
