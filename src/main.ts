@@ -2,8 +2,13 @@ import { app, BrowserWindow, Tray } from "electron";
 
 import { UserConfig } from "./config";
 import logger from "./logger";
+import setupUnhandledListeners from "./process.error.handlers";
 import WindowManager from "./window/window.manager";
 
+// Before we do anything else, setup handlers for any missed errors
+setupUnhandledListeners();
+
+// Create a new WindowManager which we'll use to control all of our windows
 const windower = new WindowManager(
 	MAIN_WINDOW_WEBPACK_ENTRY,
 	ONBOARDING_WEBPACK_ENTRY,
