@@ -2,7 +2,7 @@ import * as AppDirectory from "appdirectory";
 import { app } from "electron";
 
 const appDirectories = new AppDirectory({
-	appName: app.isPackaged ? "Lovely Inbox (Dev)" : "Lovely Inbox",
+	appName: app.isPackaged ? "Lovely Inbox" : "Lovely Inbox (Dev)",
 });
 
 interface IApplicationConfig {
