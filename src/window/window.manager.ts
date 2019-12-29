@@ -35,6 +35,10 @@ export default class WindowManager {
 		return window;
 	}
 
+	public hasMainWindow() {
+		return !!this.mainWindow;
+	}
+
 	public openInbox() {
 		this.setMainWindow(this.create(this.inboxUrl, LovelyWindow));
 	}
