@@ -7,6 +7,7 @@ import {
 	StyleDeclarationValue,
 	StyleSheet as Aphrodite,
 } from "aphrodite";
+export { StyleDeclaration, StyleDeclarationMap } from "aphrodite";
 
 const { StyleSheet, css } = Aphrodite.extend([
 	{
@@ -71,8 +72,6 @@ const { StyleSheet, css } = Aphrodite.extend([
 ]);
 
 export type CSSInputTypes = StyleDeclarationValue | false | void | null;
-export type StyleDeclaration = StyleDeclaration;
-export type StyleDeclarationMap = StyleDeclarationMap;
 
 const COLORS = {
 	BRAND: {
