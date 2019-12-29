@@ -9,8 +9,8 @@ import * as path from "path";
 
 import logger from "../logger";
 
-import * as WindowPreloadScript from "file-loader!./window.preload.js";
-import * as icon from "../../images/icon.light.red@2x.png";
+import WindowPreloadScript from "file-loader!./window.preload.js";
+import icon from "../../images/icon.light.red@2x.png";
 
 // NOTE: We cannot extend BrowserWindow, so we basically just implement a small
 // wrapper class with only the calls we need
