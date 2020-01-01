@@ -13,6 +13,6 @@ export default class WindowMinimize extends WindowBarButton {
 	}
 
 	protected handleClick() {
-		ipc.send("window-minimize");
+		ipc.notify("window-minimize");
 	}
 }
