@@ -1,10 +1,10 @@
 import * as React from "react";
 
-import Spring from "../../layout/components/spring";
-import View from "../../layout/components/view";
-import WindowClose from "../../menubar/components/close";
-import WindowMinimize from "../../menubar/components/minimize";
-import { COLORS, css, StyleSheet } from "../../styles";
+import Spring from "../../../layout/components/spring";
+import View from "../../../layout/components/view";
+import WindowClose from "../../../menubar/components/close";
+import WindowMinimize from "../../../menubar/components/minimize";
+import { COLORS, css, StyleSheet } from "../../../styles";
 
 export default class OnboardMenuBar extends React.Component {
 	public render() {
@@ -22,7 +22,7 @@ const styles = StyleSheet.create({
 	bar: {
 		"-webkit-app-region": "drag",
 		"-webkit-user-select": "none",
-		"flexDirection": "row",
+		flexDirection: "row",
 
 		"& button": {
 			"-webkit-app-region": "no-drag",

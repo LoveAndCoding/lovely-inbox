@@ -1,9 +1,9 @@
 import * as React from "react";
 
-import View, { ViewTags } from "../layout/components/view";
-import { css, StyleSheet } from "../styles";
-import OnboardServerSettings from "./account/server.settings";
-import FindingServerMessaging from "./welcome/finding.server";
+import View, { ViewTags } from "../../../layout/components/view";
+import { css, StyleSheet } from "../../../styles";
+import OnboardServerSettings from "./server.settings";
+import FindingServerMessaging from "./finding.server";
 
 export default class ServerSettingsScreen extends React.Component {
 	public render() {

@@ -1,10 +1,10 @@
 import * as React from "react";
 
-import View, { ViewTags } from "../../layout/components/view";
-import { COLORS, css, StyleSheet } from "../../styles";
-import OnboardMenuBar from "../components/menubar";
+import View, { ViewTags } from "../../../layout/components/view";
+import { COLORS, css, StyleSheet } from "../../../styles";
+import OnboardMenuBar from "./menubar";
 
-import * as HeartBGImage from "../../../../images/heart.bg.svg";
+import * as HeartBGImage from "../../../../../images/heart.bg.svg";
 
 export default class WelcomeMessagePane extends React.Component<{
 	header: string;

@@ -1,10 +1,10 @@
 import * as React from "react";
 
 import { Redirect } from "react-router";
-import View, { ViewTags } from "../layout/components/view";
-import { css, StyleSheet } from "../styles";
-import OnboardAccountAdd from "./account/add";
-import GettingStartedMessaging from "./welcome/get.started";
+import View, { ViewTags } from "../../../layout/components/view";
+import { css, StyleSheet } from "../../../styles";
+import OnboardAccountAdd from "./add";
+import GettingStartedMessaging from "./get.started";
 
 export default class InitialOnboardScreen extends React.Component<
 	{},
@@ -27,7 +27,7 @@ export default class InitialOnboardScreen extends React.Component<
 
 	private onNext = () => {
 		this.setState({ formSubmitted: true });
-	}
+	};
 }
 
 const styles = StyleSheet.create({

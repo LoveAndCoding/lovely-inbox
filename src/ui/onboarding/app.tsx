@@ -1,15 +1,14 @@
 import * as React from "react";
 import { Provider } from "react-redux";
 import { MemoryRouter as Router, Route } from "react-router-dom";
-import { createStore } from "redux";
 
 import View from "../layout/components/view";
 import { css, StyleSheet } from "../styles";
-import InitialOnboardScreen from "./initial.screen";
-import onboardingStore from "./reducers";
-import ServerSettingsScreen from "./server.settings";
+import InitialOnboardScreen from "./account/components/initial.screen";
+import ServerSettingsScreen from "./server-setup/components/settings.screen";
+import configureStore from "./store";
 
-const store = createStore(onboardingStore);
+const store = configureStore();
 
 function AppRouter() {
 	return (

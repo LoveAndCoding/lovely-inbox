@@ -1,9 +1,10 @@
 import { connect } from "react-redux";
+
 import EmailTextField, {
 	EmailFieldProps,
-} from "../../forms/components/email.text.field";
-import { setEmailAddress } from "../actions";
-import { OnboardingState } from "../reducers";
+} from "../../../forms/components/email.text.field";
+import { setEmailAddress } from "../../store/email/actions";
+import { AppState } from "../../store";
 
 const mapStateToProps = (state: OnboardingState, ownProps: EmailFieldProps) => {
 	return {
@@ -20,7 +21,4 @@ const mapDispatchToProps = (dispatch, ownProps: EmailFieldProps) => {
 	};
 };
 
-export default connect(
-	mapStateToProps,
-	mapDispatchToProps,
-)(EmailTextField);
+export default connect(mapStateToProps, mapDispatchToProps)(EmailTextField);

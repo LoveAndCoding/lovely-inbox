@@ -2,8 +2,8 @@ import { faArrowRight } from "@fortawesome/pro-light-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import * as React from "react";
 
-import View, { ViewTags } from "../../layout/components/view";
-import { COLORS, css, StyleSheet } from "../../styles";
+import View, { ViewTags } from "../../../layout/components/view";
+import { COLORS, css, StyleSheet } from "../../../styles";
 
 export default class ActionPaneSmall extends React.Component {
 	public render() {
@@ -31,10 +31,10 @@ const styles = StyleSheet.create({
 	dragbar: {
 		"-webkit-app-region": "drag",
 		"-webkit-user-select": "none",
-		"height": 30,
-		"left": 0,
-		"position": "absolute",
-		"right": 0,
-		"top": 0,
+		height: 30,
+		left: 0,
+		position: "absolute",
+		right: 0,
+		top: 0,
 	},
 });
