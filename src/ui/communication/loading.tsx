@@ -2,7 +2,7 @@ import * as React from "react";
 
 import { css, CSSInputTypes, StyleSheet } from "../styles";
 
-import * as HBAnimIcon from "../../../images/heart.beat.light.anim.svg";
+import HBAnimIcon from "../../../images/heart.beat.light.anim.svg";
 
 export default class HeartBeatLoadingIcon extends React.Component<{
 	alt: string;
@@ -27,6 +27,6 @@ export default class HeartBeatLoadingIcon extends React.Component<{
 const styles = StyleSheet.create({
 	icon: {
 		"-webkit-user-select": "none",
-		"pointerEvents": "none",
+		pointerEvents: "none",
 	},
 });
