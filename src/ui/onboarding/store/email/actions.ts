@@ -1,5 +1,5 @@
 import Email from "../../../../common/email";
-import { SET_EMAIL_ADDRESS, ISetEmailAddressAction } from "./types";
+import { ISetEmailAddressAction, SET_EMAIL_ADDRESS } from "./types";
 
 export function setEmailAddress(email: string): ISetEmailAddressAction {
 	try {

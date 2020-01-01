@@ -15,13 +15,13 @@ export const guessConfigBegin = (): IGuessConfigBeginAction => ({
 export const guessConfigSuccess = (
 	config: void | IServerConfig,
 ): IGuessConfigSuccessAction => ({
-	type: GUESS_CONFIG_SUCCESS,
 	config,
+	type: GUESS_CONFIG_SUCCESS,
 });
 
 export const guessConfigFailure = (
 	error: Error,
 ): IGuessConfigFailureAction => ({
-	type: GUESS_CONFIG_FAILURE,
 	error,
+	type: GUESS_CONFIG_FAILURE,
 });

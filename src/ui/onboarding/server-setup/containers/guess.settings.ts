@@ -1,9 +1,9 @@
 import { connect } from "react-redux";
 
+import { AppState } from "../../store";
 import GuessServerSettings, {
 	IGuessServerSettingsProps,
 } from "../components/guess.settings";
-import { AppState } from "../../store";
 import { thunkGuessConfig } from "../thunks";
 
 const mapStateToProps = (

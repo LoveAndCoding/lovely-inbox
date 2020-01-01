@@ -3,8 +3,8 @@ import { connect } from "react-redux";
 import EmailTextField, {
 	EmailFieldProps,
 } from "../../../forms/components/email.text.field";
-import { setEmailAddress } from "../../store/email/actions";
 import { AppState } from "../../store";
+import { setEmailAddress } from "../../store/email/actions";
 
 const mapStateToProps = (state: OnboardingState, ownProps: EmailFieldProps) => {
 	return {

@@ -1,5 +1,5 @@
 import Email from "../../../../common/email";
-import { IEmailState, SET_EMAIL_ADDRESS, EmailActionTypes } from "./types";
+import { EmailActionTypes, IEmailState, SET_EMAIL_ADDRESS } from "./types";
 
 const initialState: IEmailState = {
 	email: null,

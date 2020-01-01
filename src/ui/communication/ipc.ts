@@ -53,7 +53,7 @@ let nextIPCRequestId = 1;
  * For a list of routes, refer to src/common/route.signatures.ts
  *
  * @param url IPC route to request. Called URL for parity with server requests
- * @param args The arguments that this route expects. When autocomplete is supported, the arguments for the route you're calling should be shown
+ * @param args The arguments that this route expects
  * @returns Promise<mixed> The results of the request
  */
 export function request<
@@ -106,9 +106,9 @@ export function request<
 		window.postMessage(
 			{
 				args,
-				url,
 				requestId,
 				type: "ipcRequest",
+				url,
 			},
 			"*",
 		);

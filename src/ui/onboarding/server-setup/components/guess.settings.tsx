@@ -1,11 +1,11 @@
 import * as React from "react";
 
+import Email from "../../../../common/email";
 import HeartBeatLoadingIcon from "../../../communication/loading";
 import View, { ViewTags } from "../../../layout/components/view";
 import { COLORS, css, StyleSheet } from "../../../styles";
 import { IServerConfig } from "../../store/server-config/types";
 import { thunkGuessConfig } from "../thunks";
-import Email from "../../../../common/email";
 
 export interface IGuessServerSettingsProps {
 	config: IServerConfig;
@@ -65,13 +65,13 @@ const styles = StyleSheet.create({
 	container: {
 		margin: "auto",
 	},
+	loadingText: {
+		fontSize: "90%",
+	},
 	workingIcon: {
 		display: "block",
 		height: 200,
 		margin: "auto",
 		width: 200,
-	},
-	loadingText: {
-		fontSize: "90%",
 	},
 });

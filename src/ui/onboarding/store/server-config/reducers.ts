@@ -1,16 +1,16 @@
 import Email from "../../../../common/email";
 import {
-	IGuessConfigState,
 	GUESS_CONFIG_BEGIN,
 	GUESS_CONFIG_FAILURE,
 	GUESS_CONFIG_SUCCESS,
 	GuessConfigActionTypes,
+	IGuessConfigState,
 } from "./types";
 
 const initialState: IGuessConfigState = {
 	config: null,
-	loading: false,
 	error: null,
+	loading: false,
 };
 
 export default function guessConfig(
@@ -21,20 +21,20 @@ export default function guessConfig(
 		case GUESS_CONFIG_BEGIN:
 			return {
 				...state,
-				loading: true,
 				error: null,
+				loading: true,
 			};
 		case GUESS_CONFIG_SUCCESS:
 			return {
 				...state,
-				loading: false,
 				config: action.config,
+				loading: false,
 			};
 		case GUESS_CONFIG_FAILURE:
 			return {
 				...state,
-				loading: false,
 				error: action.error,
+				loading: false,
 			};
 		default:
 			return state;

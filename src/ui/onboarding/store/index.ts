@@ -1,8 +1,8 @@
-import { createStore, applyMiddleware, combineReducers } from "redux";
+import { applyMiddleware, combineReducers, createStore } from "redux";
 import thunk from "redux-thunk";
 
-import rootReducer from "./reducers";
 import emailReducer from "./email/reducers";
+import rootReducer from "./reducers";
 import guessServerConfigReducer from "./server-config/reducers";
 
 const rootReducer = combineReducers({

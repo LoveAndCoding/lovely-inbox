@@ -46,18 +46,6 @@ export default class LovelyWindow {
 		this.init();
 	}
 
-	protected init() {
-		// Always listen for minimize events
-		const minimize = (event: IpcMessageEvent) =>
-			this.browserWindow.minimize();
-		this.onMsg("window-minimize", minimize);
-
-		this.browserWindow.once("closed", () => {
-			// Clean up all the listeners on close
-			this.removeAllMsgListeners();
-		});
-	}
-
 	public onMsg(name: string, callback: (event: IpcMessageEvent) => void) {
 		logger.debug(
 			`Adding ${name} IPC listener from ${this.constructor.name}`,
@@ -119,5 +107,17 @@ export default class LovelyWindow {
 				this.ipcListeners.delete(name);
 			}
 		}
+	}
+
+	protected init() {
+		// Always listen for minimize events
+		const minimize = (event: IpcMessageEvent) =>
+			this.browserWindow.minimize();
+		this.onMsg("window-minimize", minimize);
+
+		this.browserWindow.once("closed", () => {
+			// Clean up all the listeners on close
+			this.removeAllMsgListeners();
+		});
 	}
 }

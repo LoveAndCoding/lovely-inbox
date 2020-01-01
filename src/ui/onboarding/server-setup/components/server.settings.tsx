@@ -3,13 +3,13 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import * as React from "react";
 import { Link } from "react-router-dom";
 
-import GuessServerSettings from "../containers/guess.settings";
 import { ButtonSizes } from "../../../forms/components/button";
 import Spring from "../../../layout/components/spring";
 import View, { ViewTags } from "../../../layout/components/view";
 import { COLORS, css, StyleSheet } from "../../../styles";
 import ActionPaneSmall from "../../common/components/action.pane.small";
 import GuessNextButton from "../containers/guess.next.button";
+import GuessServerSettings from "../containers/guess.settings";
 
 export default class OnboardServerSettings extends React.Component {
 	public render() {
