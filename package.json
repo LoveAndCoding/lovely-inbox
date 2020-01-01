@@ -128,8 +128,6 @@
 		"url-loader": "^3.0.0"
 	},
 	"husky": {
-		"hooks": {
-			"pre-commit": "lint-staged"
-		}
+		"hooks": {}
 	}
 }

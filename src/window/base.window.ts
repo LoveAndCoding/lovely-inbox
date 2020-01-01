@@ -43,21 +43,22 @@ export default class LovelyWindow {
 		this.browserWindow = new BrowserWindow(options);
 		this.ipcListeners = new Map<string, Array<(IpcMessageEvent) => void>>();
 
+		this.init();
+	}
+
+	protected init() {
 		// Always listen for minimize events
 		const minimize = (event: IpcMessageEvent) =>
 			this.browserWindow.minimize();
-		this.addIPCListener("window-minimize", minimize);
+		this.onMsg("window-minimize", minimize);
 
 		this.browserWindow.once("closed", () => {
 			// Clean up all the listeners on close
-			this.removeAllIPCListeners();
+			this.removeAllMsgListeners();
 		});
 	}
 
-	public addIPCListener(
-		name: string,
-		callback: (event: IpcMessageEvent) => void,
-	) {
+	public onMsg(name: string, callback: (event: IpcMessageEvent) => void) {
 		logger.debug(
 			`Adding ${name} IPC listener from ${this.constructor.name}`,
 		);
@@ -76,10 +77,7 @@ export default class LovelyWindow {
 		return wrappedCB;
 	}
 
-	public removeIPCListener(
-		name: string,
-		callback: (event: IpcMessageEvent) => void,
-	) {
+	public offMsg(name: string) {
 		logger.debug(
 			`Removing ${name} IPC listener from ${this.constructor.name}`,
 		);
@@ -96,8 +94,8 @@ export default class LovelyWindow {
 		}
 	}
 
-	public removeAllIPCListeners();
-	public removeAllIPCListeners(name: string) {
+	public removeAllMsgListeners();
+	public removeAllMsgListeners(name: string) {
 		if (typeof name === "string") {
 			if (!this.ipcListeners.has(name)) {
 				logger.info(
@@ -122,8 +120,4 @@ export default class LovelyWindow {
 			}
 		}
 	}
-
-	// Aliasing the IPC stuff since IPC is just a technical detail name
-	public onMsg = (name, cb) => this.addIPCListener(name, cb);
-	public offMsg = (name, cb) => this.removeIPCListener(name, cb);
 }

@@ -1,6 +1,7 @@
 import { BrowserWindowConstructorOptions } from "electron";
 
 import logger from "../logger";
+import Router from "../route/router";
 import LovelyWindow from "./base.window";
 import OnboardingWindow from "./onboard.window";
 
@@ -8,7 +9,11 @@ export default class WindowManager {
 	private windows: LovelyWindow[];
 	private mainWindow: LovelyWindow;
 
-	constructor(readonly inboxUrl: string, readonly onboardingUrl: string) {
+	constructor(
+		public readonly inboxUrl: string,
+		public readonly onboardingUrl: string,
+		public readonly router: Router,
+	) {
 		this.windows = [];
 	}
 

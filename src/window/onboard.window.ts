@@ -18,8 +18,4 @@ export default class OnboardingWindow extends LovelyWindow {
 			width: 950,
 		});
 	}
-
-	public constructor(options: BrowserWindowConstructorOptions) {
-		super(options);
-	}
 }
