@@ -6,10 +6,12 @@ import EmailTextField, {
 import { AppState } from "../../store";
 import { setEmailAddress } from "../../store/email/actions";
 
-const mapStateToProps = (state: OnboardingState, ownProps: EmailFieldProps) => {
+const mapStateToProps = (state: AppState, ownProps: EmailFieldProps) => {
 	return {
 		...ownProps,
-		defaultValue: state.emailAddress ? state.emailAddress.address : "",
+		defaultValue: state.emailAddress.email
+			? state.emailAddress.email.address
+			: "",
 	};
 };
 
