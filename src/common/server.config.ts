@@ -1,7 +1,8 @@
 export interface IMailServer {
 	host: string;
 	port: number;
-	ssl: boolean;
+	ssl?: boolean;
+	tls?: boolean;
 }
 
 export interface IIncomingServerConfig {
@@ -14,7 +15,16 @@ export interface IOutgoingServerConfig {
 	server: IMailServer;
 }
 
+export enum CONFIG_SOURCE {
+	Confirmed_Guess = "guessed right",
+	Guess = "just guessed",
+	Known_DNS = "known dns",
+	Known_Domain = "known domain",
+	User = "user entered",
+}
+
 export interface IServerConfig {
-	incoming: IIncomingServerConfig;
-	outgoing: IOutgoingServerConfig;
+	incoming?: IIncomingServerConfig;
+	outgoing?: IOutgoingServerConfig;
+	source?: CONFIG_SOURCE;
 }
