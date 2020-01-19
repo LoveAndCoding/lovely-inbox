@@ -70,6 +70,7 @@ export default class OnboardAccountAdd extends React.Component {
 const styles = StyleSheet.create({
 	buttonBar: {
 		flexDirection: "row",
+		margin: "20px 0px",
 	},
 	buttonIcon: {
 		// The FA Icon seems to look better centered rather than at baseline

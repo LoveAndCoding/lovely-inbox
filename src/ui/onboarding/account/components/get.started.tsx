@@ -23,11 +23,6 @@ export default class GettingStartedMessaging extends React.Component {
 
 				<p className={paraStyle}>First, what’s your email address?</p>
 
-				<p className={css(welcomeStyles.para, styles.note)}>
-					(if you have several, pick one and we'll work on the rest of
-					them later)
-				</p>
-
 				<img
 					src={PointerImage}
 					alt=""
@@ -46,7 +41,7 @@ const styles = StyleSheet.create({
 	},
 	pointerImage: {
 		"-webkit-user-select": "none",
-		bottom: 62,
+		bottom: 100,
 		display: "block",
 		height: 110,
 		padding: 0,

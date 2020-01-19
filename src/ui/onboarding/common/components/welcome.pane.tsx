@@ -38,7 +38,7 @@ export const welcomeStyles = StyleSheet.create({
 		paddingBottom: 10,
 		paddingLeft: 30,
 		paddingRight: 30,
-		paddingTop: 25,
+		paddingTop: 15,
 	},
 	welcome: {
 		backgroundColor: COLORS.white,

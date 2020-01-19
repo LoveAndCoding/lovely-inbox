@@ -86,6 +86,9 @@ const COLORS = {
 	offBlack: "#2f2c24",
 
 	darkBlue: "#01223F",
+	darkPurple: "#24081C",
+
+	purple: "#7218F0",
 
 	offWhite: "#efeae7",
 	white: "#FFFAF6",

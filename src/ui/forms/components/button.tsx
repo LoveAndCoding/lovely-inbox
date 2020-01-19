@@ -16,6 +16,8 @@ export enum ButtonSizes {
 export enum ButtonColors {
 	dark = "dark",
 	light = "light",
+	transparentDark = "transparentDark",
+	transparentLight = "transparentLight",
 }
 
 export type LovelyButtonProps = {
@@ -67,13 +69,14 @@ export default class LovelyButton extends React.Component<LovelyButtonProps> {
 
 const styles = StyleSheet.create({
 	button: {
-		alignItems: "baseline",
+		alignItems: "center",
 		border: "none",
 		borderRadius: 4,
 		cursor: "pointer",
 		display: "flex",
 		flexDirection: "row",
 		justifyContent: "center",
+		lineHeight: 1,
 		width: "auto",
 	},
 
@@ -122,21 +125,38 @@ const styles = StyleSheet.create({
 
 	// Colors
 	dark: {
-		"backgroundColor": COLORS.darkBlue,
-		"boxShadow": `3px 3px 2px ${COLORS.black40}`,
-		"color": COLORS.white,
+		backgroundColor: COLORS.darkPurple,
+		boxShadow: `3px 3px 2px ${COLORS.black40}`,
+		color: COLORS.white,
 
 		"&:active, &:focus, &:hover": {
 			backgroundColor: COLORS.black,
+			boxShadow: `3px 3px 2px ${COLORS.black60}`,
 		},
 	},
 	light: {
-		"backgroundColor": COLORS.white,
-		"boxShadow": `3px 3px 2px ${COLORS.black40}`,
-		"color": COLORS.darkBlue,
+		backgroundColor: COLORS.white,
+		boxShadow: `3px 3px 2px ${COLORS.black40}`,
+		color: COLORS.darkBlue,
 
 		"&:active, &:focus, &:hover": {
 			backgroundColor: COLORS.offWhite,
+		},
+	},
+	transparentDark: {
+		backgroundColor: "transparent",
+		color: COLORS.darkPurple,
+
+		"&:active, &:focus, &:hover": {
+			backgroundColor: COLORS.offWhite,
+		},
+	},
+	transparentLight: {
+		backgroundColor: "transparent",
+		color: COLORS.white,
+
+		"&:active, &:focus, &:hover": {
+			backgroundColor: COLORS.offBlack,
 		},
 	},
 
