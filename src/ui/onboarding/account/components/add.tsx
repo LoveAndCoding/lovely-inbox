@@ -3,7 +3,7 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import * as React from "react";
 
 import { ButtonColors, ButtonSizes } from "../../../forms/components/button";
-import { InputFieldSizes } from "../../../forms/components/email.text.field";
+import { InputFieldSizes } from "../../../forms/components/input.field";
 import Spring from "../../../layout/components/spring";
 import View, { ViewTags } from "../../../layout/components/view";
 import { COLORS, css, StyleSheet } from "../../../styles";
@@ -38,8 +38,11 @@ export default class OnboardAccountAdd extends React.Component {
 					onSubmit={this.handleSubmit}
 				>
 					<EmailInputField
+						label="Email"
+						placeholder="kairi@destiny.island"
 						size={InputFieldSizes.large}
 						required={true}
+						type="email"
 					/>
 					<View styles={[styles.buttonBar]}>
 						<Spring />
