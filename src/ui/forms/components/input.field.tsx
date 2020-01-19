@@ -41,6 +41,7 @@ type InputTypeProps =
 
 export type InputFieldProps = InputTypeProps & {
 	disabled?: boolean;
+	inline?: boolean;
 	label: string;
 	placeholder: string;
 	required?: boolean;
@@ -66,7 +67,13 @@ export default class InputField extends React.Component<InputFieldProps> {
 	public render() {
 		return (
 			<React.Fragment>
-				<label className={css(styles.label)} htmlFor={this.inputId}>
+				<label
+					className={css(
+						styles.label,
+						this.props.inline && styles[this.props.size],
+					)}
+					htmlFor={this.inputId}
+				>
 					{this.props.label}
 				</label>
 				<input
@@ -115,6 +122,7 @@ const styles = StyleSheet.create({
 	},
 	label: {
 		display: "block",
+		lineHeight: "normal",
 		marginBottom: 8,
 	},
 
@@ -133,6 +141,7 @@ const styles = StyleSheet.create({
 		fontSize: 20,
 		padding: "14px 20px",
 	},
+
 	xlarge: {
 		fontSize: 24,
 		padding: "20px 32px",

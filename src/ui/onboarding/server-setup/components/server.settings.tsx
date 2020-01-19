@@ -21,7 +21,7 @@ export default class OnboardServerSettings extends React.Component {
 						<span className={css(styles.buttonText)}>Back</span>
 					</Link>
 					<GuessNextButton size={ButtonSizes.large}>
-						<span className={css(styles.buttonText)}>Next</span>
+						<span className={css(styles.buttonText)}>Login</span>
 						<FontAwesomeIcon
 							icon={faArrowRight}
 							className={css(styles.buttonIcon)}
@@ -41,7 +41,6 @@ const styles = StyleSheet.create({
 		color: COLORS.white,
 		cursor: "pointer",
 		display: "flex",
-		flex: 1,
 		flexDirection: "row",
 		fontSize: 20,
 		justifyContent: "center",
@@ -58,7 +57,8 @@ const styles = StyleSheet.create({
 	},
 	buttonBar: {
 		flexDirection: "row",
-		margin: 20,
+		justifyContent: "space-between",
+		margin: "40px 20px",
 	},
 	buttonIcon: {
 		// The FA Icon seems to look better centered rather than at baseline

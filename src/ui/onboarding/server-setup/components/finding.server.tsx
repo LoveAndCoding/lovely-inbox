@@ -24,18 +24,16 @@ export default class GettingStartedMessaging extends React.Component {
 					more info.
 				</p>
 
-				<p className={css(welcomeStyles.para, styles.note)}></p>
+				<p className={paraStyle}>
+					Once we've got everything we need, click the login button to
+					login to your email and start using the app.
+				</p>
 			</WelcomeMessagePane>
 		);
 	}
 }
 
 const styles = StyleSheet.create({
-	note: {
-		color: COLORS.offBlack,
-		fontSize: 18,
-		fontStyle: "italic",
-	},
 	pointerImage: {
 		"-webkit-user-select": "none",
 		bottom: 62,
