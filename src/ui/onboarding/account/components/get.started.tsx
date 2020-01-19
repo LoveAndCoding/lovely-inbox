@@ -34,11 +34,6 @@ export default class GettingStartedMessaging extends React.Component {
 }
 
 const styles = StyleSheet.create({
-	note: {
-		color: COLORS.offBlack,
-		fontSize: 18,
-		fontStyle: "italic",
-	},
 	pointerImage: {
 		"-webkit-user-select": "none",
 		bottom: 100,
