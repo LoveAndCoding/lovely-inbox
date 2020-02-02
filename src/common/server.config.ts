@@ -26,5 +26,6 @@ export enum CONFIG_SOURCE {
 export interface IServerConfig {
 	incoming?: IIncomingServerConfig;
 	outgoing?: IOutgoingServerConfig;
-	source?: CONFIG_SOURCE;
+	source: CONFIG_SOURCE;
+	username: string;
 }

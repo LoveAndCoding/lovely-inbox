@@ -91,6 +91,10 @@ export async function guessAtConfig(
 			`Found known server configuration data for domain ${domain}`,
 		);
 		guessedConfig.source = CONFIG_SOURCE.Known_Domain;
+		guessedConfig.username =
+			typeof guessedConfig.username === "function"
+				? guessedConfig.username(email)
+				: email;
 		return guessedConfig;
 	}
 
@@ -99,12 +103,17 @@ export async function guessAtConfig(
 	if (guessedConfig) {
 		logger.info(`Found known server configuration from dns for ${domain}`);
 		guessedConfig.source = CONFIG_SOURCE.Known_DNS;
+		guessedConfig.username =
+			typeof guessedConfig.username === "function"
+				? guessedConfig.username(email)
+				: email;
 		return guessedConfig;
 	}
 
 	// Finally, if we couldn't do that, we're gonna just start trying configs
 	guessedConfig = {
 		source: CONFIG_SOURCE.Guess,
+		username: email,
 	};
 
 	for (const subdomain of INCOMING_SUB_DOMAIN_GUESSES) {
