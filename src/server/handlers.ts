@@ -46,7 +46,7 @@ async function checkMXRecordsForConfig(domain: string) {
 
 async function checkIncomingConfig(user: string, host: string, port: number) {
 	let connection = new IMAPConnection({
-		autotls: true,
+		autotls: "always",
 		host,
 		port,
 		tls: true,

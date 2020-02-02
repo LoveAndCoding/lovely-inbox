@@ -1,4 +1,4 @@
-import * as AppDirectory from "appdirectory";
+import * as logform from "logform";
 import * as path from "path";
 import * as winston from "winston";
 
@@ -19,7 +19,7 @@ const logger = winston.createLogger({
 	format: combine(
 		timestamp(),
 		printf(
-			(log) =>
+			(log: logform.TransformableInfo) =>
 				`${log.timestamp} [${log.level.toUpperCase()}]: ${log.message}`,
 		),
 	),

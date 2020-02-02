@@ -6,7 +6,7 @@ import ServerConnection, { ConnectionOptions } from "./base.connection";
 
 interface IMAPLibaryOptions {
 	authTimeout?: number;
-	autotls?: boolean;
+	autotls?: "always" | "required" | "never";
 	connTimeout?: number;
 	socketTimeout?: number;
 	tls?: boolean;
@@ -25,26 +25,33 @@ export default class IMAPConnection extends ServerConnection {
 	}
 
 	public connect(password: string): Promise<boolean> {
-		const imapOpts = Object.assign(this.getBaseIMAPOptions(), {
+		const imapOpts: IMAP.Config = Object.assign(this.getBaseIMAPOptions(), {
 			// TODO(alexis): We should avoid keeping the password around as much
 			// as we can, but that requires fixing the library, which is a big
 			// task. So I'm putting this as a TODO to do a full rewrite of auth
 			// in the IMAP library... you know, as you do sometimes...
 			password,
 		});
-		this.imap = new IMAP(imapOpts);
+		const imap = (this.imap = new IMAP(imapOpts));
 
-		return new Promise((resolve, reject) => {
+		return new Promise<boolean>((resolve, reject) => {
 			const errHandler = (err: Error) => {
 				reject(err);
 			};
-			this.imap.on("error", errHandler);
-			this.imap.once("ready", () => {
-				this.imap.removeListener("error", errHandler);
-				resolve();
+			imap.on("error", errHandler);
+			imap.once("ready", () => {
+				imap.removeListener("error", errHandler);
+				resolve(true);
 			});
-			this.imap.connect();
-		}).then(this.onConnect);
+			imap.connect();
+		}).then((result: boolean) => {
+			this.onConnect();
+			return result;
+		});
+	}
+
+	public get connected() {
+		return this.imap && this.imap.state !== "disconnected";
 	}
 
 	public testConnection(): Promise<boolean> {
@@ -94,8 +101,6 @@ export default class IMAPConnection extends ServerConnection {
 	}
 
 	public disconnect(force: boolean) {
-		this.connected = false;
-
 		if (this.imap) {
 			this.imap.destroy();
 			this.emit("disconnected");
@@ -113,9 +118,9 @@ export default class IMAPConnection extends ServerConnection {
 
 			// TLS defaults (default to secure)
 			autotls:
-				typeof this.options.autotls === "boolean"
+				typeof this.options.autotls === "string"
 					? this.options.autotls
-					: true,
+					: "always",
 			tls:
 				typeof this.options.tls === "boolean" ? this.options.tls : true,
 			tlsOptions: this.options.tlsOptions,
@@ -138,8 +143,6 @@ export default class IMAPConnection extends ServerConnection {
 			);
 			return;
 		}
-
-		this.connected = true;
 
 		// this.imap.on("alert", this.onAlert);
 		// this.imap.on("close", this.onClose);

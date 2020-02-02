@@ -1,5 +1,4 @@
 import {
-	CONFIG_SOURCE
 	IIncomingServerConfig,
 	IOutgoingServerConfig,
 	IServerConfig,
