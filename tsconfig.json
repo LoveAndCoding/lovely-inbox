@@ -1,15 +1,16 @@
 {
 	"compilerOptions": {
+		"baseUrl": ".",
+		"jsx": "react",
 		"module": "commonjs",
 		"noImplicitAny": true,
-		"sourceMap": true,
 		"outDir": "dist",
-		"baseUrl": ".",
 		"paths": {
 			"*": ["node_modules/*"],
 			"src/*": ["src/*"]
 		},
-		"jsx": "react"
+		"sourceMap": true,
+		"typeRoots": ["./node_modules/@types", "./types"]
 	},
 	"include": ["src/**/*"]
 }

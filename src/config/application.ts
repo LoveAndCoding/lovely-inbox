@@ -1,8 +1,8 @@
-import * as AppDirectory from "appdirectory";
+import AppDirectory = require("appdirectory");
 import { app } from "electron";
 
 const appDirectories = new AppDirectory({
-	appName: app.isPackaged ? "Lovely Inbox" : "Lovely Inbox (Dev)",
+	appName: app && app.isPackaged ? "Lovely Inbox" : "Lovely Inbox (Dev)",
 });
 
 interface IApplicationConfig {
@@ -16,8 +16,8 @@ interface IApplicationConfig {
 	};
 }
 
-export const ApplicationConfig: ReadOnly<IApplicationConfig> = {
-	isDev: !app.isPackaged,
+export const ApplicationConfig: Readonly<IApplicationConfig> = {
+	isDev: !(app && app.isPackaged),
 
 	directories: {
 		cache: appDirectories.userCache(),
