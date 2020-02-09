@@ -20,7 +20,7 @@ export default class ServerSettingsForm extends React.Component<
 	public handleChange = (event: Event) => {};
 
 	public render() {
-		const { incoming, outgoing, source } = this.props.config;
+		const { incoming, outgoing, source, username } = this.props.config;
 		const fieldsetClass = css(styles.fieldset);
 		const configGroupLabelClass = css(styles.configGroupLabel);
 
@@ -31,7 +31,7 @@ export default class ServerSettingsForm extends React.Component<
 				tag={ViewTags.form}
 			>
 				<InputField
-					defaultValue={this.props.email.address}
+					defaultValue={username}
 					inline={true}
 					label="Username"
 					placeholder="kairi@destiny.island"
@@ -39,7 +39,7 @@ export default class ServerSettingsForm extends React.Component<
 					type="text"
 				/>
 				<InputField
-					defaultValue={incoming.server.host}
+					defaultValue={incoming?.server.host}
 					inline={true}
 					label="IMAP Server"
 					placeholder="imap.example.com"
@@ -47,7 +47,7 @@ export default class ServerSettingsForm extends React.Component<
 					type="url"
 				/>
 				<InputField
-					defaultValue={outgoing.server.host}
+					defaultValue={outgoing?.server.host}
 					inline={true}
 					label="SMTP Server"
 					placeholder="smtp.example.com"
