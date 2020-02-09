@@ -83,35 +83,39 @@ export async function guessAtConfig(
 
 	const domain = parsedEmail.domain.toLowerCase();
 
-	let guessedConfig = lookupKnownConfiguration(domain);
+	let knownConfig = lookupKnownConfiguration(domain);
 
-	if (guessedConfig) {
+	if (knownConfig) {
 		// If we found a known configuration, we can simply return
 		logger.info(
 			`Found known server configuration data for domain ${domain}`,
 		);
-		guessedConfig.source = CONFIG_SOURCE.Known_Domain;
-		guessedConfig.username =
-			typeof guessedConfig.username === "function"
-				? guessedConfig.username(email)
-				: email;
-		return guessedConfig;
+		return {
+			incoming: knownConfig.incoming,
+			outgoing: knownConfig.outgoing,
+			source: CONFIG_SOURCE.Known_Domain,
+			username: knownConfig.getUsername
+				? knownConfig.getUsername(email)
+				: email,
+		};
 	}
 
 	// Try to guess the configuration based on the DNS and our known configs
-	guessedConfig = await checkMXRecordsForConfig(domain);
-	if (guessedConfig) {
+	knownConfig = await checkMXRecordsForConfig(domain);
+	if (knownConfig) {
 		logger.info(`Found known server configuration from dns for ${domain}`);
-		guessedConfig.source = CONFIG_SOURCE.Known_DNS;
-		guessedConfig.username =
-			typeof guessedConfig.username === "function"
-				? guessedConfig.username(email)
-				: email;
-		return guessedConfig;
+		return {
+			incoming: knownConfig.incoming,
+			outgoing: knownConfig.outgoing,
+			source: CONFIG_SOURCE.Known_DNS,
+			username: knownConfig.getUsername
+				? knownConfig.getUsername(email)
+				: email,
+		};
 	}
 
 	// Finally, if we couldn't do that, we're gonna just start trying configs
-	guessedConfig = {
+	let guessedConfig: IServerConfig = {
 		source: CONFIG_SOURCE.Guess,
 		username: email,
 	};

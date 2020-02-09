@@ -23,7 +23,13 @@ export enum CONFIG_SOURCE {
 	User = "user entered",
 }
 
-export interface IServerConfig {
+export interface IKnownServerConfig {
+	getUsername?: (email: string) => string;
+	incoming: IIncomingServerConfig;
+	outgoing: IOutgoingServerConfig;
+}
+
+export interface IServerConfig extends IKnownServerConfig {
 	incoming?: IIncomingServerConfig;
 	outgoing?: IOutgoingServerConfig;
 	source: CONFIG_SOURCE;

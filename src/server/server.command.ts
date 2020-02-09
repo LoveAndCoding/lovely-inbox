@@ -9,7 +9,6 @@ export default class ServerCommand {
 
 	constructor(command: () => Promise<boolean>) {
 		this.command = command;
-		this.running = false;
 	}
 
 	public execute() {

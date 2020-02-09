@@ -18,7 +18,7 @@ export default abstract class ServerConnection extends EventEmitter {
 	protected queueDraining: boolean;
 	protected executingCommand: ServerCommand;
 
-	public abstract get connected();
+	public abstract get connected(): boolean;
 
 	public get box() {
 		return this.connection ? this.currentBox : undefined;
@@ -34,7 +34,7 @@ export default abstract class ServerConnection extends EventEmitter {
 	}
 
 	public abstract connect(password: string): Promise<boolean>;
-	public abstract disconnect(force: boolean);
+	public abstract disconnect(force: boolean): void;
 
 	//public abstract listBoxes(): Promise<Box[]>;
 
