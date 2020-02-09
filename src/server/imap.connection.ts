@@ -1,5 +1,6 @@
 import * as IMAP from "imap";
-import { TlsOptions } from "tls";
+import { TlsOptions, TLSSocket } from "tls";
+import { Socket } from "net";
 
 import logger from "../logger";
 import ServerConnection, { ConnectionOptions } from "./base.connection";
@@ -54,49 +55,121 @@ export default class IMAPConnection extends ServerConnection {
 		return this.imap && this.imap.state !== "disconnected";
 	}
 
-	public testConnection(): Promise<boolean> {
+	public testConnection(): Promise<false | string[]> {
+		// For testing a connection, we don't need to use the full IMAP library,
+		// we can simply open up a socket and check if things are what we expect
 		const imapOpts = this.getBaseIMAPOptions();
-		const testImap = new IMAP(imapOpts);
+		const rawSock = new Socket();
+
+		let sock = rawSock;
+		if (imapOpts.tls) {
+			sock = new TLSSocket(rawSock);
+		}
+
+		const cleanup = () => {
+			try {
+				if (!sock.destroyed) {
+					sock.destroy();
+				}
+			} catch (e) {
+				logger.error(
+					`Error cleaning up socket connection from connection test: ${e.message}`,
+				);
+			}
+		};
 
 		return new Promise((resolve, reject) => {
-			const cleanup = () => {
-				try {
-					testImap.destroy();
-					testImap.removeListener("error", errHandler);
-					testImap.removeListener("ready", readyHandler);
-				} catch (e) {
-					logger.error(
-						`Error cleaning up socket connection from connection test: ${e.message}`,
-					);
+			let dataRead = "";
+			let returned = false;
+
+			// We need to wrap things up and return the promise at the end of
+			// all the things
+			const finalize = () => {
+				if (returned) {
+					// If we've already returned ignore this call
+					return;
 				}
+
+				// Otherwise resolve the promise
+				const lines = dataRead.split("\r\n");
+				const caps: string[] = [];
+				const capMatchString = " CAPABILITY ";
+				lines.forEach((line) => {
+					const capIndex = line.indexOf(capMatchString);
+					if (capIndex >= 0 && capIndex <= 7) {
+						// If we see the word capability early in the line, it's
+						// probably a line we're looking for
+						caps.push(
+							...line
+								.substr(capIndex + capMatchString.length)
+								.split(" "),
+						);
+					}
+				});
+
+				resolve(caps.length ? caps : false);
+				// And mark that we've returned something
+				returned = true;
 			};
-			const errHandler = (err: Error) => {
+
+			// Wrap any functions so we can catch errors and reject
+			function catchErrors<T>(cb: (data: T) => void): (data: T) => void {
+				return (data: T) => {
+					try {
+						cb(data);
+					} catch (e) {
+						returned = true;
+						reject(e);
+						cleanup();
+					}
+				};
+			}
+
+			sock.once(
+				"close",
+				// When closing, clean everything up and make sure we resolved
+				catchErrors<boolean>(() => {
+					cleanup();
+					finalize();
+				}),
+			);
+			sock.once(
+				"connect",
+				// If we get a connection, find out what the server can do then
+				// logout so we don't leave the connection open
+				catchErrors<void>(() => {
+					sock.write("a001 CAPABILITY\r\na002 LOGOUT\r\n");
+				}),
+			);
+			sock.on(
+				"data",
+				// Record data
+				catchErrors((data) => (dataRead += data.toString("utf8"))),
+			);
+			sock.once(
+				"end",
+				// When ending, clean everything up and make sure we resolved
+				catchErrors<void>(() => {
+					cleanup();
+					finalize();
+				}),
+			);
+			// If we get an error, probably means we're not a server
+			sock.on("error", (e) => {
 				cleanup();
-				resolve(
-					err.source === "authentication" &&
-						// We've successfully done everything except
-						// authenticate, this is probably the droid we're
-						// looking for if the error message is about not having
-						// an authentication method (which for us just means we
-						// didn't provide any)
-						// TODO(alexis): Comparing the error message here seems
-						// very fragile. Tweak the library to do better
-						err.message ===
-							"No supported authentication method(s) available." +
-								" Unable to login.",
-				);
-			};
-			const readyHandler = () => {
+				finalize();
+			});
+
+			sock.setTimeout(5000, () => {
 				cleanup();
-				reject(
-					new Error(
-						"Test connection thinks it was ready without auth?!",
-					),
-				);
-			};
-			testImap.once("error", errHandler);
-			testImap.once("ready", readyHandler);
-			testImap.connect();
+				finalize();
+			});
+
+			// Make a connection
+			rawSock.connect({
+				host: imapOpts.host,
+				port: imapOpts.port,
+			});
 		});
 	}
 

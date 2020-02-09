@@ -52,9 +52,7 @@ async function checkIncomingConfig(user: string, host: string, port: number) {
 		tls: true,
 		user,
 	});
-	logger.debug(
-		`Testing for IMAP server at ${host}:${port} with user ${user}`,
-	);
+	logger.debug(`Testing for IMAP server at ${host}:${port} with user`);
 	const successful = await connection.testConnection();
 
 	if (successful) {
