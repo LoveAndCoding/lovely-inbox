@@ -2,7 +2,7 @@
 
 exports[`<LovelyButton> Color rendering changed via prop 1`] = `
 <button
-  className="button_1bs4i0o-o_O-medium_e28yzh-o_O-light_13slhe1"
+  className="button_1gv8n7i-o_O-medium_e28yzh-o_O-light_13slhe1"
   disabled={false}
   onClick={[Function]}
   type="button"
@@ -13,7 +13,7 @@ exports[`<LovelyButton> Color rendering changed via prop 1`] = `
 
 exports[`<LovelyButton> Default props render correctly 1`] = `
 <button
-  className="button_1bs4i0o-o_O-medium_e28yzh-o_O-dark_xzwfai"
+  className="button_1gv8n7i-o_O-medium_e28yzh-o_O-dark_1d5e1mm"
   disabled={false}
   onClick={[Function]}
   type="button"
@@ -24,7 +24,7 @@ exports[`<LovelyButton> Default props render correctly 1`] = `
 
 exports[`<LovelyButton> Disabled rendering changed via prop 1`] = `
 <button
-  className="button_1bs4i0o-o_O-medium_e28yzh-o_O-dark_xzwfai-o_O-disabled_1lrpyjs"
+  className="button_1gv8n7i-o_O-medium_e28yzh-o_O-dark_1d5e1mm-o_O-disabled_1lrpyjs"
   disabled={true}
   onClick={[Function]}
   type="button"
@@ -35,7 +35,7 @@ exports[`<LovelyButton> Disabled rendering changed via prop 1`] = `
 
 exports[`<LovelyButton> Size rendering changed via prop 1`] = `
 <button
-  className="button_1bs4i0o-o_O-xsmall_ba50ph-o_O-dark_xzwfai"
+  className="button_1gv8n7i-o_O-xsmall_ba50ph-o_O-dark_1d5e1mm"
   disabled={false}
   onClick={[Function]}
   type="button"
@@ -46,7 +46,7 @@ exports[`<LovelyButton> Size rendering changed via prop 1`] = `
 
 exports[`<LovelyButton> Type rendering changed via prop 1`] = `
 <button
-  className="button_1bs4i0o-o_O-medium_e28yzh-o_O-dark_xzwfai"
+  className="button_1gv8n7i-o_O-medium_e28yzh-o_O-dark_1d5e1mm"
   disabled={false}
   onClick={[Function]}
   type="submit"

@@ -30,7 +30,7 @@ export default class Email {
 		const domain = address.substring(atIndex + 1);
 		const local = address.substring(0, atIndex);
 
-		let potentialTags = [];
+		let potentialTags: string[] = [];
 		let localWithoutTags = local;
 		if (tagMatcher) {
 			// Some email providers use "+" as a tag delimiter, others use "-"
