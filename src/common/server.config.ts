@@ -29,7 +29,7 @@ export interface IKnownServerConfig {
 	outgoing: IOutgoingServerConfig;
 }
 
-export interface IServerConfig extends IKnownServerConfig {
+export interface IServerConfig {
 	incoming?: IIncomingServerConfig;
 	outgoing?: IOutgoingServerConfig;
 	source: CONFIG_SOURCE;
