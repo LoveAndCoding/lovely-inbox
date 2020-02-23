@@ -35,10 +35,11 @@ export type InputFieldProps = InputTypeProps & {
 	placeholder?: string;
 	required?: boolean;
 	size?: InputFieldSizes;
-} & ITypeable &
-	IValidatable;
+};
 
-export default class InputField extends React.Component<InputFieldProps> {
+export default class InputField extends React.Component<
+	InputFieldProps & ITypeable & IValidatable
+> {
 	protected static defaultProps = {
 		required: false,
 		size: InputFieldSizes.medium,

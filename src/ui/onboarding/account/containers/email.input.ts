@@ -1,12 +1,20 @@
-import { connect } from "react-redux";
+import {
+	connect,
+	MapDispatchToPropsFunction,
+	MapStateToProps,
+} from "react-redux";
 
 import InputField, {
 	InputFieldProps,
 } from "../../../forms/components/input.field";
+import { ITypeable, IValidatable } from "../../../forms/types";
 import { AppState } from "../../store";
 import { setEmailAddress } from "../../store/email/actions";
 
-const mapStateToProps = (state: AppState, ownProps: InputFieldProps) => {
+const mapStateToProps: MapStateToProps<AppState, InputFieldProps> = (
+	state: AppState,
+	ownProps: InputFieldProps,
+) => {
 	return {
 		...ownProps,
 		defaultValue: state.emailAddress.email
@@ -15,7 +23,10 @@ const mapStateToProps = (state: AppState, ownProps: InputFieldProps) => {
 	};
 };
 
-const mapDispatchToProps = (dispatch, ownProps: InputFieldProps) => {
+const mapDispatchToProps: MapDispatchToPropsFunction<
+	ITypeable & IValidatable,
+	InputFieldProps
+> = (dispatch, ownProps: InputFieldProps) => {
 	return {
 		onChange: (email) => {
 			dispatch(setEmailAddress(email));
