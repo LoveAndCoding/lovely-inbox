@@ -10,9 +10,9 @@ import LovelyButton, {
 	ButtonSizes,
 } from "../../../forms/components/button";
 import View, { ViewTags } from "../../../layout/components/view";
-import ServerSettingsForm from "../containers/server.settings.form";
 import { COLORS, css, StyleSheet } from "../../../styles";
-import { IServerConfig, CONFIG_SOURCE } from "../../store/server-config/types";
+import { CONFIG_SOURCE, IServerConfig } from "../../store/server-config/types";
+import ServerSettingsForm from "../containers/server.settings.form";
 import { thunkGuessConfig } from "../thunks";
 
 export interface IGuessServerSettingsProps {
@@ -39,12 +39,6 @@ export default class GuessServerSettings extends React.Component<
 	public componentDidMount() {
 		this.props.guessConfig(this.props.email);
 	}
-
-	private toggleShowDetails = () => {
-		this.setState({
-			editDetails: !this.state.editDetails,
-		});
-	};
 
 	public render() {
 		if (this.props.loading || (!this.props.error && !this.props.config)) {
@@ -111,6 +105,12 @@ export default class GuessServerSettings extends React.Component<
 			);
 		}
 	}
+
+	private toggleShowDetails = () => {
+		this.setState({
+			editDetails: !this.state.editDetails,
+		});
+	};
 }
 
 const styles = StyleSheet.create({

@@ -36,7 +36,7 @@ export default abstract class ServerConnection extends EventEmitter {
 	public abstract connect(password: string): Promise<boolean>;
 	public abstract disconnect(force: boolean): void;
 
-	//public abstract listBoxes(): Promise<Box[]>;
+	// public abstract listBoxes(): Promise<Box[]>;
 
 	protected queueCommand(command: () => Promise<boolean>) {
 		this.queue.push(new ServerCommand(command));

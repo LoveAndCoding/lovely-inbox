@@ -1,6 +1,6 @@
 import * as IMAP from "imap";
-import { TlsOptions, TLSSocket } from "tls";
 import { Socket } from "net";
+import { TlsOptions, TLSSocket } from "tls";
 
 import logger from "../logger";
 import ServerConnection, { ConnectionOptions } from "./base.connection";

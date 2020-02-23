@@ -1,6 +1,6 @@
 let GLOBAL_ID_COUNTER = 0;
 
-let idMap: WeakMap<Object, string> = new WeakMap();
+let idMap: WeakMap<object, string> = new WeakMap();
 
 /**
  * Get a unique ID that is always unique with every call
@@ -26,7 +26,7 @@ export function getAlwaysUniqueId(prefix: string) {
  * @param item Item you want to get ID for; Must be a non-null Object
  * @param prefix Prefix for the ID string iff generating a new ID (Default 'global-item')
  */
-export function getItemUniqueId(item: Object, prefix?: string) {
+export function getItemUniqueId(item: object, prefix?: string) {
 	if (!idMap.has(item)) {
 		// If we don't have an ID already, generate one
 		idMap.set(item, getAlwaysUniqueId(prefix || "global-item"));

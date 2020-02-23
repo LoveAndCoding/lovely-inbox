@@ -68,8 +68,8 @@ const styles = StyleSheet.create({
 	},
 	configGroupLabel: {
 		fontSize: 16,
-		margin: 5,
 		gridColumn: "span 2",
+		margin: 5,
 	},
 	fieldset: {
 		// Workaround for chrome bug

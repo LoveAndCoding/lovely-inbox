@@ -1,10 +1,10 @@
+import Email from "../common/email";
 import {
 	IIncomingServerConfig,
-	IOutgoingServerConfig,
 	IKnownServerConfig,
+	IOutgoingServerConfig,
 } from "../common/server.config";
-import Email from "../common/email";
-import logger from "src/logger";
+import logger from "../logger";
 
 export const KNOWN_CONFIGURATIONS: Map<string, IKnownServerConfig> = new Map();
 
@@ -40,8 +40,8 @@ function buildOutgoingServerConfig(
 		server: {
 			host,
 			port,
-			tls,
 			ssl,
+			tls,
 		},
 	};
 }

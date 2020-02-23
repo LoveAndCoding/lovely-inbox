@@ -7,10 +7,10 @@ import { IpcMainInvokeEvent } from "electron";
 import Email from "../common/email";
 import { InvalidEmailAddressError } from "../common/errors";
 import { CONFIG_SOURCE, IServerConfig } from "../common/server.config";
+import logger from "../logger";
+import Router from "../route/router";
 import IMAPConnection from "./imap.connection";
 import lookupKnownConfiguration from "./known.configurations";
-import Router from "../route/router";
-import logger from "../logger";
 
 const INCOMING_SUB_DOMAIN_GUESSES = ["mail", "imap", "email"];
 const OUTGOING_SUB_DOMAIN_GUESSES = ["smtp", "mail", "email"];
@@ -45,7 +45,7 @@ async function checkMXRecordsForConfig(domain: string) {
 }
 
 async function checkIncomingConfig(user: string, host: string, port: number) {
-	let connection = new IMAPConnection({
+	const connection = new IMAPConnection({
 		autotls: "always",
 		host,
 		port,
@@ -113,7 +113,7 @@ export async function guessAtConfig(
 	}
 
 	// Finally, if we couldn't do that, we're gonna just start trying configs
-	let guessedConfig: IServerConfig = {
+	const guessedConfig: IServerConfig = {
 		source: CONFIG_SOURCE.Guess,
 		username: email,
 	};
