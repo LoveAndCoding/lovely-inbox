@@ -1,9 +1,8 @@
 import * as React from "react";
 
+import { getItemUniqueId } from "../../layout/uid.factory";
 import { COLORS, css, StyleSheet } from "../../styles";
 import { ITypeable, IValidatable } from "../types";
-
-const INPUT_ID_VAL = 0;
 
 export enum InputFieldSizes {
 	small = "small",
@@ -12,40 +11,30 @@ export enum InputFieldSizes {
 	xlarge = "xlarge",
 }
 
-type InputFieldTypes =
-	| "color"
-	| "date"
-	| "email"
-	| "number"
-	| "search"
-	| "tel"
-	| "text"
-	| "time"
-	| "url";
+interface INumberTypeProps {
+	max?: number;
+	min?: number;
+	step?: number;
+	type: "number";
+}
+interface IStringTypeProps {
+	maxLength?: number;
+	minLength?: number;
+	type: "search" | "tel" | "text" | "url";
+}
+interface IOtherTypeProps {
+	type: "color" | "date" | "email" | "time";
+}
 
-type InputTypeProps =
-	| {
-			max?: number;
-			min?: number;
-			step?: number;
-			type: "number";
-	  }
-	| {
-			maxLength?: number;
-			minLength?: number;
-			type: "search" | "tel" | "text" | "url";
-	  }
-	| {
-			type: "color" | "date" | "email" | "time";
-	  };
+type InputTypeProps = INumberTypeProps | IStringTypeProps | IOtherTypeProps;
 
 export type InputFieldProps = InputTypeProps & {
 	disabled?: boolean;
 	inline?: boolean;
 	label: string;
-	placeholder: string;
+	placeholder?: string;
 	required?: boolean;
-	size: InputFieldSizes;
+	size?: InputFieldSizes;
 } & ITypeable &
 	IValidatable;
 
@@ -58,13 +47,11 @@ export default class InputField extends React.Component<InputFieldProps> {
 
 	constructor(props: InputFieldProps) {
 		super(props);
-
-		// Increment our global ID unique value and stash locally
-		INPUT_ID_VAL++;
-		this.inputId = `text-input-${INPUT_ID_VAL}`;
 	}
 
 	public render() {
+		const id = getItemUniqueId(this, "text-input");
+
 		return (
 			<React.Fragment>
 				<label
@@ -72,21 +59,25 @@ export default class InputField extends React.Component<InputFieldProps> {
 						styles.label,
 						this.props.inline && styles[this.props.size],
 					)}
-					htmlFor={this.inputId}
+					htmlFor={"#" + id}
 				>
 					{this.props.label}
 				</label>
 				<input
 					className={css(styles.input, styles[this.props.size])}
 					defaultValue={this.props.defaultValue}
-					id={this.inputId}
-					max={this.props.max}
-					maxLength={this.props.maxLength}
-					min={this.props.min}
-					minLength={this.props.minLenght}
+					id={id}
+					max={"max" in this.props ? this.props.max : null}
+					maxLength={
+						"maxLength" in this.props ? this.props.maxLength : null
+					}
+					min={"min" in this.props ? this.props.min : null}
+					minLength={
+						"minLength" in this.props ? this.props.minLength : null
+					}
 					onChange={this.handleChange}
 					placeholder={this.props.placeholder}
-					step={this.props.step}
+					step={"step" in this.props ? this.props.step : null}
 					type={this.props.type}
 					required={this.props.required}
 				/>

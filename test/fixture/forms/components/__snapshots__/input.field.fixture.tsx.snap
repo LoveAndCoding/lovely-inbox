@@ -1,0 +1,139 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`<InputField> Input attr 'required' renders correctly 1`] = `
+Array [
+  <label
+    className="label_5g4e5d"
+    htmlFor="#text-input-1"
+  >
+    Required Attr Test
+  </label>,
+  <input
+    className="input_1us7r7i-o_O-medium_1jznm8k"
+    id="text-input-1"
+    max={null}
+    maxLength={null}
+    min={null}
+    minLength={null}
+    onChange={[Function]}
+    required={true}
+    step={null}
+    type="number"
+  />,
+]
+`;
+
+exports[`<InputField> Input type 'date' renders correctly 1`] = `
+Array [
+  <label
+    className="label_5g4e5d"
+    htmlFor="#text-input-1"
+  >
+    Date Test
+  </label>,
+  <input
+    className="input_1us7r7i-o_O-medium_1jznm8k"
+    id="text-input-1"
+    max={null}
+    maxLength={null}
+    min={null}
+    minLength={null}
+    onChange={[Function]}
+    required={false}
+    step={null}
+    type="date"
+  />,
+]
+`;
+
+exports[`<InputField> Input type 'number' renders correctly 1`] = `
+Array [
+  <label
+    className="label_5g4e5d"
+    htmlFor="#text-input-1"
+  >
+    Number Test
+  </label>,
+  <input
+    className="input_1us7r7i-o_O-medium_1jznm8k"
+    id="text-input-1"
+    max={null}
+    maxLength={null}
+    min={null}
+    minLength={null}
+    onChange={[Function]}
+    required={false}
+    step={null}
+    type="number"
+  />,
+]
+`;
+
+exports[`<InputField> Input type 'number' with 'min'/'max'/'step' renders correctly 1`] = `
+Array [
+  <label
+    className="label_5g4e5d"
+    htmlFor="#text-input-1"
+  >
+    Number Attr Test
+  </label>,
+  <input
+    className="input_1us7r7i-o_O-medium_1jznm8k"
+    id="text-input-1"
+    max={10}
+    maxLength={null}
+    min={1}
+    minLength={null}
+    onChange={[Function]}
+    required={false}
+    step={0.1}
+    type="number"
+  />,
+]
+`;
+
+exports[`<InputField> Input type 'text' renders correctly 1`] = `
+Array [
+  <label
+    className="label_5g4e5d"
+    htmlFor="#text-input-1"
+  >
+    Text Test
+  </label>,
+  <input
+    className="input_1us7r7i-o_O-medium_1jznm8k"
+    id="text-input-1"
+    max={null}
+    maxLength={null}
+    min={null}
+    minLength={null}
+    onChange={[Function]}
+    required={false}
+    step={null}
+    type="text"
+  />,
+]
+`;
+
+exports[`<InputField> Input type 'text' with 'min/maxLength' renders correctly 1`] = `
+Array [
+  <label
+    className="label_5g4e5d"
+    htmlFor="#text-input-1"
+  >
+    Text Attr Test
+  </label>,
+  <input
+    className="input_1us7r7i-o_O-medium_1jznm8k"
+    id="text-input-1"
+    max={null}
+    maxLength={10}
+    min={null}
+    minLength={1}
+    onChange={[Function]}
+    required={false}
+    step={null}
+    type="text"
+  />,
+]
+`;
