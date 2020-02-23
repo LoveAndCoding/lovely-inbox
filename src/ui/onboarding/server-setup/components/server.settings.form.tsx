@@ -7,7 +7,13 @@ import InputField, {
 } from "../../../forms/components/input.field";
 import View, { ViewTags } from "../../../layout/components/view";
 import { COLORS, css, StyleSheet } from "../../../styles";
-import { IServerConfig } from "../../store/server-config/types";
+import { CONFIG_SOURCE, IServerConfig } from "../../store/server-config/types";
+
+export interface IServerSettingsFormDispatchProps {
+	onIncomingHostChange: (host: string) => void;
+	onOutgoingHostChange: (host: string) => void;
+	onUsernameChange: (username: string) => void;
+}
 
 export interface IServerSettingsFormProps {
 	config: IServerConfig;
@@ -15,12 +21,10 @@ export interface IServerSettingsFormProps {
 }
 
 export default class ServerSettingsForm extends React.Component<
-	IServerSettingsFormProps
+	IServerSettingsFormProps & IServerSettingsFormDispatchProps
 > {
-	public handleChange = (event: Event) => {};
-
 	public render() {
-		const { incoming, outgoing, source, username } = this.props.config;
+		const { incoming, outgoing, username } = this.props.config;
 		const fieldsetClass = css(styles.fieldset);
 		const configGroupLabelClass = css(styles.configGroupLabel);
 
@@ -34,6 +38,7 @@ export default class ServerSettingsForm extends React.Component<
 					defaultValue={username}
 					inline={true}
 					label="Username"
+					onChange={this.handleUsernameChange}
 					placeholder="kairi@destiny.island"
 					size={InputFieldSizes.small}
 					type="text"
@@ -42,6 +47,7 @@ export default class ServerSettingsForm extends React.Component<
 					defaultValue={incoming?.server.host}
 					inline={true}
 					label="IMAP Server"
+					onChange={this.handleIncomingServerHostChange}
 					placeholder="imap.example.com"
 					size={InputFieldSizes.small}
 					type="url"
@@ -50,6 +56,7 @@ export default class ServerSettingsForm extends React.Component<
 					defaultValue={outgoing?.server.host}
 					inline={true}
 					label="SMTP Server"
+					onChange={this.handleOutgoingServerHostChange}
 					placeholder="smtp.example.com"
 					size={InputFieldSizes.small}
 					type="url"
@@ -57,6 +64,16 @@ export default class ServerSettingsForm extends React.Component<
 			</View>
 		);
 	}
+
+	public handleIncomingServerHostChange = (host: string) => {
+		this.props.onIncomingHostChange(host);
+	};
+	public handleOutgoingServerHostChange = (host: string) => {
+		this.props.onOutgoingHostChange(host);
+	};
+	public handleUsernameChange = (username: string) => {
+		this.props.onUsernameChange(username);
+	};
 }
 
 const styles = StyleSheet.create({

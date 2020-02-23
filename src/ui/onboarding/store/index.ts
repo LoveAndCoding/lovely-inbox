@@ -3,11 +3,11 @@ import thunk from "redux-thunk";
 
 import emailReducer from "./email/reducers";
 import rootReducer from "./reducers";
-import guessServerConfigReducer from "./server-config/reducers";
+import updateServerConfigReducer from "./server-config/reducers";
 
 const rootReducer = combineReducers({
 	emailAddress: emailReducer,
-	guessConfig: guessServerConfigReducer,
+	guessConfig: updateServerConfigReducer,
 });
 
 export type AppState = ReturnType<typeof rootReducer>;
