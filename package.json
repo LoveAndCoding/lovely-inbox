@@ -51,17 +51,11 @@
 								{
 									"html": "./templates/index.html",
 									"js": "./src/renderer.tsx",
-									"additionalChunks": [
-										"./styles/base.less"
-									],
 									"name": "main_window"
 								},
 								{
 									"html": "./templates/onboarding.html",
 									"js": "./src/onboarding.tsx",
-									"additionalChunks": [
-										"./styles/base.less"
-									],
 									"name": "onboarding"
 								}
 							]
@@ -117,7 +111,6 @@
 		"less": "^3.9.0",
 		"less-loader": "^5.0.0",
 		"lint-staged": "^9.2.3",
-		"mini-css-extract-plugin": "^0.9.0",
 		"node-loader": "^0.6.0",
 		"prettier": "^1.18.2",
 		"react-test-renderer": "^16.9.0",

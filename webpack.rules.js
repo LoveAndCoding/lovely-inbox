@@ -1,5 +1,3 @@
-const MiniCssExtractPlugin = require("mini-css-extract-plugin");
-
 module.exports = [
 	// Add support for native node modules
 	{
@@ -24,21 +22,15 @@ module.exports = [
 				loader: "ts-loader",
 				options: {
 					transpileOnly: true,
-				},
+			},
 			},
 		],
 	},
 	{
-		test: /\.less$/,
+		test: /\.css$/,
 		use: [
 			{
-				loader: MiniCssExtractPlugin.loader,
-			},
-			{
 				loader: "css-loader",
-			},
-			{
-				loader: "less-loader",
 			},
 		],
 	},
