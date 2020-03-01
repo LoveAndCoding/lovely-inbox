@@ -25,22 +25,22 @@ export enum ButtonTypes {
 	submit = "submit",
 }
 
-export type LovelyButtonStateProps = {
+export interface ILovelyButtonStateProps {
 	disabled?: boolean;
-};
+}
 
 export type LovelyButtonDispatchProps = IClickable<HTMLButtonElement>;
 
-export type LovelyButtonOwnProps = {
-	children: (string | React.ReactElement)[];
+export interface ILovelyButtonOwnProps {
+	children: React.ReactNode;
 	color?: ButtonColors;
 	size?: ButtonSizes;
 	type?: ButtonTypes;
-};
+}
 
-export type LovelyButtonProps = LovelyButtonStateProps &
+export type LovelyButtonProps = ILovelyButtonStateProps &
 	LovelyButtonDispatchProps &
-	LovelyButtonOwnProps;
+	ILovelyButtonOwnProps;
 
 export default class LovelyButton extends React.Component<LovelyButtonProps> {
 	public static defaultProps = {

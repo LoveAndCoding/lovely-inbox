@@ -1,16 +1,16 @@
 import { connect, MapStateToProps } from "react-redux";
 
 import LovelyButton, {
-	LovelyButtonOwnProps,
-	LovelyButtonStateProps,
+	ILovelyButtonOwnProps,
+	ILovelyButtonStateProps,
 } from "../../../forms/components/button";
 import { AppState } from "../../store";
 
 const mapStateToProps: MapStateToProps<
-	LovelyButtonStateProps,
-	LovelyButtonOwnProps,
+	ILovelyButtonStateProps,
+	ILovelyButtonOwnProps,
 	AppState
-> = (state: AppState, ownProps: LovelyButtonOwnProps) => {
+> = (state: AppState, ownProps: ILovelyButtonOwnProps) => {
 	return {
 		...ownProps,
 		disabled: !state.emailAddress.email,

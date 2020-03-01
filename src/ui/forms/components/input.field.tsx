@@ -28,10 +28,10 @@ interface IOtherTypeProps {
 
 type InputTypeProps = INumberTypeProps | IStringTypeProps | IOtherTypeProps;
 
-export type InputFieldStateProps = {
+export interface IInputFieldStateProps {
 	readonly defaultValue?: string;
 	disabled?: boolean;
-};
+}
 
 export type InputFieldDispatchProps = ITypeable & IValidatable;
 
@@ -44,7 +44,7 @@ export type InputFieldOwnProps = InputTypeProps & {
 };
 
 export type InputFieldProps = InputFieldOwnProps &
-	InputFieldStateProps &
+	IInputFieldStateProps &
 	InputFieldDispatchProps;
 
 export default class InputField extends React.Component<InputFieldProps> {

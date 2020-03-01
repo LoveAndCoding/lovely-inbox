@@ -7,13 +7,13 @@ import {
 import InputField, {
 	InputFieldDispatchProps,
 	InputFieldOwnProps,
-	InputFieldStateProps,
+	IInputFieldStateProps,
 } from "../../../forms/components/input.field";
 import { AppState } from "../../store";
 import { setEmailAddress } from "../../store/email/actions";
 
 const mapStateToProps: MapStateToProps<
-	InputFieldStateProps,
+	IInputFieldStateProps,
 	InputFieldOwnProps,
 	AppState
 > = (state: AppState, ownProps: InputFieldOwnProps) => {

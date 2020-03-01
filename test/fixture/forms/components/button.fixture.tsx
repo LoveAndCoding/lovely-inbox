@@ -4,6 +4,7 @@ import * as TestRenderer from "react-test-renderer";
 import LovelyButton, {
 	ButtonColors,
 	ButtonSizes,
+	ButtonTypes,
 } from "src/ui/forms/components/button";
 
 describe("<LovelyButton>", () => {
@@ -52,7 +53,9 @@ describe("<LovelyButton>", () => {
 
 		// Act
 		const tree = TestRenderer.create(
-			<LovelyButton type="submit">Submit Button</LovelyButton>,
+			<LovelyButton type={ButtonTypes.submit}>
+				Submit Button
+			</LovelyButton>,
 		).toJSON();
 
 		// Assert
