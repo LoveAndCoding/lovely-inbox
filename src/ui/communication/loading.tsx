@@ -2,7 +2,7 @@ import * as React from "react";
 
 import { css, CSSInputTypes, StyleSheet } from "../styles";
 
-import HBAnimIcon from "../../../images/heart.beat.light.anim.svg";
+import HBAnimIcon from "images/heart.beat.light.anim.svg";
 
 export default class HeartBeatLoadingIcon extends React.Component<{
 	alt: string;

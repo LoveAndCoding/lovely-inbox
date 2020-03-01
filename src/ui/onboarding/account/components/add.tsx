@@ -11,7 +11,7 @@ import ActionPaneSmall from "../../common/components/action.pane.small";
 import EmailInputField from "../containers/email.input";
 import EmailNextButton from "../containers/email.next.button";
 
-import LogoUrl from "../../../../../images/icon.dark.svg";
+import LogoUrl from "images/icon.dark.svg";
 
 export default class OnboardAccountAdd extends React.Component {
 	constructor(props) {

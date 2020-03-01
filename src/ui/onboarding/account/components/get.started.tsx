@@ -6,7 +6,7 @@ import WelcomeMessagePane, {
 	welcomeStyles,
 } from "../../common/components/welcome.pane";
 
-import PointerImage from "../../../../../images/fill.in.svg";
+import PointerImage from "images/fill.in.svg";
 
 export default class GettingStartedMessaging extends React.Component {
 	public render() {
