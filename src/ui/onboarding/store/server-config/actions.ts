@@ -88,7 +88,7 @@ export const guessConfigBegin = (): IGuessConfigBeginAction => ({
 });
 
 export const guessConfigSuccess = (
-	config: void | IServerConfig,
+	config: IServerConfig,
 ): IGuessConfigSuccessAction => ({
 	config,
 	type: GUESS_CONFIG_SUCCESS,

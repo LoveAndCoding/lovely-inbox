@@ -28,8 +28,14 @@ interface IOtherTypeProps {
 
 type InputTypeProps = INumberTypeProps | IStringTypeProps | IOtherTypeProps;
 
-export type InputFieldProps = InputTypeProps & {
+export type InputFieldStateProps = {
+	readonly defaultValue?: string;
 	disabled?: boolean;
+};
+
+export type InputFieldDispatchProps = ITypeable & IValidatable;
+
+export type InputFieldOwnProps = InputTypeProps & {
 	inline?: boolean;
 	label: string;
 	placeholder?: string;
@@ -37,10 +43,12 @@ export type InputFieldProps = InputTypeProps & {
 	size?: InputFieldSizes;
 };
 
-export default class InputField extends React.Component<
-	InputFieldProps & ITypeable & IValidatable
-> {
-	protected static defaultProps = {
+export type InputFieldProps = InputFieldOwnProps &
+	InputFieldStateProps &
+	InputFieldDispatchProps;
+
+export default class InputField extends React.Component<InputFieldProps> {
+	public static defaultProps = {
 		required: false,
 		size: InputFieldSizes.medium,
 	};

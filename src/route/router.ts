@@ -4,7 +4,12 @@ import { IRouteHandler } from "../common/route.signatures";
 import logger from "../logger";
 
 export default class Router {
-	private routes: Map<string, Route>;
+	private routes: Map<
+		string,
+		(
+			...args: Parameters<IRouteHandler[keyof IRouteHandler]>
+		) => Promise<ReturnType<IRouteHandler[keyof IRouteHandler]>>
+	>;
 
 	constructor() {
 		this.routes = new Map();
@@ -13,7 +18,7 @@ export default class Router {
 	public addHandler<
 		T extends keyof IRouteHandler,
 		K extends IRouteHandler[T]
-	>(route: T, callback: K) {
+	>(route: T, callback: (...args: Parameters<K>) => Promise<ReturnType<K>>) {
 		logger.debug(`Adding IPC Handler for route ${route}`);
 		this.routes.set(route, callback);
 		ipcMain.handle(route, callback);
@@ -26,10 +31,9 @@ export default class Router {
 	}
 
 	public removeAllHandlers() {
-		const routes = this.routes.keys();
-		routes.forEach((route) => {
-			this.routes.delete(route);
+		for (const route of this.routes.keys()) {
 			ipcMain.removeHandler(route);
-		});
+		}
+		this.routes.clear();
 	}
 }

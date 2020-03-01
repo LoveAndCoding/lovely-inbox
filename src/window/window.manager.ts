@@ -17,11 +17,10 @@ export default class WindowManager {
 		this.windows = [];
 	}
 
-	public create(url: string, WindowClass: LovelyWindow): LovelyWindow;
 	public create(
 		url: string,
-		WindowClass: LovelyWindow,
-		optionsOverrides: BrowserWindowConstructorOptions,
+		WindowClass: typeof LovelyWindow,
+		optionsOverrides?: BrowserWindowConstructorOptions,
 	): LovelyWindow {
 		const window = new WindowClass(optionsOverrides);
 

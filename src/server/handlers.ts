@@ -6,7 +6,11 @@ import { IpcMainInvokeEvent } from "electron";
 
 import Email from "../common/email";
 import { InvalidEmailAddressError } from "../common/errors";
-import { CONFIG_SOURCE, IServerConfig } from "../common/server.config";
+import {
+	CONFIG_SOURCE,
+	IIncomingServerConfig,
+	IServerConfig,
+} from "../common/server.config";
 import logger from "../logger";
 import Router from "../route/router";
 import IMAPConnection from "./imap.connection";
@@ -27,7 +31,7 @@ async function checkMXRecordsForConfig(domain: string) {
 		return;
 	}
 
-	mxRecords = mxRecords.sort((a, b) => a.priority > b.priority);
+	mxRecords = mxRecords.sort((a, b) => a.priority - b.priority);
 	for (const record of mxRecords) {
 		// We want to strip out the sub-domain for this check
 		// NOTE(alexis): this is a best guess and won't support MX domains like
@@ -44,7 +48,11 @@ async function checkMXRecordsForConfig(domain: string) {
 	}
 }
 
-async function checkIncomingConfig(user: string, host: string, port: number) {
+async function checkIncomingConfig(
+	user: string,
+	host: string,
+	port: number,
+): Promise<void | IIncomingServerConfig> {
 	const connection = new IMAPConnection({
 		autotls: "always",
 		host,
@@ -71,7 +79,7 @@ async function checkIncomingConfig(user: string, host: string, port: number) {
 export async function guessAtConfig(
 	event: IpcMainInvokeEvent,
 	email: string,
-): IServerConfig {
+): Promise<IServerConfig> {
 	let parsedEmail;
 	try {
 		parsedEmail = new Email(email);

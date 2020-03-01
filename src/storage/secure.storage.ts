@@ -5,42 +5,46 @@ import FileStorage, { StorageTypes } from "./file.storage";
 
 const SECURE_STORAGE_KEY_NAME = "LTS Tokens";
 
-export default class SecureStorage extends FileStorage {
+export default class SecureStorage extends FileStorage<string | void> {
 	constructor(name: string, type: StorageTypes = StorageTypes.Data) {
 		super(name, type);
 	}
 
-	public save(key: string, value: string) {
-		return this.encrypt(value).then((encryptedVal) => {
-			this.localCache[key] = encryptedVal;
-			return this.writeCacheToDisk();
-		});
+	public async save(key: string, value: string | void) {
+		let encryptedVal = value;
+		if (typeof value === "string") {
+			encryptedVal = await this.encrypt(value);
+		}
+
+		this.localCache.set(key, encryptedVal);
+		return this.writeCacheToDisk();
 	}
 
-	public get(key: string): Promise<string> | void;
-	public get(key: string, defaultValue: string): Promise<string> {
+	public async get(
+		key: string,
+		defaultValue: string | void,
+	): Promise<string | void> {
 		// Check for not in, since we may still want to return empty strings
-		if (!key in this.localCache) {
+		if (this.localCache.has(key)) {
 			// While I can't imagine a scenario where a default value makes
 			// sense for what we'd like to encrypt, included anyway just in case
-			return typeof defaultValue !== "undefined"
-				? Promise.resolve(defaultValue)
-				: defaultValue;
+			return defaultValue;
 		}
 
 		// An empty string doesn't need to be decrypted, just return
-		if (!this.localCache[key]) {
-			return Promise.resolve(this.localCache[key] as string);
+		let val = this.localCache.get(key);
+		if (typeof val === "string" && val !== "") {
+			val = await this.decrypt(val);
 		}
 
-		return this.decrypt(this.localCache[key]);
+		return val;
 	}
 
-	private encrypt(value: string) {
-		return encryptTextValue(value, SECURE_STORAGE_KEY_NAME);
+	private async encrypt(value: string) {
+		return await encryptTextValue(value, SECURE_STORAGE_KEY_NAME);
 	}
 
-	private decrypt(value: string) {
-		return decryptTextValue(value, SECURE_STORAGE_KEY_NAME);
+	private async decrypt(value: string) {
+		return await decryptTextValue(value, SECURE_STORAGE_KEY_NAME);
 	}
 }

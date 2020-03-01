@@ -20,9 +20,6 @@ module.exports = [
 		loaders: [
 			{
 				loader: "ts-loader",
-				options: {
-					transpileOnly: true,
-			},
 			},
 		],
 	},

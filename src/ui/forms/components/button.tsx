@@ -20,19 +20,34 @@ export enum ButtonColors {
 	transparentLight = "transparentLight",
 }
 
-export type LovelyButtonProps = {
-	size?: ButtonSizes;
-	color?: ButtonColors;
+export enum ButtonTypes {
+	button = "button",
+	submit = "submit",
+}
+
+export type LovelyButtonStateProps = {
 	disabled?: boolean;
-	type?: "button" | "submit";
-} & IClickable<HTMLButtonElement>;
+};
+
+export type LovelyButtonDispatchProps = IClickable<HTMLButtonElement>;
+
+export type LovelyButtonOwnProps = {
+	children: (string | React.ReactElement)[];
+	color?: ButtonColors;
+	size?: ButtonSizes;
+	type?: ButtonTypes;
+};
+
+export type LovelyButtonProps = LovelyButtonStateProps &
+	LovelyButtonDispatchProps &
+	LovelyButtonOwnProps;
 
 export default class LovelyButton extends React.Component<LovelyButtonProps> {
-	protected static defaultProps = {
+	public static defaultProps = {
 		color: ButtonColors.dark,
 		disabled: false,
 		size: ButtonSizes.medium,
-		type: "button",
+		type: ButtonTypes.button,
 	};
 
 	constructor(props: LovelyButtonProps) {

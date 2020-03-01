@@ -29,11 +29,7 @@ export default class ServerSettingsForm extends React.Component<
 		const configGroupLabelClass = css(styles.configGroupLabel);
 
 		return (
-			<View
-				onChange={this.handleChange}
-				styles={styles.configGroup}
-				tag={ViewTags.form}
-			>
+			<View styles={[styles.configGroup]} tag={ViewTags.form}>
 				<InputField
 					defaultValue={username}
 					inline={true}

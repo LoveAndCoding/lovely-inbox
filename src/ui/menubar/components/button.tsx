@@ -6,7 +6,7 @@ import * as React from "react";
 import { COLORS, css, FONTS, StyleSheet } from "../../styles";
 
 interface IButtonProps {
-	disabled: boolean;
+	disabled?: boolean;
 }
 
 export default abstract class WindowBarButton extends React.Component<
@@ -27,22 +27,24 @@ export default abstract class WindowBarButton extends React.Component<
 		);
 	}
 
-	protected abstract handleClick(event: Event);
+	protected abstract handleClick(
+		event: React.MouseEvent<HTMLButtonElement, MouseEvent>,
+	): void;
 }
 
 const styles = StyleSheet.create({
 	button: {
-		"background": "transparent",
-		"border": "0px",
-		"color": COLORS.black,
-		"cursor": "pointer",
-		"display": "block",
-		"fontSize": 16,
-		"fontWeight": 900,
-		"padding": "4px 8px",
-		"textAlign": "center",
-		"userSelect": "none",
-		"width": 38,
+		background: "transparent",
+		border: "0px",
+		color: COLORS.black,
+		cursor: "pointer",
+		display: "block",
+		fontSize: 16,
+		fontWeight: 900,
+		padding: "4px 8px",
+		textAlign: "center",
+		userSelect: "none",
+		width: 38,
 
 		"&:active, &:focus, &:hover": {
 			backgroundColor: COLORS.offWhite,

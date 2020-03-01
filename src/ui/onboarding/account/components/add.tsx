@@ -2,7 +2,11 @@ import { faArrowRight } from "@fortawesome/pro-light-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import * as React from "react";
 
-import { ButtonColors, ButtonSizes } from "../../../forms/components/button";
+import {
+	ButtonColors,
+	ButtonSizes,
+	ButtonTypes,
+} from "../../../forms/components/button";
 import { InputFieldSizes } from "../../../forms/components/input.field";
 import Spring from "../../../layout/components/spring";
 import View, { ViewTags } from "../../../layout/components/view";
@@ -13,11 +17,15 @@ import EmailNextButton from "../containers/email.next.button";
 
 import LogoUrl from "images/icon.dark.svg";
 
-export default class OnboardAccountAdd extends React.Component {
-	constructor(props) {
-		super(props);
+interface IOnboardAccountAddProps {
+	onNext?: () => void;
+}
 
-		this.handleSubmit = this.handleSubmit.bind(this);
+export default class OnboardAccountAdd extends React.Component<
+	IOnboardAccountAddProps
+> {
+	constructor(props: IOnboardAccountAddProps) {
+		super(props);
 	}
 
 	public render() {
@@ -46,7 +54,10 @@ export default class OnboardAccountAdd extends React.Component {
 					/>
 					<View styles={[styles.buttonBar]}>
 						<Spring />
-						<EmailNextButton size={ButtonSizes.large} type="submit">
+						<EmailNextButton
+							size={ButtonSizes.large}
+							type={ButtonTypes.submit}
+						>
 							<span className={css(styles.buttonText)}>Next</span>
 							<FontAwesomeIcon
 								icon={faArrowRight}
@@ -59,12 +70,12 @@ export default class OnboardAccountAdd extends React.Component {
 		);
 	}
 
-	private handleSubmit(event: Event) {
+	private handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
 		event.preventDefault();
 		if (this.props.onNext) {
 			this.props.onNext();
 		}
-	}
+	};
 }
 
 const styles = StyleSheet.create({
@@ -102,6 +113,7 @@ const styles = StyleSheet.create({
 	header: {
 		"-webkit-user-select": "none",
 		fontSize: 48,
+		fontStyle: "italic",
 		fontWeight: 200,
 		margin: "auto",
 	},

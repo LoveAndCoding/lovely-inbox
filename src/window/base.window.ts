@@ -2,7 +2,7 @@ import {
 	BrowserWindow,
 	BrowserWindowConstructorOptions,
 	ipcMain,
-	IpcMessageEvent,
+	IpcMainEvent,
 	nativeImage,
 } from "electron";
 import * as path from "path";
@@ -35,22 +35,29 @@ export default class LovelyWindow {
 	}
 
 	public readonly browserWindow: BrowserWindow;
-	protected ipcListeners: Map<string, Array<(IpcMessageEvent) => void>>;
+	protected ipcListeners: Map<string, Array<(event: IpcMainEvent) => void>>;
 
 	public constructor(options: BrowserWindowConstructorOptions) {
 		options = Object.assign({}, this.defaultWindowOptions, options);
 
 		this.browserWindow = new BrowserWindow(options);
-		this.ipcListeners = new Map<string, Array<(IpcMessageEvent) => void>>();
+		this.ipcListeners = new Map<
+			string,
+			Array<(event: IpcMainEvent) => void>
+		>();
 
 		this.init();
 	}
 
-	public onMsg(name: string, callback: (event: IpcMessageEvent) => void) {
+	public close() {
+		this.browserWindow.close();
+	}
+
+	public onMsg(name: string, callback: (event: IpcMainEvent) => void) {
 		logger.debug(
 			`Adding ${name} IPC listener from ${this.constructor.name}`,
 		);
-		const wrappedCB = (event: IpcMessageEvent) => {
+		const wrappedCB = (event: IpcMainEvent) => {
 			if (this.browserWindow.webContents === event.sender) {
 				return callback(event);
 			}
@@ -65,7 +72,7 @@ export default class LovelyWindow {
 		return wrappedCB;
 	}
 
-	public offMsg(name: string) {
+	public offMsg(name: string, callback: (event: IpcMainEvent) => void) {
 		logger.debug(
 			`Removing ${name} IPC listener from ${this.constructor.name}`,
 		);
@@ -82,8 +89,7 @@ export default class LovelyWindow {
 		}
 	}
 
-	public removeAllMsgListeners();
-	public removeAllMsgListeners(name: string) {
+	public removeAllMsgListeners(name?: string) {
 		if (typeof name === "string") {
 			if (!this.ipcListeners.has(name)) {
 				logger.info(
@@ -102,17 +108,16 @@ export default class LovelyWindow {
 				`Removing all IPC listener from ${this.constructor.name}`,
 			);
 			const names = this.ipcListeners.keys();
-			for (name of names) {
-				ipcMain.removeAllListeners(name);
-				this.ipcListeners.delete(name);
+			for (const n of names) {
+				ipcMain.removeAllListeners(n);
+				this.ipcListeners.delete(n);
 			}
 		}
 	}
 
 	protected init() {
 		// Always listen for minimize events
-		const minimize = (event: IpcMessageEvent) =>
-			this.browserWindow.minimize();
+		const minimize = (event: IpcMainEvent) => this.browserWindow.minimize();
 		this.onMsg("window-minimize", minimize);
 
 		this.browserWindow.once("closed", () => {

@@ -9,7 +9,7 @@ const USED_NAMES: Set<string> = new Set();
  * storage implementations. Each implementation will need to implement each of
  * these functions to properly store data.
  */
-export default abstract class Storage {
+export default abstract class Storage<T> {
 	public readonly name: string;
 
 	/**
@@ -26,9 +26,8 @@ export default abstract class Storage {
 		this.name = name;
 	}
 
-	public abstract save<T>(key: string, value: T): boolean | Promise;
-	public abstract delete(key: string): boolean | Promise;
-	public abstract get<T>(key: string): T | void;
-	public abstract get<T>(key: string, defaultValue: T): T;
-	public abstract clear(): boolean | Promise;
+	public abstract save(key: string, value: T): boolean | Promise<boolean>;
+	public abstract delete(key: string): boolean | Promise<boolean>;
+	public abstract get(key: string, defaultValue: T): T | Promise<T>;
+	public abstract clear(): boolean | Promise<boolean>;
 }

@@ -14,17 +14,13 @@ import logger from "./logger";
 export default function setupUnhandledListeners() {
 	process.on("uncaughtException", (err: Error) => {
 		logger.error("There was an uncaught error");
-		logger.error(
-			err.stack || `${err.fileName}#${err.lineNumber} ${err.message}`,
-		);
+		logger.error(err.stack);
 		ipcMain.emit("uncaught-exception", err);
 	});
 
 	process.on("unhandledRejection", (err: Error) => {
 		logger.error("There was an unhandled promise rejection");
-		logger.error(
-			err.stack || `${err.fileName}#${err.lineNumber} ${err.message}`,
-		);
+		logger.error(err.stack);
 		ipcMain.emit("unhandled-promise-rejection", err);
 	});
 }

@@ -13,7 +13,7 @@ import { IServerConfig } from "../store/server-config/types";
 
 export function thunkGuessConfig(
 	email: Email,
-): ThunkAction<Promise<null | IServerConfig>, AppState, null, Action<string>> {
+): ThunkAction<Promise<void | IServerConfig>, AppState, null, Action<string>> {
 	return (dispatch) => {
 		dispatch(guessConfigBegin());
 		return IPC.request("/account/server/settings/guess", email.address)
@@ -21,6 +21,8 @@ export function thunkGuessConfig(
 				dispatch(guessConfigSuccess(config));
 				return config;
 			})
-			.catch((error) => dispatch(guessConfigFailure(error)));
+			.catch((error) => {
+				dispatch(guessConfigFailure(error));
+			});
 	};
 }

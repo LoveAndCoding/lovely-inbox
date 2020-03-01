@@ -1,15 +1,17 @@
-import { connect } from "react-redux";
+import { connect, MapDispatchToProps, MapStateToProps } from "react-redux";
 
 import { AppState } from "../../store";
 import GuessServerSettings, {
-	IGuessServerSettingsProps,
+	IGuessSettingsDispatchProps,
+	IGuessSettingsStateProps,
 } from "../components/guess.settings";
 import { thunkGuessConfig } from "../thunks";
 
-const mapStateToProps = (
-	state: AppState,
-	ownProps: IGuessServerSettingsProps,
-) => {
+const mapStateToProps: MapStateToProps<
+	IGuessSettingsStateProps,
+	{},
+	AppState
+> = (state: AppState, ownProps: {}) => {
 	return {
 		...ownProps,
 		config: state.guessConfig.config,
@@ -19,6 +21,16 @@ const mapStateToProps = (
 	};
 };
 
-export default connect(mapStateToProps, {
-	guessConfig: thunkGuessConfig,
-})(GuessServerSettings);
+const mapDispatchToProps: MapDispatchToProps<
+	IGuessSettingsDispatchProps,
+	{}
+> = (dispatch, ownProps = {}) => {
+	return {
+		guessConfig: thunkGuessConfig,
+	};
+};
+
+export default connect(
+	mapStateToProps,
+	mapDispatchToProps,
+)(GuessServerSettings);

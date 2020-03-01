@@ -5,10 +5,13 @@ import { css, CSSInputTypes, StyleSheet } from "../styles";
 import HBAnimIcon from "images/heart.beat.light.anim.svg";
 
 export default class HeartBeatLoadingIcon extends React.Component<{
-	alt: string;
-	styles: CSSInputTypes[];
+	alt?: string;
+	styles?: CSSInputTypes[];
 }> {
-	protected static defaultProps = {
+	protected static defaultProps: {
+		alt: string;
+		styles: CSSInputTypes[];
+	} = {
 		alt: "We're working on getting this ready",
 		styles: [],
 	};

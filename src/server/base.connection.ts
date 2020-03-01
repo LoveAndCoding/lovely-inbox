@@ -6,7 +6,7 @@ import ServerCommand from "./server.command";
 export type ConnectionOptions = Readonly<{
 	host: string;
 	port: number;
-	autoReconnect: boolean;
+	autoReconnect?: boolean;
 }>;
 
 export default abstract class ServerConnection extends EventEmitter {

@@ -15,14 +15,19 @@ import { CONFIG_SOURCE, IServerConfig } from "../../store/server-config/types";
 import ServerSettingsForm from "../containers/server.settings.form";
 import { thunkGuessConfig } from "../thunks";
 
-export interface IGuessServerSettingsProps {
+export interface IGuessSettingsStateProps {
 	config: IServerConfig;
 	email: Email;
 	error: Error;
 	loading: boolean;
+}
 
+export interface IGuessSettingsDispatchProps {
 	guessConfig: typeof thunkGuessConfig;
 }
+
+export type IGuessServerSettingsProps = IGuessSettingsStateProps &
+	IGuessSettingsDispatchProps;
 
 interface IGuessserverSettingsState {
 	editDetails: void | boolean;
@@ -32,7 +37,8 @@ export default class GuessServerSettings extends React.Component<
 	IGuessServerSettingsProps,
 	IGuessserverSettingsState
 > {
-	constructor() {
+	constructor(props: IGuessServerSettingsProps) {
+		super(props);
 		this.state = { editDetails: null };
 	}
 
@@ -45,8 +51,8 @@ export default class GuessServerSettings extends React.Component<
 			// Our empty and loading states should show the message we're
 			// finding stuff
 			return (
-				<View styles={styles.loadingContainer}>
-					<HeartBeatLoadingIcon styles={styles.workingIcon} />
+				<View styles={[styles.loadingContainer]}>
+					<HeartBeatLoadingIcon styles={[styles.workingIcon]} />
 					<p className={css(styles.loadingText)}>
 						Finding that email&hellip;
 					</p>
@@ -80,7 +86,7 @@ export default class GuessServerSettings extends React.Component<
 			}
 
 			return (
-				<View styles={styles.foundContainer}>
+				<View styles={[styles.foundContainer]}>
 					<h2 className={css(styles.foundHeader)}>{headerText}</h2>
 					<BalanceText className={css(styles.foundText)}>
 						{infoText}

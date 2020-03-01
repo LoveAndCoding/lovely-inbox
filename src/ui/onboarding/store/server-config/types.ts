@@ -7,7 +7,7 @@ export const GUESS_CONFIG_SUCCESS = "GUESS_CONFIG_SUCCESS";
 export const GUESS_CONFIG_FAILURE = "GUESS_CONFIG_FAILURE";
 
 export interface IConfigState {
-	config: null | IServerConfig;
+	config: IServerConfig;
 	loading: boolean;
 	error: null | Error;
 }
@@ -17,7 +17,7 @@ export interface IGuessConfigBeginAction {
 }
 export interface IGuessConfigSuccessAction {
 	type: typeof GUESS_CONFIG_SUCCESS;
-	config: null | IServerConfig;
+	config: IServerConfig;
 }
 export interface IGuessConfigFailureAction {
 	type: typeof GUESS_CONFIG_FAILURE;

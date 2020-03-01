@@ -1,4 +1,4 @@
-import { IpcMainInvokeEvent } from "electron";
+import { IpcMainInvokeEvent, IpcMessageEvent } from "electron";
 
 import { IPCRequestTimeoutError } from "../../common/errors";
 import { IRouteHandler } from "../../common/route.signatures";
@@ -11,17 +11,21 @@ type IPCResponse =
 	  }
 	| {
 			requestId: number;
-			results: any;
+			result: any;
 	  };
 
 // This repsonse error does not need to be shared so it is in this file
 class IPCResponseError extends Error {
-	constructor(public readonly reason: any) {
+	public readonly reason: any;
+
+	constructor(reason: any) {
 		if (typeof reason === "string") {
 			super(reason);
 		} else {
 			super("Unknown IPC Response Error");
 		}
+
+		this.reason = reason;
 	}
 }
 
@@ -76,20 +80,20 @@ export function request<
 	*/
 	T extends keyof IRouteHandler,
 	K extends Tail<Parameters<IRouteHandler[T]>>
->(url: T, ...args: K): ReturnType<IRouteHandler[T]> {
-	return new Promise((resolve, reject) => {
+>(url: T, ...args: K): Promise<ReturnType<IRouteHandler[T]>> {
+	return new Promise<ReturnType<IRouteHandler[T]>>((resolve, reject) => {
 		const requestId = nextIPCRequestId++;
 		// Check if the response we get is the one we're waiting for
-		const checkResponse = (event: Event) => {
-			const msg: IPCResponse | void = event.detail;
+		const checkResponse = (event: CustomEvent<IPCResponse>) => {
+			const msg = event.detail;
 
 			if (msg && msg.requestId === requestId) {
 				// We got a response, remove the listener and resolve
 				window.removeEventListener("ipcResponse", checkResponse);
-				if (typeof msg.error === "undefined") {
-					resolve(msg.result);
-				} else {
+				if ("error" in msg) {
 					reject(new IPCResponseError(msg.error));
+				} else {
+					resolve(msg.result);
 				}
 			}
 		};
@@ -102,7 +106,6 @@ export function request<
 
 		window.addEventListener("ipcResponse", checkResponse);
 
-		requestId++;
 		window.postMessage(
 			{
 				args,

@@ -13,15 +13,15 @@ export enum ViewTags {
 
 type ViewProps =
 	| ({
-			styles: CSSInputTypes[];
+			styles?: CSSInputTypes[];
 			tag: ViewTags.form;
 	  } & React.HTMLAttributes<HTMLFormElement>)
 	| ({
-			styles: CSSInputTypes[];
-			tag: ViewTags.div;
+			styles?: CSSInputTypes[];
+			tag?: ViewTags.div;
 	  } & React.HTMLAttributes<HTMLDivElement>)
 	| ({
-			styles: CSSInputTypes[];
+			styles?: CSSInputTypes[];
 			tag:
 				| ViewTags.aside
 				| ViewTags.main
@@ -30,7 +30,7 @@ type ViewProps =
 	  } & React.HTMLAttributes<HTMLElement>);
 
 export default class View extends React.Component<ViewProps> {
-	private static defaultProps = {
+	private static defaultProps: ViewProps = {
 		styles: [],
 		tag: ViewTags.div,
 	};

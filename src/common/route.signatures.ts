@@ -6,5 +6,5 @@ export interface IRouteHandler {
 	"/account/server/settings/guess": (
 		event: IpcMainInvokeEvent,
 		email: string,
-	) => Promise<IServerConfig | void>;
+	) => IServerConfig;
 }

@@ -10,8 +10,8 @@ export default class InitialOnboardScreen extends React.Component<
 	{},
 	{ formSubmitted: boolean }
 > {
-	constructor() {
-		super();
+	constructor(props: {}) {
+		super(props);
 		this.state = { formSubmitted: false };
 	}
 
@@ -25,7 +25,7 @@ export default class InitialOnboardScreen extends React.Component<
 		);
 	}
 
-	private onNext = () => {
+	public onNext = () => {
 		this.setState({ formSubmitted: true });
 	};
 }

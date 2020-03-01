@@ -5,7 +5,7 @@ interface IUserConfig {
 }
 
 class UserConfigStore implements IUserConfig {
-	private userConfigStorage: FileStorage;
+	private userConfigStorage: FileStorage<boolean | number | string | void>;
 
 	constructor() {
 		this.userConfigStorage = new FileStorage(
@@ -15,10 +15,10 @@ class UserConfigStore implements IUserConfig {
 	}
 
 	get completedOnBoarding(): boolean {
-		return this.userConfigStorage.get<boolean>(
+		return this.userConfigStorage.get(
 			"completedOnboarding",
 			false,
-		);
+		) as boolean;
 	}
 }
 
