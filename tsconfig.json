@@ -11,6 +11,7 @@
 			"src/*": ["src/*"]
 		},
 		"sourceMap": true,
+		"target": "ES2019",
 		"typeRoots": ["./node_modules/@types", "./types"]
 	},
 	"include": ["src/**/*"]

@@ -42,6 +42,10 @@ module.exports = [
 		use: [
 			{
 				loader: "url-loader",
+				options: {
+					limit: 16384,
+					name: "images/[name].[ext]",
+				},
 			},
 		],
 	},
@@ -50,6 +54,9 @@ module.exports = [
 		use: [
 			{
 				loader: "file-loader",
+				options: {
+					name: "fonts/[name].[ext]",
+				},
 			},
 		],
 	},
