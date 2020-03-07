@@ -1,25 +1,17 @@
 import { app, BrowserWindow, Tray } from "electron";
 
-import { UserConfig } from "./config";
+import { ApplicationConfig, UserConfig } from "./config";
 import logger from "./logger";
 import setupUnhandledListeners from "./process.error.handlers";
 import { createAppRouter } from "./route";
 import WindowManager from "./window/window.manager";
-
-// Delcaring some globals defined by tooling
-declare const LOVELY_INBOX_WEBPACK_ENTRY: string;
-declare const LOVELY_INBOX_ONBOARDING_WEBPACK_ENTRY: string;
 
 // Before we do anything else, setup handlers for any missed errors
 setupUnhandledListeners();
 const appRouter = createAppRouter();
 
 // Create a new WindowManager which we'll use to control all of our windows
-const windower = new WindowManager(
-	LOVELY_INBOX_WEBPACK_ENTRY,
-	LOVELY_INBOX_ONBOARDING_WEBPACK_ENTRY,
-	appRouter,
-);
+const windower = new WindowManager(appRouter);
 
 /**
  * bringAppUp

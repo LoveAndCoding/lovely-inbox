@@ -1,5 +1,6 @@
 import { BrowserWindowConstructorOptions } from "electron";
 
+import { ApplicationConfig } from "../config";
 import logger from "../logger";
 import Router from "../route/router";
 import LovelyWindow from "./base.window";
@@ -9,11 +10,7 @@ export default class WindowManager {
 	private windows: LovelyWindow[];
 	private mainWindow: LovelyWindow;
 
-	constructor(
-		public readonly inboxUrl: string,
-		public readonly onboardingUrl: string,
-		public readonly router: Router,
-	) {
+	constructor(public readonly router: Router) {
 		this.windows = [];
 	}
 
@@ -44,11 +41,18 @@ export default class WindowManager {
 	}
 
 	public openInbox() {
-		this.setMainWindow(this.create(this.inboxUrl, LovelyWindow));
+		this.setMainWindow(
+			this.create(ApplicationConfig.entrypoints.main, LovelyWindow),
+		);
 	}
 
 	public openOnboarding() {
-		this.setMainWindow(this.create(this.onboardingUrl, OnboardingWindow));
+		this.setMainWindow(
+			this.create(
+				ApplicationConfig.entrypoints.onboarding,
+				OnboardingWindow,
+			),
+		);
 	}
 
 	private setMainWindow(
