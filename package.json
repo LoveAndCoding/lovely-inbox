@@ -16,65 +16,8 @@
 	"author": "Alexis Hushbeck (https://loveandcoding.com)",
 	"license": "MIT",
 	"config": {
-		"forge": {
-			"packagerConfig": {},
-			"makers": [
-				{
-					"name": "@electron-forge/maker-squirrel",
-					"config": {
-						"name": "lovely_inbox_2"
-					}
+		"forge": "./forge.config.js"
 				},
-				{
-					"name": "@electron-forge/maker-zip",
-					"platforms": [
-						"darwin"
-					]
-				},
-				{
-					"name": "@electron-forge/maker-deb",
-					"config": {}
-				},
-				{
-					"name": "@electron-forge/maker-rpm",
-					"config": {}
-				}
-			],
-			"plugins": [
-				[
-					"@electron-forge/plugin-webpack",
-					{
-						"mainConfig": "./webpack.main.config.js",
-						"renderer": {
-							"config": "./webpack.renderer.config.js",
-							"entryPoints": [
-								{
-									"js": "./styles/base.css",
-									"name": "styles"
-								},
-								{
-									"additionalChunks": [
-										"styles"
-									],
-									"html": "./templates/index.html",
-									"js": "./src/renderer.tsx",
-									"name": "Lovely Inbox"
-								},
-								{
-									"additionalChunks": [
-										"styles"
-									],
-									"html": "./templates/index.html",
-									"js": "./src/onboarding.tsx",
-									"name": "Lovely Inbox Onboarding"
-								}
-							]
-						}
-					}
-				]
-			]
-		}
-	},
 	"dependencies": {
 		"@fortawesome/fontawesome-svg-core": "^1.2.21",
 		"@fortawesome/free-solid-svg-icons": "^5.10.1",
