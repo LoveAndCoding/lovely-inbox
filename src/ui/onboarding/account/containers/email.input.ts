@@ -5,9 +5,9 @@ import {
 } from "react-redux";
 
 import InputField, {
+	IInputFieldStateProps,
 	InputFieldDispatchProps,
 	InputFieldOwnProps,
-	IInputFieldStateProps,
 } from "../../../forms/components/input.field";
 import { AppState } from "../../store";
 import { setEmailAddress } from "../../store/email/actions";
