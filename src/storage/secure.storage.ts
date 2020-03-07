@@ -1,16 +1,16 @@
 import * as keytar from "keytar";
 
 import { decryptTextValue, encryptTextValue } from "../common/encryption";
-import FileStorage, { StorageTypes } from "./file.storage";
+import BaseFileStorage from "./base.file.storage";
+
+export { StorageTypes } from "./base.file.storage";
 
 const SECURE_STORAGE_KEY_NAME = "LTS Tokens";
 
-export default class SecureStorage extends FileStorage<string | void> {
-	constructor(name: string, type: StorageTypes = StorageTypes.Data) {
-		super(name, type);
-	}
-
-	public async save(key: string, value: string | void) {
+export default class SecureStorage<T extends string> extends BaseFileStorage<
+	Record<T, string>
+> {
+	public async save(key: T, value: string) {
 		let encryptedVal = value;
 		if (typeof value === "string") {
 			encryptedVal = await this.encrypt(value);
@@ -20,10 +20,7 @@ export default class SecureStorage extends FileStorage<string | void> {
 		return this.writeCacheToDisk();
 	}
 
-	public async get(
-		key: string,
-		defaultValue: string | void,
-	): Promise<string | void> {
+	public async get<V extends string>(key: T, defaultValue: V): Promise<V> {
 		// Check for not in, since we may still want to return empty strings
 		if (this.localCache.has(key)) {
 			// While I can't imagine a scenario where a default value makes
@@ -32,12 +29,13 @@ export default class SecureStorage extends FileStorage<string | void> {
 		}
 
 		// An empty string doesn't need to be decrypted, just return
-		let val = this.localCache.get(key);
+		let val: string = this.localCache.get(key);
 		if (typeof val === "string" && val !== "") {
 			val = await this.decrypt(val);
 		}
 
-		return val;
+		// TS needs the generic even though it's always a string
+		return val as V;
 	}
 
 	private async encrypt(value: string) {

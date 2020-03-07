@@ -1,16 +1,6 @@
-import * as fs from "fs";
-import * as path from "path";
+import BaseFileStorage from "./base.file.storage";
 
-import { ApplicationConfig } from "../config";
-import logger from "../logger";
-import Storage from "./storage";
-
-export enum StorageTypes {
-	Cache,
-	Config,
-	Data,
-	Logs,
-}
+export { StorageTypes } from "./base.file.storage";
 
 /**
  * FileStorage
@@ -23,92 +13,16 @@ export enum StorageTypes {
  * Whenever possible, these files should be kept small. Loading and saving
  * larger files takes more time and will cause us to be slower on startup.
  */
-export default class FileStorage<T> extends Storage<T> {
-	protected localCache: Map<string, T>;
-	private readonly filename: string;
-	private readonly path: string;
-
-	constructor(name: string, type: StorageTypes = StorageTypes.Data) {
-		name = name.slice(0, 32).replace(/[^0-9a-z]/gi, "_");
-		super(`File Storage ${name}`);
-
-		this.localCache = new Map();
-		this.filename = name + ".json";
-
-		let filebase = "";
-		switch (type) {
-			case StorageTypes.Cache:
-				filebase = ApplicationConfig.directories.cache;
-				break;
-			case StorageTypes.Config:
-				filebase = ApplicationConfig.directories.config;
-				break;
-			case StorageTypes.Data:
-				filebase = ApplicationConfig.directories.data;
-				break;
-			case StorageTypes.Logs:
-				filebase = ApplicationConfig.directories.logs;
-				break;
-		}
-
-		this.path = path.join(filebase, this.filename);
-		this.rebuildSync();
-	}
-
-	public save(key: string, value: T) {
+export default class FileStorage<T> extends BaseFileStorage<T> {
+	public save<K extends keyof T, V extends T[K]>(key: K, value: V) {
 		this.localCache.set(key, value);
 		return this.writeCacheToDisk();
 	}
 
-	public delete(key: string) {
-		this.localCache.delete(key);
-		return this.writeCacheToDisk();
-	}
-
-	public get(key: string, defaultValue: T): T | Promise<T> {
+	public get<K extends keyof T, V extends T[K]>(key: K, defaultValue: V): V {
 		if (this.localCache.has(key)) {
 			return defaultValue;
 		}
-		return this.localCache.get(key) as T;
-	}
-
-	public clear(): Promise<boolean> {
-		this.localCache.clear();
-		return this.writeCacheToDisk();
-	}
-
-	/**
-	 * rebuild
-	 *
-	 * Because rebuild is called when we initially spin up
-	 */
-	protected rebuildSync() {
-		try {
-			const contents = fs.readFileSync(this.path, { encoding: "utf8" });
-			const json = JSON.parse(contents);
-			Object.keys(json).forEach((key) => {
-				this.localCache.set(key, json[key]);
-			});
-		} catch (e) {
-			logger.warn(
-				`Unable to rebuild contents of ${this.name} from ${this.path}`,
-			);
-		}
-	}
-
-	protected writeCacheToDisk(): Promise<boolean> {
-		return new Promise((resolve, reject) => {
-			fs.writeFile(
-				this.path,
-				JSON.stringify(this.localCache),
-				{ encoding: "utf8" },
-				(err) => {
-					if (err) {
-						return reject(err);
-					}
-					resolve(true);
-				},
-			);
-		});
+		return this.localCache.get(key) as V;
 	}
 }

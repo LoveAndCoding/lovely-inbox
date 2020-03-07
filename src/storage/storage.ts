@@ -26,8 +26,16 @@ export default abstract class Storage<T> {
 		this.name = name;
 	}
 
-	public abstract save(key: string, value: T): boolean | Promise<boolean>;
-	public abstract delete(key: string): boolean | Promise<boolean>;
-	public abstract get(key: string, defaultValue: T): T | Promise<T>;
+	public abstract save<K extends keyof T, V extends T[K]>(
+		key: K,
+		value: V,
+	): boolean | Promise<boolean>;
+	public abstract delete<K extends keyof T>(
+		key: K,
+	): boolean | Promise<boolean>;
+	public abstract get<K extends keyof T, V extends T[K]>(
+		key: K,
+		defaultValue: V,
+	): V | Promise<V>;
 	public abstract clear(): boolean | Promise<boolean>;
 }
