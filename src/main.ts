@@ -7,8 +7,8 @@ import { createAppRouter } from "./route";
 import WindowManager from "./window/window.manager";
 
 // Delcaring some globals defined by tooling
-declare const MAIN_WINDOW_WEBPACK_ENTRY: string;
-declare const ONBOARDING_WEBPACK_ENTRY: string;
+declare const LOVELY_INBOX_WEBPACK_ENTRY: string;
+declare const LOVELY_INBOX_ONBOARDING_WEBPACK_ENTRY: string;
 
 // Before we do anything else, setup handlers for any missed errors
 setupUnhandledListeners();
@@ -16,8 +16,8 @@ const appRouter = createAppRouter();
 
 // Create a new WindowManager which we'll use to control all of our windows
 const windower = new WindowManager(
-	MAIN_WINDOW_WEBPACK_ENTRY,
-	ONBOARDING_WEBPACK_ENTRY,
+	LOVELY_INBOX_WEBPACK_ENTRY,
+	LOVELY_INBOX_ONBOARDING_WEBPACK_ENTRY,
 	appRouter,
 );
 

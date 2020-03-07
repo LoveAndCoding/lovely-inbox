@@ -58,15 +58,15 @@
 									],
 									"html": "./templates/index.html",
 									"js": "./src/renderer.tsx",
-									"name": "main_window"
+									"name": "Lovely Inbox"
 								},
 								{
 									"additionalChunks": [
 										"styles"
 									],
-									"html": "./templates/onboarding.html",
+									"html": "./templates/index.html",
 									"js": "./src/onboarding.tsx",
-									"name": "onboarding"
+									"name": "Lovely Inbox Onboarding"
 								}
 							]
 						}
