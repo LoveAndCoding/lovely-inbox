@@ -23,6 +23,9 @@ jobs:
                   yarn install
               env:
                   FA_AUTH_TOKEN: ${{ secrets.FA_AUTH_TOKEN }}
+            - name: Lint
+              run: |
+                  yarn lint
             - name: Test
               run: |
                   yarn test
