@@ -1,3 +1,7 @@
+const childProcess = require("child_process");
+
+const pkg = require("./package.json");
+
 const ALLOWED_CONFIGS = ["production", "beta", "alpha"];
 
 function getBuildConfig() {
@@ -9,8 +13,17 @@ function getBuildConfig() {
 	return "nightly";
 }
 
+const gitRevision = childProcess
+	.execSync("git rev-parse HEAD", { encoding: "utf8" })
+	.trim();
+
 module.exports = {
 	buildIdentifier: `../build/${getBuildConfig()}`,
+
+	packagerConfig: {
+		appVersion: `${pkg.version}-${gitRevision.substr(0, 6)}`,
+		ignore: new RegExp(`^.(?!\.webpack)`),
+	},
 
 	makers: [
 		{
