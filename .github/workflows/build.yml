@@ -23,7 +23,7 @@ jobs:
               run: |
                   npm config set "//npm.fontawesome.com/:_authToken" "%FA_AUTH_TOKEN%"
                   npm install -g yarn
-                  yarn install
+                  yarn install --verbose
               env:
                   FA_AUTH_TOKEN: ${{ secrets.FA_AUTH_TOKEN }}
             - name: Upload Yarn Errors (on Failure)
@@ -58,7 +58,7 @@ jobs:
               run: |
                   npm config set "//npm.fontawesome.com/:_authToken" "${FA_AUTH_TOKEN}"
                   npm install -g yarn
-                  yarn install
+                  yarn install --verbose
               env:
                   FA_AUTH_TOKEN: ${{ secrets.FA_AUTH_TOKEN }}
             - name: Upload Yarn Errors (on Failure)
