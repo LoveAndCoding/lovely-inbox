@@ -1,0 +1,55 @@
+name: Build
+
+on:
+    push:
+        branches:
+            - master
+
+jobs:
+    build_win:
+        runs-on: windows-latest
+
+        strategy:
+            matrix:
+                node-version: [12.x]
+
+        steps:
+            - uses: actions/checkout@v1
+            - name: Use Node ${{ matrix.node-version }}
+              uses: actions/setup-node@v1
+              with:
+                  node-version: ${{ matrix.node-version }}
+            - name: Install Deps
+              run: |
+                  npm config set "//npm.fontawesome.com/:_authToken" "${FA_AUTH_TOKEN}"
+                  npm install -g yarn
+                  yarn install --prod
+              env:
+                  FA_AUTH_TOKEN: ${{ secrets.FA_AUTH_TOKEN }}
+            - name: Build
+              run: |
+                  yarn make
+
+    build_mac:
+        runs-on: macos-latest
+
+        strategy:
+            matrix:
+                node-version: [12.x]
+
+        steps:
+            - uses: actions/checkout@v1
+            - name: Use Node ${{ matrix.node-version }}
+              uses: actions/setup-node@v1
+              with:
+                  node-version: ${{ matrix.node-version }}
+            - name: Install Deps
+              run: |
+                  npm config set "//npm.fontawesome.com/:_authToken" "${FA_AUTH_TOKEN}"
+                  npm install -g yarn
+                  yarn install --prod
+              env:
+                  FA_AUTH_TOKEN: ${{ secrets.FA_AUTH_TOKEN }}
+            - name: Build
+              run: |
+                  yarn make
