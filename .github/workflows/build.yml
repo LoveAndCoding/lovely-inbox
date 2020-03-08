@@ -39,7 +39,7 @@ jobs:
               uses: actions/upload-artifact@v1
               with:
                   name: build-win
-                  path: build/make/squirrel.windows
+                  path: build/nightly/make/squirrel.windows
 
     build_mac:
         runs-on: macos-latest
@@ -74,4 +74,4 @@ jobs:
               uses: actions/upload-artifact@v1
               with:
                   name: build-osx
-                  path: build/make
+                  path: build/nightly/make
