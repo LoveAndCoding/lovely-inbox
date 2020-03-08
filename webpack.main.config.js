@@ -1,3 +1,5 @@
+const path = require("path");
+
 module.exports = {
 	/**
 	 * This is the main entry point for your application, it's the first file
@@ -5,6 +7,15 @@ module.exports = {
 	 */
 	entry: "./src/main.ts",
 	resolve: {
+		alias: {
+			logform$: path.resolve(
+				__dirname,
+				"node_modules",
+				"logform",
+				"dist",
+				"browser",
+			),
+		},
 		extensions: [".tsx", ".ts", ".jsx", ".js", ".json"],
 	},
 	// Put your normal webpack config below here
