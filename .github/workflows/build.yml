@@ -26,9 +26,20 @@ jobs:
                   yarn install
               env:
                   FA_AUTH_TOKEN: ${{ secrets.FA_AUTH_TOKEN }}
+            - name: Upload Yarn Errors (on Failure)
+              uses: actions/upload-artifact@v1
+              if: failure()
+              with:
+                  name: yarn-error.log
+                  path: yarn-error.log
             - name: Build
               run: |
                   yarn make
+            - name: Archive production artifacts
+              uses: actions/upload-artifact@v1
+              with:
+                  name: build-win
+                  path: build/make/squirrel.windows
 
     build_mac:
         runs-on: macos-latest
@@ -50,6 +61,17 @@ jobs:
                   yarn install
               env:
                   FA_AUTH_TOKEN: ${{ secrets.FA_AUTH_TOKEN }}
+            - name: Upload Yarn Errors (on Failure)
+              uses: actions/upload-artifact@v1
+              if: failure()
+              with:
+                  name: yarn-error.log
+                  path: yarn-error.log
             - name: Build
               run: |
                   yarn make
+            - name: Archive Build
+              uses: actions/upload-artifact@v1
+              with:
+                  name: build-osx
+                  path: build/make
