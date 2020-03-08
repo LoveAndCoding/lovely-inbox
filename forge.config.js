@@ -1,11 +1,22 @@
+const ALLOWED_CONFIGS = ["production", "beta", "alpha"];
+
+function getBuildConfig() {
+	const config = (process.env.NODE_ENV || "").toLowerCase();
+
+	if (ALLOWED_CONFIGS.includes(config)) {
+		return config;
+	}
+	return "nightly";
+}
+
 module.exports = {
-	packagerConfig: {},
+	buildIdentifier: `../build/${getBuildConfig()}`,
 
 	makers: [
 		{
 			name: "@electron-forge/maker-squirrel",
 			config: {
-				name: "Lovely Inbox",
+				name: "LovelyInbox",
 			},
 		},
 		{

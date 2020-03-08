@@ -19,6 +19,11 @@ const windower = new WindowManager(appRouter);
  * Initializes and brings up the application window
  */
 function bringAppUp() {
+	// Check if we've launched from squirrel
+	if (require("electron-squirrel-startup")) {
+		return app.quit();
+	}
+
 	if (UserConfig.completedOnBoarding) {
 		logger.info("User has completed onboarding; Load Inbox");
 		windower.openInbox();
