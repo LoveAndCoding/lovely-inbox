@@ -23,7 +23,7 @@ jobs:
               run: |
                   npm config set "//npm.fontawesome.com/:_authToken" "${FA_AUTH_TOKEN}"
                   npm install -g yarn
-                  yarn install --prod
+                  yarn install
               env:
                   FA_AUTH_TOKEN: ${{ secrets.FA_AUTH_TOKEN }}
             - name: Build
@@ -47,7 +47,7 @@ jobs:
               run: |
                   npm config set "//npm.fontawesome.com/:_authToken" "${FA_AUTH_TOKEN}"
                   npm install -g yarn
-                  yarn install --prod
+                  yarn install
               env:
                   FA_AUTH_TOKEN: ${{ secrets.FA_AUTH_TOKEN }}
             - name: Build
