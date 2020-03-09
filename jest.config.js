@@ -1,9 +1,8 @@
-module.exports = {
-	preset: "ts-jest",
-	moduleNameMapper: {
-		"^src/(.+)$": "<rootDir>/src/$1",
-	},
+const commonConfig = require("./jest.common.config");
+
+module.exports = Object.assign({}, commonConfig, {
 	setupFiles: ["<rootDir>/test/jest.setup.worker.ts"],
-	testEnvironment: "node",
-	testMatch: ["**/*.+(spec|test|fixture).[jt]s?(x)"],
-};
+	testMatch: [
+		"**/test/(unit|integration|fixture)/**/*.+(spec|test|fixture).[jt]s?(x)",
+	],
+});

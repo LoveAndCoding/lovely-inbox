@@ -2,7 +2,7 @@ const childProcess = require("child_process");
 
 const pkg = require("./package.json");
 
-const ALLOWED_CONFIGS = ["production", "beta", "alpha"];
+const ALLOWED_CONFIGS = ["production", "beta", "alpha", "test"];
 
 function getBuildConfig() {
 	const config = (process.env.NODE_ENV || "").toLowerCase();
