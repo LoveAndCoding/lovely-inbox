@@ -35,11 +35,6 @@ jobs:
             - name: Build
               run: |
                   yarn make
-            - name: Archive production artifacts
-              uses: actions/upload-artifact@v1
-              with:
-                  name: build-win
-                  path: build/nightly/make/squirrel.windows
 
     build_mac:
         runs-on: macos-latest
@@ -70,8 +65,3 @@ jobs:
             - name: Build
               run: |
                   yarn make
-            - name: Archive Build
-              uses: actions/upload-artifact@v1
-              with:
-                  name: build-osx
-                  path: build/nightly/make
