@@ -35,7 +35,7 @@ export default class LovelyWindow {
 	}
 
 	public readonly browserWindow: BrowserWindow;
-	protected ipcListeners: Map<string, Array<(event: IpcMainEvent) => void>>;
+	protected ipcListeners: Map<string, ((event: IpcMainEvent) => void)[]>;
 
 	public constructor(options: BrowserWindowConstructorOptions) {
 		options = Object.assign({}, this.defaultWindowOptions, options);
@@ -43,7 +43,7 @@ export default class LovelyWindow {
 		this.browserWindow = new BrowserWindow(options);
 		this.ipcListeners = new Map<
 			string,
-			Array<(event: IpcMainEvent) => void>
+			((event: IpcMainEvent) => void)[]
 		>();
 
 		this.init();
