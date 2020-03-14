@@ -16,6 +16,7 @@ describe("Onboarding.Window", () => {
 			// Arrange
 			app = new Application({
 				args: [ROOT_DIR],
+				chromeDriverArgs: ["--disable-dev-shm-usage", "--no-sandbox"],
 				path: ELECTRON_PATH,
 			});
 
