@@ -19,16 +19,14 @@ jobs:
             - name: Install Deps
               run: |
                   npm config set "//npm.fontawesome.com/:_authToken" "${FA_AUTH_TOKEN}"
-                  npm install -g yarn
                   yarn install
               env:
                   FA_AUTH_TOKEN: ${{ secrets.FA_AUTH_TOKEN }}
             - name: Lint
               run: |
                   yarn lint
-            - name: Test
+            - name: Unit, Integration, & Fixture Tests
               run: |
                   yarn test
-                  yarn test:e2e
               env:
                   CI: true
