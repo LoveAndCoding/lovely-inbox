@@ -44,7 +44,6 @@ export const ApplicationConfig: Readonly<IApplicationConfig> = {
 		main: INBOX_WEBPACK_ENTRY,
 		onboarding: ONBOARDING_WEBPACK_ENTRY,
 	},
-	},
 };
 
 // For convenience, we make our application directories at this point so we
