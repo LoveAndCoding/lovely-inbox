@@ -3,6 +3,9 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import * as React from "react";
 import { Link } from "react-router-dom";
 
+import Email from "../../../../common/email";
+import { IServerConfig } from "../../../../common/server.config";
+import { notify, request } from "../../../communication/ipc";
 import { ButtonSizes } from "../../../forms/components/button";
 import Spring from "../../../layout/components/spring";
 import View, { ViewTags } from "../../../layout/components/view";
@@ -11,7 +14,25 @@ import ActionPaneSmall from "../../common/components/action.pane.small";
 import GuessNextButton from "../containers/guess.next.button";
 import GuessServerSettings from "../containers/guess.settings";
 
-export default class OnboardServerSettings extends React.Component {
+export interface IServerSettingsDispatchProps {}
+
+export interface IServerSettingsProps {
+	config: IServerConfig;
+	email: Email;
+}
+
+export default class OnboardServerSettings extends React.Component<
+	IServerSettingsProps & IServerSettingsDispatchProps
+> {
+	handlePress = async () => {
+		const account = await request(
+			"/account/create",
+			this.props.config,
+			this.props.email,
+		);
+		notify("config.onboarding", true);
+	};
+
 	public render() {
 		return (
 			<ActionPaneSmall>
@@ -20,12 +41,11 @@ export default class OnboardServerSettings extends React.Component {
 					<Link to="/" className={css(styles.backLink)}>
 						<span className={css(styles.buttonText)}>Back</span>
 					</Link>
-					<GuessNextButton size={ButtonSizes.large}>
+					<GuessNextButton
+						onPress={this.handlePress}
+						size={ButtonSizes.large}
+					>
 						<span className={css(styles.buttonText)}>Login</span>
-						<FontAwesomeIcon
-							icon={faArrowRight}
-							className={css(styles.buttonIcon)}
-						/>
 					</GuessNextButton>
 				</View>
 			</ActionPaneSmall>

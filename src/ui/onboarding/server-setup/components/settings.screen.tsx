@@ -3,7 +3,7 @@ import * as React from "react";
 import View, { ViewTags } from "../../../layout/components/view";
 import { css, StyleSheet } from "../../../styles";
 import FindingServerMessaging from "./finding.server";
-import OnboardServerSettings from "./server.settings";
+import OnboardServerSettings from "../containers/server.settings";
 
 export default class ServerSettingsScreen extends React.Component {
 	public render() {
