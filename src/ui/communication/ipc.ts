@@ -87,20 +87,6 @@ export function request<
 >(url: T, ...args: K): Promise<ReturnType<IRouteHandler[T]>> {
 	return new Promise<ReturnType<IRouteHandler[T]>>((resolve, reject) => {
 		const requestId = nextIPCRequestId++;
-		// Check if the response we get is the one we're waiting for
-		const checkResponse = (event: CustomEvent<IPCResponse>) => {
-			const msg = event.detail;
-
-			if (msg && msg.requestId === requestId) {
-				// We got a response, remove the listener and resolve
-				window.removeEventListener("ipcResponse", checkResponse);
-				if ("error" in msg) {
-					reject(new IPCResponseError(msg.error));
-				} else {
-					resolve(msg.result);
-				}
-			}
-		};
 
 		// Timeout the request if we don't get a response in 30 seconds
 		const tmr = setTimeout(() => {
@@ -108,6 +94,21 @@ export function request<
 			reject(new IPCRequestTimeoutError(url));
 		}, 30000);
 
+		// Check if the response we get is the one we're waiting for
+		const checkResponse = (event: CustomEvent<IPCResponse>) => {
+			const msg = event.detail;
+
+			if (msg && msg.requestId === requestId) {
+				// We got a response, remove the listener and resolve
+				window.removeEventListener("ipcResponse", checkResponse);
+				clearTimeout(tmr);
+				if ("error" in msg) {
+					reject(new IPCResponseError(msg.error));
+				} else {
+					resolve(msg.result);
+				}
+			}
+		};
 		window.addEventListener("ipcResponse", checkResponse);
 
 		window.postMessage(
