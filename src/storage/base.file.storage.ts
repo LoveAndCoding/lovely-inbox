@@ -69,11 +69,9 @@ export default abstract class BaseFileStorage<T> extends Storage<T> {
 	protected rebuildSync() {
 		try {
 			const contents = fs.readFileSync(this.path, { encoding: "utf8" });
-			const json = JSON.parse(contents) as T;
-			for (const key in json) {
-				if (Object.prototype.hasOwnProperty.call(json, key)) {
-					this.localCache.set(key, json[key]);
-				}
+			const jsonLoadedMap = new Map(JSON.parse(contents)) as any;
+			for (let [key, val] of jsonLoadedMap) {
+				this.localCache.set(key, val);
 			}
 		} catch (e) {
 			logger.warn(
@@ -83,10 +81,12 @@ export default abstract class BaseFileStorage<T> extends Storage<T> {
 	}
 
 	protected writeCacheToDisk(): Promise<boolean> {
+		logger.debug(`Writing ${this.name} configruation to ${this.path}`);
+
 		return new Promise((resolve, reject) => {
 			fs.writeFile(
 				this.path,
-				JSON.stringify(this.localCache),
+				JSON.stringify(Array.from(this.localCache.entries())),
 				{ encoding: "utf8" },
 				(err) => {
 					if (err) {
