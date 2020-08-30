@@ -83,7 +83,7 @@ describe("Email", () => {
 			const email = new Email(validEmail);
 
 			// Assert
-			expect(email.address).toEqual("kairi@destiny.island");
+			expect(email.fullAddress).toEqual("kairi@destiny.island");
 			expect(email.domain).toEqual("destiny.island");
 			expect(email.local).toEqual("kairi");
 		});

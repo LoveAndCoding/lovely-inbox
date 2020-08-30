@@ -11,7 +11,6 @@ import {
 	configUpdateUsername,
 } from "../../store/server-config/actions";
 import OnboardServerSettings, {
-	IServerSettingsDispatchProps,
 	IServerSettingsProps,
 } from "../components/server.settings";
 
@@ -26,14 +25,4 @@ const mapStateToProps: MapStateToProps<IServerSettingsProps, {}, AppState> = (
 	};
 };
 
-const mapDispatchToProps: MapDispatchToPropsFunction<
-	IServerSettingsDispatchProps,
-	{}
-> = (dispatch, ownProps: {}) => {
-	return {};
-};
-
-export default connect(
-	mapStateToProps,
-	mapDispatchToProps,
-)(OnboardServerSettings);
+export default connect(mapStateToProps)(OnboardServerSettings);

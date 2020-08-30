@@ -14,15 +14,13 @@ import ActionPaneSmall from "../../common/components/action.pane.small";
 import GuessNextButton from "../containers/guess.next.button";
 import GuessServerSettings from "../containers/guess.settings";
 
-export interface IServerSettingsDispatchProps {}
-
 export interface IServerSettingsProps {
 	config: IServerConfig;
 	email: Email;
 }
 
 export default class OnboardServerSettings extends React.Component<
-	IServerSettingsProps & IServerSettingsDispatchProps
+	IServerSettingsProps
 > {
 	handlePress = async () => {
 		const account = await request(

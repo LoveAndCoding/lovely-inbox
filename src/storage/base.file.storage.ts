@@ -93,7 +93,7 @@ export default abstract class BaseFileStorage<T> extends Storage<T> {
 		try {
 			const contents = fs.readFileSync(this.path, { encoding: "utf8" });
 			const jsonLoadedMap = new Map(JSON.parse(contents)) as any;
-			for (let [key, val] of jsonLoadedMap) {
+			for (const [key, val] of jsonLoadedMap) {
 				this.localCache.set(key, val);
 			}
 		} catch (e) {

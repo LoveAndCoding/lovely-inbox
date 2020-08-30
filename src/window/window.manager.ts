@@ -32,7 +32,7 @@ export default class WindowManager {
 		const wins = Array.from(this.windows);
 		logger.debug("Closing all windows");
 		// Start at the last (top-most) window and close them in reverse
-		for (var i = wins.length - 1; i >= 0; i--) {
+		for (let i = wins.length - 1; i >= 0; i--) {
 			wins[i].close();
 	}
 		this.persistApp = oldPersist;
