@@ -3,8 +3,9 @@ import { app } from "electron";
 import * as fs from "fs";
 
 // Delcaring some globals defined by tooling
-declare const LOVELY_INBOX_WEBPACK_ENTRY: string;
-declare const LOVELY_INBOX_ONBOARDING_WEBPACK_ENTRY: string;
+declare const INBOX_WEBPACK_ENTRY: string;
+declare const ONBOARDING_WEBPACK_ENTRY: string;
+
 const APP_NAME = app && app.isPackaged ? "Lovely Inbox" : "Lovely Inbox (Dev)";
 const AUTHOR_NAME = "Love & Coding";
 
@@ -40,8 +41,9 @@ export const ApplicationConfig: Readonly<IApplicationConfig> = {
 	},
 
 	entrypoints: {
-		main: LOVELY_INBOX_WEBPACK_ENTRY,
-		onboarding: LOVELY_INBOX_ONBOARDING_WEBPACK_ENTRY,
+		main: INBOX_WEBPACK_ENTRY,
+		onboarding: ONBOARDING_WEBPACK_ENTRY,
+	},
 	},
 };
 

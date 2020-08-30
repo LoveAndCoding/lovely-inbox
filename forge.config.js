@@ -56,7 +56,7 @@ module.exports = {
 							additionalChunks: ["styles"],
 							html: "./templates/index.html",
 							js: "./src/renderer.tsx",
-							name: "Lovely Inbox",
+							name: "Inbox",
 						},
 
 						// Onboarding Window
@@ -64,7 +64,7 @@ module.exports = {
 							additionalChunks: ["styles"],
 							html: "./templates/index.html",
 							js: "./src/onboarding.tsx",
-							name: "Lovely Inbox Onboarding",
+							name: "Onboarding",
 						},
 					],
 				},
