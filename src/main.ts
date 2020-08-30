@@ -8,6 +8,9 @@ import WindowManager from "./window";
 // Before we do anything else, setup handlers for any missed errors
 setupUnhandledListeners();
 
+// Configure some app level things
+app.allowRendererProcessReuse = true;
+
 /**
  * bringAppUp
  *

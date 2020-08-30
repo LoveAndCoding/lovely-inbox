@@ -22,7 +22,6 @@ module.exports = {
 
 	packagerConfig: {
 		appVersion: `${pkg.version}-${gitRevision.substr(0, 6)}`,
-		ignore: new RegExp(`^.(?!\.webpack)`),
 	},
 
 	makers: [
