@@ -30,6 +30,13 @@ class UserConfigStore implements IUserConfig {
 		);
 	}
 
+	public async changeOnboardingStatus(finished: boolean) {
+		return await this.userConfigStorage.save(
+			"completedOnBoarding",
+			finished,
+		);
+	}
+
 	public async addAccount(id: AccountId): Promise<boolean> {
 		logger.info(`Adding new account with ID ${id}`);
 		const accts = this.accounts;

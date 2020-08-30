@@ -17,6 +17,7 @@ export default class WindowManager {
 		public readonly notifier: Notifier,
 	) {
 		this.windows = [];
+		notifier.windowManager = this;
 	}
 
 	/**

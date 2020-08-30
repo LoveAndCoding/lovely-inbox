@@ -5,6 +5,8 @@ import logger from "../logger";
 import WindowManager from "../window/window.manager";
 
 export default class Notifier {
+	public windowManager: WindowManager;
+
 	public listen<
 		T extends keyof IServerNotifyChannels,
 		K extends IServerNotifyChannels[T]
