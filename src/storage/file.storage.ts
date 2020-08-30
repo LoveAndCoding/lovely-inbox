@@ -1,4 +1,5 @@
 import BaseFileStorage from "./base.file.storage";
+import { InvalidStateError } from "../common/errors";
 
 export { StorageTypes } from "./base.file.storage";
 
@@ -20,7 +21,13 @@ export default class FileStorage<T> extends BaseFileStorage<T> {
 	}
 
 	public get<K extends keyof T, V extends T[K]>(key: K, defaultValue: V): V {
-		if (this.localCache.has(key)) {
+		if (this.destroyed) {
+			throw new InvalidStateError(
+				"Cannot get from storage. Storage has already been destroyed and deleted",
+			);
+		}
+
+		if (!this.localCache.has(key)) {
 			return defaultValue;
 		}
 		return this.localCache.get(key) as V;

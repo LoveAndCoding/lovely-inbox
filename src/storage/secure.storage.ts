@@ -1,6 +1,7 @@
 import * as keytar from "keytar";
 
 import { decryptTextValue, encryptTextValue } from "../common/encryption";
+import { InvalidStateError } from "../common/errors";
 import BaseFileStorage from "./base.file.storage";
 
 export { StorageTypes } from "./base.file.storage";
@@ -21,6 +22,12 @@ export default class SecureStorage<T extends string> extends BaseFileStorage<
 	}
 
 	public async get<V extends string>(key: T, defaultValue: V): Promise<V> {
+		if (this.destroyed) {
+			throw new InvalidStateError(
+				"Cannot get from secure storage. Storage has already been destroyed and deleted",
+			);
+		}
+
 		// Check for not in, since we may still want to return empty strings
 		if (this.localCache.has(key)) {
 			// While I can't imagine a scenario where a default value makes

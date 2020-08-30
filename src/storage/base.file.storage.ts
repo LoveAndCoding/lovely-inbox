@@ -1,6 +1,7 @@
 import * as fs from "fs";
 import * as path from "path";
 
+import { InvalidStateError } from "../common/errors";
 import { ApplicationConfig } from "../config";
 import logger from "../logger";
 import Storage from "./storage";
@@ -23,6 +24,7 @@ export default abstract class BaseFileStorage<T> extends Storage<T> {
 	protected localCache: Map<keyof T, any>;
 	protected readonly filename: string;
 	protected readonly path: string;
+	protected destroyed: boolean;
 
 	constructor(name: string, type: StorageTypes = StorageTypes.Data) {
 		name = name.slice(0, 32).replace(/[^0-9a-z]/gi, "_");
@@ -30,6 +32,7 @@ export default abstract class BaseFileStorage<T> extends Storage<T> {
 
 		this.localCache = new Map();
 		this.filename = name + ".json";
+		this.destroyed = false;
 
 		let filebase = "";
 		switch (type) {
@@ -61,12 +64,32 @@ export default abstract class BaseFileStorage<T> extends Storage<T> {
 		return this.writeCacheToDisk();
 	}
 
+	public destroy(): Promise<boolean> {
+		// We already deleted this storage, no-op
+		if (this.destroyed) {
+			return Promise.resolve(true);
+		}
+
+		this.destroyed = true;
+		return new Promise((resolve, reject) => {
+			fs.unlink(this.path, () => {
+				resolve(true);
+			});
+		});
+	}
+
 	/**
 	 * rebuild
 	 *
 	 * Because rebuild is called when we initially spin up
 	 */
 	protected rebuildSync() {
+		if (this.destroyed) {
+			throw new InvalidStateError(
+				"Cannot perform this operation. Storage has been destroyed and data erased",
+			);
+		}
+
 		try {
 			const contents = fs.readFileSync(this.path, { encoding: "utf8" });
 			const jsonLoadedMap = new Map(JSON.parse(contents)) as any;
@@ -81,6 +104,12 @@ export default abstract class BaseFileStorage<T> extends Storage<T> {
 	}
 
 	protected writeCacheToDisk(): Promise<boolean> {
+		if (this.destroyed) {
+			throw new InvalidStateError(
+				"Cannot perform this operation. Storage has been destroyed and data erased",
+			);
+		}
+
 		logger.debug(`Writing ${this.name} configruation to ${this.path}`);
 
 		return new Promise((resolve, reject) => {
