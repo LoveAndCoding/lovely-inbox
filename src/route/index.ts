@@ -1,11 +1,13 @@
-import * as ServerConnections from "../server/handlers";
+import { attachHandlers as attachAccountHandlers } from "../account/handlers";
+import { attachHandlers as attachServerHandlers } from "../server/handlers";
 import Router from "./router";
 
 export function createAppRouter() {
 	const appRouter = new Router();
 
 	// Here is where we attach our route handlers
-	ServerConnections.attachHandlers(appRouter);
+	attachAccountHandlers(appRouter);
+	attachServerHandlers(appRouter);
 
 	return appRouter;
 }
