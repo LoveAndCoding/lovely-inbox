@@ -23,7 +23,7 @@ export interface IGuessSettingsStateProps {
 }
 
 export interface IGuessSettingsDispatchProps {
-	guessConfig: typeof thunkGuessConfig;
+	guessConfig: (email: Email) => void;
 }
 
 export type IGuessServerSettingsProps = IGuessSettingsStateProps &

@@ -18,11 +18,11 @@ export default class WindowManager {
 		this.windows = [];
 	}
 
-	public create(
+	public create<T extends LovelyWindow>(
 		url: string,
-		WindowClass: typeof LovelyWindow,
+		WindowClass: new (options: BrowserWindowConstructorOptions) => T,
 		optionsOverrides?: BrowserWindowConstructorOptions,
-	): LovelyWindow {
+	): T {
 		const window = new WindowClass(optionsOverrides);
 
 		window.browserWindow.loadURL(url);
@@ -59,8 +59,8 @@ export default class WindowManager {
 		);
 	}
 
-	private setMainWindow(
-		window: LovelyWindow,
+	private setMainWindow<T extends LovelyWindow>(
+		window: T,
 		subWindowsCloseToo: boolean = true,
 	) {
 		this.mainWindow = window;

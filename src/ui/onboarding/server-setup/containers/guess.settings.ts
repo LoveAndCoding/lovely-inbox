@@ -21,16 +21,6 @@ const mapStateToProps: MapStateToProps<
 	};
 };
 
-const mapDispatchToProps: MapDispatchToProps<
-	IGuessSettingsDispatchProps,
-	{}
-> = (dispatch, ownProps = {}) => {
-	return {
-		guessConfig: thunkGuessConfig,
-	};
-};
-
-export default connect(
-	mapStateToProps,
-	mapDispatchToProps,
-)(GuessServerSettings);
+export default connect(mapStateToProps, { guessConfig: thunkGuessConfig })(
+	GuessServerSettings,
+);
