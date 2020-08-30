@@ -10,12 +10,31 @@ import OnboardingWindow from "./onboard.window";
 export default class WindowManager {
 	private windows: LovelyWindow[];
 	private mainWindow: LovelyWindow;
+	public persistApp = false;
 
 	constructor(
 		public readonly router: Router,
 		public readonly notifier: Notifier,
 	) {
 		this.windows = [];
+	}
+
+	/**
+	 *
+	 *
+	 * @param persistApp {boolean} Should the app still be running after
+	 */
+	public closeAllWindows(persistApp = false) {
+		// Clone the array so we can loop through without issue
+		const oldPersist = this.persistApp;
+		this.persistApp = persistApp;
+		const wins = Array.from(this.windows);
+		logger.debug("Closing all windows");
+		// Start at the last (top-most) window and close them in reverse
+		for (var i = wins.length - 1; i >= 0; i--) {
+			wins[i].close();
+	}
+		this.persistApp = oldPersist;
 	}
 
 	public create<T extends LovelyWindow>(
