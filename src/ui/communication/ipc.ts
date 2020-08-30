@@ -1,6 +1,7 @@
 import { IpcMainInvokeEvent, IpcMessageEvent } from "electron";
 
 import { IPCRequestTimeoutError } from "../../common/errors";
+import { IServerNotifyChannels } from "../../common/notify.channels";
 import { IRouteHandler } from "../../common/route.signatures";
 import { Tail } from "../../common/types";
 
@@ -36,7 +37,10 @@ class IPCResponseError extends Error {
  * @param channel IPC channel where listeners will be notified
  * @param args Any additional arguments or data listeners may expect
  */
-export function notify(channel: string, ...args: any) {
+export function notify<
+	T extends keyof IServerNotifyChannels,
+	K extends IServerNotifyChannels[T]
+>(channel: T, ...args: K): void {
 	window.postMessage(
 		{
 			args,

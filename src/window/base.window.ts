@@ -118,7 +118,7 @@ export default class LovelyWindow {
 	protected init() {
 		// Always listen for minimize events
 		const minimize = (event: IpcMainEvent) => this.browserWindow.minimize();
-		this.onMsg("window-minimize", minimize);
+		this.onMsg("window.minimize", minimize);
 
 		this.browserWindow.once("closed", () => {
 			// Clean up all the listeners on close

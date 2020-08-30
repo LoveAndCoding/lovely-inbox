@@ -2,6 +2,7 @@ import { BrowserWindowConstructorOptions } from "electron";
 
 import { ApplicationConfig } from "../config";
 import logger from "../logger";
+import Notifier from "../notify/notifier";
 import Router from "../route/router";
 import LovelyWindow from "./base.window";
 import OnboardingWindow from "./onboard.window";
@@ -10,7 +11,10 @@ export default class WindowManager {
 	private windows: LovelyWindow[];
 	private mainWindow: LovelyWindow;
 
-	constructor(public readonly router: Router) {
+	constructor(
+		public readonly router: Router,
+		public readonly notifier: Notifier,
+	) {
 		this.windows = [];
 	}
 
