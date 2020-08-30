@@ -8,11 +8,15 @@ interface IEmailAddressParts {
 	potentialTags?: string[];
 }
 
+export interface IEmailProperties extends IEmailAddressParts {
+	name: string;
+}
+
 // Regex pulled from MDN to match the <input email /> validation See:
 // https://developer.mozilla.org/en-US/docs/Web/HTML/Element/input/email#Validation
 export const EMAIL_VALIDATION_REGEX = /^[a-zA-Z0-9.!#$%&'*+\/=?^_`{|}~-]+@[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?(?:\.[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?)*$/;
 
-export default class Email {
+export default class Email implements IEmailProperties {
 	/**
 	 * Split a given email address into its component parts
 	 *
@@ -49,7 +53,7 @@ export default class Email {
 	}
 
 	/** Full email adddress */
-	public readonly address: string;
+	public readonly fullAddress: string;
 	/** Domain part of the email */
 	public readonly domain: string;
 	/** Local part of the email */
@@ -62,7 +66,7 @@ export default class Email {
 	/** Potential sub-address tags included in email address */
 	public readonly potentialTags: string[];
 	/** Name to be used for this email address */
-	public readonly name: string;
+	public name: string;
 
 	constructor(address: string, name?: string) {
 		const {
@@ -73,7 +77,7 @@ export default class Email {
 			potentialTags,
 		} = Email.getAddressParts(address);
 
-		this.address = address;
+		this.fullAddress = fullAddress;
 		this.name = name;
 		this.domain = domain;
 		this.local = local;

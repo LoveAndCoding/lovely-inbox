@@ -14,6 +14,7 @@ import { COLORS, css, StyleSheet } from "../../../styles";
 import ActionPaneSmall from "../../common/components/action.pane.small";
 import EmailInputField from "../containers/email.input";
 import EmailNextButton from "../containers/email.next.button";
+import EmailNameField from "../containers/name.input";
 
 import LogoUrl from "images/icon.dark.svg";
 
@@ -45,6 +46,13 @@ export default class OnboardAccountAdd extends React.Component<
 					styles={[styles.form]}
 					onSubmit={this.handleSubmit}
 				>
+					<EmailNameField
+						label="Your Name"
+						placeholder="Kairi Uchida"
+						size={InputFieldSizes.large}
+						required={false}
+						type="text"
+					/>
 					<EmailInputField
 						label="Email"
 						placeholder="kairi@destiny.island"

@@ -1,5 +1,17 @@
 import Email from "../../../../common/email";
-import { ISetEmailAddressAction, SET_EMAIL_ADDRESS } from "./types";
+import {
+	ISetEmailSenderNameAction,
+	ISetEmailAddressAction,
+	SET_EMAIL_ADDRESS,
+	SET_EMAIL_SENDER_NAME,
+} from "./types";
+
+export function setEmailSenderName(name: string): ISetEmailSenderNameAction {
+	return {
+		name,
+		type: SET_EMAIL_SENDER_NAME,
+	};
+}
 
 export function setEmailAddress(email: string): ISetEmailAddressAction {
 	let parsedEmail = null;

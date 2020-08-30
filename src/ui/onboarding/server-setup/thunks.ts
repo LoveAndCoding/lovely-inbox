@@ -16,7 +16,7 @@ export function thunkGuessConfig(
 ): ThunkAction<Promise<void | IServerConfig>, AppState, null, Action<string>> {
 	return (dispatch) => {
 		dispatch(guessConfigBegin());
-		return IPC.request("/account/server/settings/guess", email.address)
+		return IPC.request("/account/server/settings/guess", email.fullAddress)
 			.then((config) => {
 				dispatch(guessConfigSuccess(config));
 				return config;

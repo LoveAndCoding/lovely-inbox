@@ -10,7 +10,7 @@ import InputField, {
 	InputFieldOwnProps,
 } from "../../../forms/components/input.field";
 import { AppState } from "../../store";
-import { setEmailAddress } from "../../store/email/actions";
+import { setEmailSenderName } from "../../store/email/actions";
 
 const mapStateToProps: MapStateToProps<
 	IInputFieldStateProps,
@@ -19,9 +19,7 @@ const mapStateToProps: MapStateToProps<
 > = (state: AppState, ownProps: InputFieldOwnProps) => {
 	return {
 		...ownProps,
-		defaultValue: state.emailAddress.email
-			? state.emailAddress.email.fullAddress
-			: "",
+		defaultValue: state.emailAddress.name,
 	};
 };
 
@@ -30,8 +28,8 @@ const mapDispatchToProps: MapDispatchToPropsFunction<
 	InputFieldOwnProps
 > = (dispatch, ownProps: InputFieldOwnProps) => {
 	return {
-		onChange: (email) => {
-			dispatch(setEmailAddress(email));
+		onChange: (name) => {
+			dispatch(setEmailSenderName(name));
 		},
 	};
 };
