@@ -1,4 +1,4 @@
-import { faTimes } from "@fortawesome/pro-light-svg-icons";
+import { faTimes } from "@fortawesome/free-solid-svg-icons";
 import * as React from "react";
 
 import WindowBarButton from "./button";

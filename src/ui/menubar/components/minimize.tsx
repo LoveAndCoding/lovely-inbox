@@ -1,4 +1,4 @@
-import { faWindowMinimize } from "@fortawesome/pro-light-svg-icons";
+import { faWindowMinimize } from "@fortawesome/free-solid-svg-icons";
 import * as React from "react";
 
 import * as ipc from "../../communication/ipc";

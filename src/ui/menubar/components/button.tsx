@@ -1,4 +1,4 @@
-import { IconDefinition } from "@fortawesome/pro-light-svg-icons";
+import { IconDefinition } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { remote } from "electron";
 import * as React from "react";
