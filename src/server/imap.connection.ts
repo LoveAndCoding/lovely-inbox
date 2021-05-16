@@ -1,6 +1,6 @@
 import * as IMAP from "imap";
 import { Socket } from "net";
-import { TlsOptions, TLSSocket } from "tls";
+import { ConnectionOptions as TLSConnectionOptions, TLSSocket } from "tls";
 
 import logger from "../logger";
 import ServerConnection, { ConnectionOptions } from "./base.connection";
@@ -11,7 +11,7 @@ interface IMAPLibaryOptions {
 	connTimeout?: number;
 	socketTimeout?: number;
 	tls?: boolean;
-	tlsOptions?: TlsOptions;
+	tlsOptions?: TLSConnectionOptions;
 	user: string;
 }
 
