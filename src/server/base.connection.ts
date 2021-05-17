@@ -1,5 +1,4 @@
 import { EventEmitter } from "events";
-import * as IMAP from "imap";
 
 import ServerCommand from "./server.command";
 
@@ -20,7 +19,7 @@ export default abstract class ServerConnection extends EventEmitter {
 
 	public abstract get connected(): boolean;
 
-	public get box() {
+	public get box(): string | void {
 		return this.connection ? this.currentBox : undefined;
 	}
 
@@ -38,17 +37,17 @@ export default abstract class ServerConnection extends EventEmitter {
 
 	// public abstract listBoxes(): Promise<Box[]>;
 
-	protected queueCommand(command: () => Promise<boolean>) {
+	protected queueCommand(command: () => Promise<boolean>): void {
 		this.queue.push(new ServerCommand(command));
 		this.nextCommand();
 	}
 
-	protected unpauseCommands() {
+	protected unpauseCommands(): void {
 		this.queueDraining = true;
 		this.nextCommand();
 	}
 
-	protected pauseCommands() {
+	protected pauseCommands(): void {
 		this.queueDraining = false;
 	}
 

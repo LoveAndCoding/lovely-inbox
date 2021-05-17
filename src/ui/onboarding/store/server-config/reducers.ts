@@ -1,4 +1,3 @@
-import Email from "../../../../common/email";
 import {
 	CONFIG_SOURCE,
 	CONFIG_UPDATE_INCOMING_HOST,

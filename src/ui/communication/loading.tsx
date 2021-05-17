@@ -16,7 +16,7 @@ export default class HeartBeatLoadingIcon extends React.Component<{
 		styles: [],
 	};
 
-	public render() {
+	public render(): React.ReactElement {
 		return (
 			<img
 				src={HBAnimIcon}

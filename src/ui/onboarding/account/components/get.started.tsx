@@ -1,7 +1,6 @@
 import * as React from "react";
 
-import View, { ViewTags } from "../../../layout/components/view";
-import { COLORS, css, StyleSheet } from "../../../styles";
+import { css, StyleSheet } from "../../../styles";
 import WelcomeMessagePane, {
 	welcomeStyles,
 } from "../../common/components/welcome.pane";
@@ -9,7 +8,7 @@ import WelcomeMessagePane, {
 import PointerImage from "images/fill.in.svg";
 
 export default class GettingStartedMessaging extends React.Component {
-	public render() {
+	public render(): React.ReactElement {
 		const paraStyle = css(welcomeStyles.para);
 
 		return (

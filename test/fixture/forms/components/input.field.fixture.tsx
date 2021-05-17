@@ -1,9 +1,7 @@
 import * as React from "react";
 import * as TestRenderer from "react-test-renderer";
 
-import InputField, {
-	InputFieldSizes,
-} from "src/ui/forms/components/input.field";
+import InputField from "src/ui/forms/components/input.field";
 import { UNSAFE_resetUniqueIdCounters } from "src/ui/layout/uid.factory";
 
 describe("<InputField>", () => {

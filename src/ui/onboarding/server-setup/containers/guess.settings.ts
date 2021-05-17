@@ -1,17 +1,18 @@
-import { connect, MapDispatchToProps, MapStateToProps } from "react-redux";
+import { connect, MapStateToProps } from "react-redux";
 
 import { AppState } from "../../store";
 import GuessServerSettings, {
-	IGuessSettingsDispatchProps,
 	IGuessSettingsStateProps,
 } from "../components/guess.settings";
 import { thunkGuessConfig } from "../thunks";
 
+type GuessSettingsOwnProps = Record<string, unknown>;
+
 const mapStateToProps: MapStateToProps<
 	IGuessSettingsStateProps,
-	{},
+	GuessSettingsOwnProps,
 	AppState
-> = (state: AppState, ownProps: {}) => {
+> = (state: AppState, ownProps: GuessSettingsOwnProps) => {
 	return {
 		...ownProps,
 		config: state.guessConfig.config,

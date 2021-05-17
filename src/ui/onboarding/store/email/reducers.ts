@@ -1,4 +1,3 @@
-import Email from "../../../../common/email";
 import {
 	EmailActionTypes,
 	IEmailState,
@@ -28,7 +27,7 @@ export default function emailAddress(
 	} else if (action.type === SET_EMAIL_SENDER_NAME) {
 		// Update the email object's name value too
 		if (state.email) {
-			state.email.name = name;
+			state.email.name = action.name;
 		}
 
 		return {

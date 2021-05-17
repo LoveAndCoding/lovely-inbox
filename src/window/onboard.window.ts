@@ -1,8 +1,4 @@
-import {
-	BrowserWindowConstructorOptions,
-	ipcMain,
-	IpcMessageEvent,
-} from "electron";
+import { BrowserWindowConstructorOptions } from "electron";
 
 import LovelyWindow from "./base.window";
 

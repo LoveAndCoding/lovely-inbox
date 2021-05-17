@@ -28,7 +28,7 @@ const mapStateToProps: MapStateToProps<
 const mapDispatchToProps: MapDispatchToPropsFunction<
 	InputFieldDispatchProps,
 	InputFieldOwnProps
-> = (dispatch, ownProps: InputFieldOwnProps) => {
+> = (dispatch) => {
 	return {
 		onChange: (email) => {
 			dispatch(setEmailAddress(email));

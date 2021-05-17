@@ -1,5 +1,3 @@
-import * as keytar from "keytar";
-
 import { decryptTextValue, encryptTextValue } from "../common/encryption";
 import { InvalidStateError } from "../common/errors";
 import BaseFileStorage from "./base.file.storage";
@@ -11,7 +9,7 @@ const SECURE_STORAGE_KEY_NAME = "LTS Tokens";
 export default class SecureStorage<T extends string> extends BaseFileStorage<
 	Record<T, string>
 > {
-	public async save(key: T, value: string) {
+	public async save(key: T, value: string): Promise<boolean> {
 		let encryptedVal = value;
 		if (typeof value === "string") {
 			encryptedVal = await this.encrypt(value);

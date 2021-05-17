@@ -3,14 +3,14 @@ import { Provider } from "react-redux";
 import { MemoryRouter as Router, Route } from "react-router-dom";
 
 import View from "../layout/components/view";
-import { css, StyleSheet } from "../styles";
+import { StyleSheet } from "../styles";
 import InitialOnboardScreen from "./account/components/initial.screen";
 import ServerSettingsScreen from "./server-setup/components/settings.screen";
 import configureStore from "./store";
 
 const store = configureStore();
 
-function AppRouter() {
+function AppRouter(): React.ReactElement {
 	return (
 		<Router>
 			<Provider store={store}>

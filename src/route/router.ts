@@ -1,4 +1,4 @@
-import { ipcMain, IpcMainInvokeEvent } from "electron";
+import { ipcMain } from "electron";
 
 import { IRouteHandler } from "../common/route.signatures";
 import logger from "../logger";
@@ -17,20 +17,23 @@ export default class Router {
 
 	public addHandler<
 		T extends keyof IRouteHandler,
-		K extends IRouteHandler[T]
-	>(route: T, callback: (...args: Parameters<K>) => Promise<ReturnType<K>>) {
+		K extends IRouteHandler[T],
+	>(
+		route: T,
+		callback: (...args: Parameters<K>) => Promise<ReturnType<K>>,
+	): void {
 		logger.debug(`Adding IPC Handler for route ${route}`);
 		this.routes.set(route, callback);
 		ipcMain.handle(route, callback);
 	}
 
-	public removeHandler(route: keyof IRouteHandler) {
+	public removeHandler(route: keyof IRouteHandler): void {
 		logger.debug(`Removing IPC Handler for route ${route}`);
 		this.routes.delete(route);
 		ipcMain.removeHandler(route);
 	}
 
-	public removeAllHandlers() {
+	public removeAllHandlers(): void {
 		for (const route of this.routes.keys()) {
 			ipcMain.removeHandler(route);
 		}

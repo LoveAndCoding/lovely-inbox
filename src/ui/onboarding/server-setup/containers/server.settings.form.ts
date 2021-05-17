@@ -15,11 +15,13 @@ import ServerSettingsForm, {
 	IServerSettingsFormProps,
 } from "../components/server.settings.form";
 
+type ServerSettingsFormOwnProps = Record<string, unknown>;
+
 const mapStateToProps: MapStateToProps<
 	IServerSettingsFormProps,
-	{},
+	ServerSettingsFormOwnProps,
 	AppState
-> = (state: AppState, ownProps: {}) => {
+> = (state: AppState, ownProps: ServerSettingsFormOwnProps) => {
 	return {
 		...ownProps,
 		config: state.guessConfig.config,
@@ -29,8 +31,8 @@ const mapStateToProps: MapStateToProps<
 
 const mapDispatchToProps: MapDispatchToPropsFunction<
 	IServerSettingsFormDispatchProps,
-	{}
-> = (dispatch, ownProps: {}) => {
+	ServerSettingsFormOwnProps
+> = (dispatch) => {
 	return {
 		onIncomingHostChange: (host: string) =>
 			dispatch(configUpdateIncomingHost(host)),

@@ -2,8 +2,8 @@ import * as React from "react";
 
 import { COLORS, css, StyleSheet } from "../../styles";
 
-export default class WindowTitle extends React.Component<{}> {
-	public render() {
+export default class WindowTitle extends React.Component {
+	public render(): React.ReactElement {
 		return <h1 className={css(styles.text)}>{document.title}</h1>;
 	}
 }

@@ -1,13 +1,12 @@
 import * as React from "react";
 
-import View, { ViewTags } from "../../../layout/components/view";
-import { COLORS, css, StyleSheet } from "../../../styles";
+import { css } from "../../../styles";
 import WelcomeMessagePane, {
 	welcomeStyles,
 } from "../../common/components/welcome.pane";
 
 export default class GettingStartedMessaging extends React.Component {
-	public render() {
+	public render(): React.ReactElement {
 		const paraStyle = css(welcomeStyles.para);
 
 		return (
@@ -32,16 +31,3 @@ export default class GettingStartedMessaging extends React.Component {
 		);
 	}
 }
-
-const styles = StyleSheet.create({
-	pointerImage: {
-		"-webkit-user-select": "none",
-		bottom: 62,
-		display: "block",
-		height: 110,
-		padding: 0,
-		pointerEvents: "none",
-		position: "absolute",
-		width: 162,
-	},
-});

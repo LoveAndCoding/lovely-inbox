@@ -1,5 +1,8 @@
 let GLOBAL_ID_COUNTER = 0;
 
+// This is a WeakMap and we do not access the keys, so `object` is the right
+// type here, but eslint doesn't like it. So disable the error.
+// eslint-disable-next-line @typescript-eslint/ban-types
 let idMap: WeakMap<object, string> = new WeakMap();
 
 /**
@@ -10,7 +13,7 @@ let idMap: WeakMap<object, string> = new WeakMap();
  *
  * @param prefix Prefix for the ID string
  */
-export function getAlwaysUniqueId(prefix: string) {
+export function getAlwaysUniqueId(prefix: string): string {
 	return `${prefix}-${++GLOBAL_ID_COUNTER}`;
 }
 
@@ -26,7 +29,8 @@ export function getAlwaysUniqueId(prefix: string) {
  * @param item Item you want to get ID for; Must be a non-null Object
  * @param prefix Prefix for the ID string iff generating a new ID (Default 'global-item')
  */
-export function getItemUniqueId(item: object, prefix?: string) {
+// eslint-disable-next-line @typescript-eslint/ban-types
+export function getItemUniqueId(item: object, prefix?: string): string {
 	if (!idMap.has(item)) {
 		// If we don't have an ID already, generate one
 		idMap.set(item, getAlwaysUniqueId(prefix || "global-item"));
@@ -42,7 +46,7 @@ export function getItemUniqueId(item: object, prefix?: string) {
  * what you are doing. The primary use case for this is snapshot tests and the
  * like that require predictable IDs no matter the order tests are run in.
  */
-export function UNSAFE_resetUniqueIdCounters() {
+export function UNSAFE_resetUniqueIdCounters(): void {
 	idMap = new WeakMap();
 	GLOBAL_ID_COUNTER = 0;
 }

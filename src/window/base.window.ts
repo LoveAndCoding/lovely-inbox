@@ -49,11 +49,14 @@ export default class LovelyWindow {
 		this.init();
 	}
 
-	public close() {
+	public close(): void {
 		this.browserWindow.close();
 	}
 
-	public onMsg(name: string, callback: (event: IpcMainEvent) => void) {
+	public onMsg(
+		name: string,
+		callback: (event: IpcMainEvent) => void,
+	): (event: IpcMainEvent) => void {
 		logger.debug(
 			`Adding ${name} IPC listener from ${this.constructor.name}`,
 		);
@@ -72,7 +75,7 @@ export default class LovelyWindow {
 		return wrappedCB;
 	}
 
-	public offMsg(name: string, callback: (event: IpcMainEvent) => void) {
+	public offMsg(name: string, callback: (event: IpcMainEvent) => void): void {
 		logger.debug(
 			`Removing ${name} IPC listener from ${this.constructor.name}`,
 		);
@@ -89,7 +92,7 @@ export default class LovelyWindow {
 		}
 	}
 
-	public removeAllMsgListeners(name?: string) {
+	public removeAllMsgListeners(name?: string): void {
 		if (typeof name === "string") {
 			if (!this.ipcListeners.has(name)) {
 				logger.info(
@@ -115,9 +118,9 @@ export default class LovelyWindow {
 		}
 	}
 
-	protected init() {
+	protected init(): void {
 		// Always listen for minimize events
-		const minimize = (event: IpcMainEvent) => this.browserWindow.minimize();
+		const minimize = () => this.browserWindow.minimize();
 		this.onMsg("window.minimize", minimize);
 
 		this.browserWindow.once("closed", () => {

@@ -1,13 +1,10 @@
 import * as crypto from "crypto";
 
 import * as keytar from "keytar";
-import { isNullOrUndefined } from "util";
 
 const KEYCHAIN_SERVICE_NAME = "LovelyInbox";
 
-export async function generateSecureRandomKey(
-	size: number = 256,
-): Promise<string> {
+export async function generateSecureRandomKey(size = 256): Promise<string> {
 	return new Promise((resolve, reject) => {
 		crypto.randomBytes(size, (err, buff) => {
 			if (err) {
@@ -32,9 +29,9 @@ export async function generateSecureRandomKey(
 	});
 }
 
-export async function getKeychainSecret(key: string) {
+export async function getKeychainSecret(key: string): Promise<string> {
 	let secret = await keytar.getPassword(KEYCHAIN_SERVICE_NAME, key);
-	if (isNullOrUndefined(secret)) {
+	if (secret === null || secret === undefined) {
 		secret = await generateSecureRandomKey();
 		await keytar.setPassword(KEYCHAIN_SERVICE_NAME, key, secret);
 	}
@@ -44,7 +41,7 @@ export async function getKeychainSecret(key: string) {
 export async function encryptTextValue(
 	toEncrypt: string,
 	keychainLookupKey: string,
-) {
+): Promise<string> {
 	const iv = await generateSecureRandomKey(64);
 	const keychainSecret = await getKeychainSecret(keychainLookupKey);
 	const cipher = crypto.createCipheriv("aes-256-cbc", keychainSecret, iv);
@@ -56,7 +53,7 @@ export async function encryptTextValue(
 export async function decryptTextValue(
 	toDecrypt: string,
 	keychainLookupKey: string,
-) {
+): Promise<string> {
 	const [iv, encryptedContent] = toDecrypt.split("$");
 	const keychainSecret = await getKeychainSecret(keychainLookupKey);
 	const cipher = crypto.createDecipheriv("aes-256-cbc", keychainSecret, iv);

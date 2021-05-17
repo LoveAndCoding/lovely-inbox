@@ -21,6 +21,9 @@ export enum StorageTypes {
  * create a `save` and `get` method that should write to the localCache object.
  */
 export default abstract class BaseFileStorage<T> extends Storage<T> {
+	// We type-check this any everywhere we use it in the rest of the code, and
+	// using T[Key] gets complicated. So keeping explicit any for simplicity
+	// eslint-disable-next-line @typescript-eslint/no-explicit-any
 	protected localCache: Map<keyof T, any>;
 	protected readonly filename: string;
 	protected readonly path: string;
@@ -54,7 +57,7 @@ export default abstract class BaseFileStorage<T> extends Storage<T> {
 		this.rebuildSync();
 	}
 
-	public delete<K extends keyof T>(key: K) {
+	public delete<K extends keyof T>(key: K): Promise<boolean> {
 		this.localCache.delete(key);
 		return this.writeCacheToDisk();
 	}
@@ -71,7 +74,7 @@ export default abstract class BaseFileStorage<T> extends Storage<T> {
 		}
 
 		this.destroyed = true;
-		return new Promise((resolve, reject) => {
+		return new Promise((resolve) => {
 			fs.unlink(this.path, () => {
 				resolve(true);
 			});
@@ -83,7 +86,7 @@ export default abstract class BaseFileStorage<T> extends Storage<T> {
 	 *
 	 * Because rebuild is called when we initially spin up
 	 */
-	protected rebuildSync() {
+	protected rebuildSync(): void {
 		if (this.destroyed) {
 			throw new InvalidStateError(
 				"Cannot perform this operation. Storage has been destroyed and data erased",
@@ -92,6 +95,14 @@ export default abstract class BaseFileStorage<T> extends Storage<T> {
 
 		try {
 			const contents = fs.readFileSync(this.path, { encoding: "utf8" });
+			// TODO: We're loading in to JSON here and can't completely trust
+			// that our data and typing match exactly what we need. Ideally we
+			// would be able to check each key against the type we expect and
+			// only import keys we have. However, that's not what this does.
+			// For now, simply import through any. The impact of bad data is
+			// errors elsewhere in the code, but it should be fixable through
+			// diagnosis or regeneration.
+			// eslint-disable-next-line @typescript-eslint/no-explicit-any
 			const jsonLoadedMap = new Map(JSON.parse(contents)) as any;
 			for (const [key, val] of jsonLoadedMap) {
 				this.localCache.set(key, val);

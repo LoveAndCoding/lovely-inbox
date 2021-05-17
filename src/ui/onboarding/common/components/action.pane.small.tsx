@@ -1,12 +1,10 @@
-import { faArrowRight } from "@fortawesome/free-solid-svg-icons";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import * as React from "react";
 
 import View, { ViewTags } from "../../../layout/components/view";
 import { COLORS, css, StyleSheet } from "../../../styles";
 
 export default class ActionPaneSmall extends React.Component {
-	public render() {
+	public render(): React.ReactElement {
 		return (
 			<View tag={ViewTags.section} styles={[styles.add]}>
 				<div className={css(styles.dragbar)} aria-hidden={true} />

@@ -1,13 +1,12 @@
 import Account, { AccountId } from "./account";
-import { IEmailProperties } from "../common/email";
 import { IServerConfig } from "../common/server.config";
 import { UserConfig } from "../config/user";
 import logger from "../logger";
-import FileStorage, { StorageTypes } from "../storage/file.storage";
+// import FileStorage, { StorageTypes } from "../storage/file.storage";
 
-interface IAccountListConfig {
-	accounts: AccountId[];
-}
+// interface IAccountListConfig {
+// 	accounts: AccountId[];
+// }
 
 export default class AccountManager {
 	private accounts: Map<AccountId, Account>;
@@ -17,7 +16,7 @@ export default class AccountManager {
 		this.loadAccounts();
 	}
 
-	protected loadAccounts() {
+	protected loadAccounts(): void {
 		const acctList = UserConfig.accounts;
 		acctList.forEach((acctId) => {
 			const acct = new Account(acctId);
@@ -38,10 +37,7 @@ export default class AccountManager {
 		});
 	}
 
-	public async createAccount(
-		config: IServerConfig,
-		email: IEmailProperties,
-	): Promise<Account> {
+	public async createAccount(config: IServerConfig): Promise<Account> {
 		const acct = await Account.create(config);
 		this.accounts.set(acct.id, acct);
 		await UserConfig.addAccount(acct.id);
@@ -58,7 +54,7 @@ export default class AccountManager {
 		return (await acct.destroy()) && (await UserConfig.removeAccount(id));
 	}
 
-	public getAccount(id: AccountId) {
+	public getAccount(id: AccountId): Account {
 		return this.accounts.get(id);
 	}
 }

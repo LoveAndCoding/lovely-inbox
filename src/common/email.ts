@@ -14,7 +14,12 @@ export interface IEmailProperties extends IEmailAddressParts {
 
 // Regex pulled from MDN to match the <input email /> validation See:
 // https://developer.mozilla.org/en-US/docs/Web/HTML/Element/input/email#Validation
-export const EMAIL_VALIDATION_REGEX = /^[a-zA-Z0-9.!#$%&'*+\/=?^_`{|}~-]+@[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?(?:\.[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?)*$/;
+export const EMAIL_VALIDATION_REGEX =
+	// NOTE: Because we want this to match exactly, we ignore an eslint error about
+	// a redundant escape character. In practice it seems to have no effect
+	//
+	// eslint-disable-next-line no-useless-escape
+	/^[a-zA-Z0-9.!#$%&'*+\/=?^_`{|}~-]+@[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?(?:\.[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?)*$/;
 
 export default class Email implements IEmailProperties {
 	/**
@@ -24,7 +29,7 @@ export default class Email implements IEmailProperties {
 	 */
 	public static getAddressParts(
 		address: string,
-		tagMatcher: void | RegExp = /[\+\-]/,
+		tagMatcher: void | RegExp = /[+-]/,
 	): IEmailAddressParts {
 		if (!address.match(EMAIL_VALIDATION_REGEX)) {
 			throw new InvalidEmailAddressError(address);
@@ -69,13 +74,8 @@ export default class Email implements IEmailProperties {
 	public name: string;
 
 	constructor(address: string, name?: string) {
-		const {
-			domain,
-			fullAddress,
-			local,
-			localWithoutTags,
-			potentialTags,
-		} = Email.getAddressParts(address);
+		const { domain, fullAddress, local, localWithoutTags, potentialTags } =
+			Email.getAddressParts(address);
 
 		this.fullAddress = fullAddress;
 		this.name = name;

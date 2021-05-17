@@ -1,5 +1,3 @@
-import { IpcMainInvokeEvent } from "electron";
-
 import { UserConfig } from "./user";
 import logger from "../logger";
 import Notifier from "../notify/notifier";
@@ -38,7 +36,7 @@ function finishOnboarding(
 		});
 }
 
-export function attachNotifyListeners(notifier: Notifier) {
+export function attachNotifyListeners(notifier: Notifier): void {
 	// We want to deal with the window manager, so wrap the handler and pass
 	// that along
 	notifier.listen("config.onboarding", (_, finished: boolean) =>

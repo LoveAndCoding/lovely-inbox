@@ -1,12 +1,7 @@
 /**
  * Aphrodite + Our Extensions
  */
-import {
-	StyleDeclaration,
-	StyleDeclarationMap,
-	StyleDeclarationValue,
-	StyleSheet as Aphrodite,
-} from "aphrodite";
+import { StyleDeclarationValue, StyleSheet as Aphrodite } from "aphrodite";
 export { StyleDeclaration, StyleDeclarationMap } from "aphrodite";
 
 const { StyleSheet, css } = Aphrodite.extend([

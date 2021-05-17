@@ -58,7 +58,7 @@ export default class InputField extends React.Component<InputFieldProps> {
 		super(props);
 	}
 
-	public render() {
+	public render(): React.ReactElement {
 		const id = getItemUniqueId(this, "text-input");
 
 		return (

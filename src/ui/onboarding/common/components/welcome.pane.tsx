@@ -9,7 +9,7 @@ import HeartBGImage from "images/heart.bg.svg";
 export default class WelcomeMessagePane extends React.Component<{
 	header: string;
 }> {
-	public render() {
+	public render(): React.ReactElement {
 		const headerStyle = css(welcomeStyles.header);
 
 		return (

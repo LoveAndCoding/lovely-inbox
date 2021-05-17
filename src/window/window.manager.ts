@@ -25,7 +25,7 @@ export default class WindowManager {
 	 *
 	 * @param persistApp {boolean} Should the app still be running after
 	 */
-	public closeAllWindows(persistApp = false) {
+	public closeAllWindows(persistApp = false): void {
 		// Clone the array so we can loop through without issue
 		const oldPersist = this.persistApp;
 		this.persistApp = persistApp;
@@ -34,7 +34,7 @@ export default class WindowManager {
 		// Start at the last (top-most) window and close them in reverse
 		for (let i = wins.length - 1; i >= 0; i--) {
 			wins[i].close();
-	}
+		}
 		this.persistApp = oldPersist;
 	}
 
@@ -60,17 +60,17 @@ export default class WindowManager {
 		return window;
 	}
 
-	public hasMainWindow() {
+	public hasMainWindow(): boolean {
 		return !!this.mainWindow;
 	}
 
-	public openInbox() {
+	public openInbox(): void {
 		this.setMainWindow(
 			this.create(ApplicationConfig.entrypoints.main, LovelyWindow),
 		);
 	}
 
-	public openOnboarding() {
+	public openOnboarding(): void {
 		this.setMainWindow(
 			this.create(
 				ApplicationConfig.entrypoints.onboarding,
@@ -81,7 +81,7 @@ export default class WindowManager {
 
 	private setMainWindow<T extends LovelyWindow>(
 		window: T,
-		subWindowsCloseToo: boolean = true,
+		subWindowsCloseToo = true,
 	) {
 		this.mainWindow = window;
 		window.browserWindow.once("closed", () => {

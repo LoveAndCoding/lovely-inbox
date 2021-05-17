@@ -21,7 +21,7 @@ export default class Account implements IAccountProperties {
 	public static async create(
 		serverConfig: IServerConfig,
 		email?: IEmailProperties,
-	) {
+	): Promise<Account> {
 		// Generate a new ID; Time + random value + username should be unique
 		const id: AccountId =
 			Date.now() +
@@ -61,7 +61,7 @@ export default class Account implements IAccountProperties {
 		this.secureStore = new SecureStorage(`enc.${id}`, StorageTypes.Config);
 	}
 
-	public get email() {
+	public get email(): IEmailProperties {
 		return Object.assign({}, this.emailProps);
 	}
 

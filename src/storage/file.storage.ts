@@ -15,7 +15,10 @@ export { StorageTypes } from "./base.file.storage";
  * larger files takes more time and will cause us to be slower on startup.
  */
 export default class FileStorage<T> extends BaseFileStorage<T> {
-	public save<K extends keyof T, V extends T[K]>(key: K, value: V) {
+	public save<K extends keyof T, V extends T[K]>(
+		key: K,
+		value: V,
+	): Promise<boolean> {
 		this.localCache.set(key, value);
 		return this.writeCacheToDisk();
 	}

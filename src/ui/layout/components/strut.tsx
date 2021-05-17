@@ -1,6 +1,6 @@
 import * as React from "react";
 
-import { css, CSSInputTypes, StyleSheet } from "../../styles";
+import { StyleSheet } from "../../styles";
 import View from "./view";
 
 export enum StrutSizes {
@@ -20,7 +20,7 @@ export default class Strut extends React.Component<{
 		size: StrutSizes.medium,
 	};
 
-	public render() {
+	public render(): React.ReactElement {
 		return (
 			<View styles={[styles(this.props.size).strut]} aria-hidden={true} />
 		);

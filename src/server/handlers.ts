@@ -17,7 +17,7 @@ import IMAPConnection from "./imap.connection";
 import lookupKnownConfiguration from "./known.configurations";
 
 const INCOMING_SUB_DOMAIN_GUESSES = ["mail", "imap", "email"];
-const OUTGOING_SUB_DOMAIN_GUESSES = ["smtp", "mail", "email"];
+// const OUTGOING_SUB_DOMAIN_GUESSES = ["smtp", "mail", "email"];
 const IMAP_PORT_GUESSES = [993];
 
 async function checkMXRecordsForConfig(domain: string) {
@@ -37,10 +37,7 @@ async function checkMXRecordsForConfig(domain: string) {
 		// NOTE(alexis): this is a best guess and won't support MX domains like
 		// .co.uk or similar two part TLDs. But this is a shortcut, so that's ok
 		// for now.
-		const mxDomain = (record.exchange || "")
-			.split(".")
-			.slice(-2)
-			.join(".");
+		const mxDomain = (record.exchange || "").split(".").slice(-2).join(".");
 		const guessedConfig = lookupKnownConfiguration(mxDomain);
 		if (guessedConfig) {
 			return guessedConfig;
@@ -160,6 +157,6 @@ export async function guessAtConfig(
 	return guessedConfig;
 }
 
-export function attachHandlers(router: Router) {
+export function attachHandlers(router: Router): void {
 	router.addHandler("/account/server/settings/guess", guessAtConfig);
 }

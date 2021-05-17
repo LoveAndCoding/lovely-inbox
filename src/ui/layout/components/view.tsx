@@ -35,7 +35,7 @@ export default class View extends React.Component<ViewProps> {
 		tag: ViewTags.div,
 	};
 
-	public render() {
+	public render(): React.ReactElement {
 		const attributes = { ...this.props };
 		attributes.className = css(styles.view, this.props.styles);
 

@@ -13,7 +13,7 @@ function Users() {
 	return <h2>Users</h2>;
 }
 
-function AppRouter() {
+function AppRouter(): React.ReactElement {
 	return (
 		<Router>
 			<div>

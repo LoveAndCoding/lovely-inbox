@@ -1,10 +1,10 @@
 import * as React from "react";
 
-import { css, CSSInputTypes, StyleSheet } from "../../styles";
+import { StyleSheet } from "../../styles";
 import View from "./view";
 
-export default class Spring extends React.Component<{}> {
-	public render() {
+export default class Spring extends React.Component {
+	public render(): React.ReactElement {
 		return <View styles={[styles.spring]} aria-hidden={true} />;
 	}
 }

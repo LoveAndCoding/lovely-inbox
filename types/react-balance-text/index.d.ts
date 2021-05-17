@@ -7,7 +7,7 @@ declare module "react-balance-text" {
 		children: string | React.ReactElement;
 		className?: string;
 		resize?: boolean;
-		style?: any | any[];
+		style?: unknown | unknown[];
 	}
 
 	interface IBalanceTextState {

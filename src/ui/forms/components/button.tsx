@@ -56,7 +56,7 @@ export default class LovelyButton extends React.Component<LovelyButtonProps> {
 		this.handleClick = this.handleClick.bind(this);
 	}
 
-	public render() {
+	public render(): React.ReactElement {
 		return (
 			<button
 				className={css(

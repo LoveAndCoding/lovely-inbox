@@ -1,7 +1,7 @@
 /// <reference types="node" />
 
 declare module "appdirectory" {
-	declare type Platforms =
+	type Platforms =
 		| "aix"
 		| "darwin"
 		| "freebsd"
@@ -10,7 +10,7 @@ declare module "appdirectory" {
 		| "sunos"
 		| "win32";
 
-	declare interface AppDirectoryOptions {
+	interface AppDirectoryOptions {
 		appName: string;
 		appAuthor?: string;
 		appVersion?: string;
@@ -18,7 +18,7 @@ declare module "appdirectory" {
 		useRoaming?: boolean;
 	}
 
-	declare class AppDirectory {
+	class AppDirectory {
 		constructor(appName: string);
 		constructor(options: AppDirectoryOptions);
 

@@ -10,10 +10,9 @@ import LovelyButton, {
 	ButtonSizes,
 } from "../../../forms/components/button";
 import View, { ViewTags } from "../../../layout/components/view";
-import { COLORS, css, StyleSheet } from "../../../styles";
+import { css, StyleSheet } from "../../../styles";
 import { CONFIG_SOURCE, IServerConfig } from "../../store/server-config/types";
 import ServerSettingsForm from "../containers/server.settings.form";
-import { thunkGuessConfig } from "../thunks";
 
 export interface IGuessSettingsStateProps {
 	config: IServerConfig;
@@ -42,11 +41,11 @@ export default class GuessServerSettings extends React.Component<
 		this.state = { editDetails: null };
 	}
 
-	public componentDidMount() {
+	public componentDidMount(): void {
 		this.props.guessConfig(this.props.email);
 	}
 
-	public render() {
+	public render(): React.ReactElement {
 		if (this.props.loading || (!this.props.error && !this.props.config)) {
 			// Our empty and loading states should show the message we're
 			// finding stuff
@@ -112,7 +111,7 @@ export default class GuessServerSettings extends React.Component<
 		}
 	}
 
-	private toggleShowDetails = () => {
+	private toggleShowDetails = (): void => {
 		this.setState({
 			editDetails: !this.state.editDetails,
 		});

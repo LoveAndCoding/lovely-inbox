@@ -1,4 +1,4 @@
-import { ipcMain, IpcMessageEvent } from "electron";
+import { ipcMain } from "electron";
 
 import logger from "./logger";
 
@@ -11,7 +11,7 @@ import logger from "./logger";
  * 1. Log the error so that we can keep track of it
  * 2. Report it to the UI so that we can display it to the user
  */
-export default function setupUnhandledListeners() {
+export default function setupUnhandledListeners(): void {
 	process.on("uncaughtException", (err: Error) => {
 		logger.error("There was an uncaught error");
 		logger.error(err.stack);

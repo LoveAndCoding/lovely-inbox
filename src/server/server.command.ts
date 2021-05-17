@@ -3,7 +3,7 @@ export default class ServerCommand {
 	private running: Promise<boolean> | void;
 	private lastRun: Promise<boolean> | void;
 
-	public get results() {
+	public get results(): Promise<boolean> | void {
 		return this.lastRun;
 	}
 
@@ -11,7 +11,7 @@ export default class ServerCommand {
 		this.command = command;
 	}
 
-	public execute() {
+	public execute(): Promise<boolean> {
 		const prom = (this.lastRun = this.running = this.command());
 		prom.then(() => {
 			if (this.running === prom) {

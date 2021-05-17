@@ -2,15 +2,11 @@ import { faArrowRight } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import * as React from "react";
 
-import {
-	ButtonColors,
-	ButtonSizes,
-	ButtonTypes,
-} from "../../../forms/components/button";
+import { ButtonSizes, ButtonTypes } from "../../../forms/components/button";
 import { InputFieldSizes } from "../../../forms/components/input.field";
 import Spring from "../../../layout/components/spring";
 import View, { ViewTags } from "../../../layout/components/view";
-import { COLORS, css, StyleSheet } from "../../../styles";
+import { css, StyleSheet } from "../../../styles";
 import ActionPaneSmall from "../../common/components/action.pane.small";
 import EmailInputField from "../containers/email.input";
 import EmailNextButton from "../containers/email.next.button";
@@ -22,14 +18,12 @@ interface IOnboardAccountAddProps {
 	onNext?: () => void;
 }
 
-export default class OnboardAccountAdd extends React.Component<
-	IOnboardAccountAddProps
-> {
+export default class OnboardAccountAdd extends React.Component<IOnboardAccountAddProps> {
 	constructor(props: IOnboardAccountAddProps) {
 		super(props);
 	}
 
-	public render() {
+	public render(): React.ReactElement {
 		return (
 			<ActionPaneSmall>
 				<h1 className={css(styles.header)}>

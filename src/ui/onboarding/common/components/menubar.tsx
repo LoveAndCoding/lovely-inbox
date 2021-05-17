@@ -4,10 +4,10 @@ import Spring from "../../../layout/components/spring";
 import View from "../../../layout/components/view";
 import WindowClose from "../../../menubar/components/close";
 import WindowMinimize from "../../../menubar/components/minimize";
-import { COLORS, css, StyleSheet } from "../../../styles";
+import { StyleSheet } from "../../../styles";
 
 export default class OnboardMenuBar extends React.Component {
-	public render() {
+	public render(): React.ReactElement {
 		return (
 			<View styles={[styles.bar]}>
 				<Spring />

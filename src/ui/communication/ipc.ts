@@ -1,25 +1,23 @@
-import { IpcMainInvokeEvent, IpcMessageEvent } from "electron";
-
 import { IPCRequestTimeoutError } from "../../common/errors";
 import { IServerNotifyChannels } from "../../common/notify.channels";
 import { IRouteHandler } from "../../common/route.signatures";
 import { Tail } from "../../common/types";
 
-type IPCResponse =
+type IPCResponse<R, E = unknown> =
 	| {
 			requestId: number;
-			error: any;
+			error: E;
 	  }
 	| {
 			requestId: number;
-			result: any;
+			result: R;
 	  };
 
 // This repsonse error does not need to be shared so it is in this file
 class IPCResponseError extends Error {
-	public readonly reason: any;
+	public readonly reason: unknown;
 
-	constructor(reason: any) {
+	constructor(reason: unknown) {
 		if (typeof reason === "string") {
 			super(reason);
 		} else {
@@ -39,7 +37,7 @@ class IPCResponseError extends Error {
  */
 export function notify<
 	T extends keyof IServerNotifyChannels,
-	K extends IServerNotifyChannels[T]
+	K extends IServerNotifyChannels[T],
 >(channel: T, ...args: K): void {
 	window.postMessage(
 		{
@@ -83,7 +81,7 @@ export function request<
 		have the actual list that we should pass in.
 	*/
 	T extends keyof IRouteHandler,
-	K extends Tail<Parameters<IRouteHandler[T]>>
+	K extends Tail<Parameters<IRouteHandler[T]>>,
 >(url: T, ...args: K): Promise<ReturnType<IRouteHandler[T]>> {
 	return new Promise<ReturnType<IRouteHandler[T]>>((resolve, reject) => {
 		const requestId = nextIPCRequestId++;
@@ -95,7 +93,9 @@ export function request<
 		}, 30000);
 
 		// Check if the response we get is the one we're waiting for
-		const checkResponse = (event: CustomEvent<IPCResponse>) => {
+		const checkResponse = (
+			event: CustomEvent<IPCResponse<ReturnType<IRouteHandler[T]>>>,
+		) => {
 			const msg = event.detail;
 
 			if (msg && msg.requestId === requestId) {

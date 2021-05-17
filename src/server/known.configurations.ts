@@ -4,7 +4,6 @@ import {
 	IKnownServerConfig,
 	IOutgoingServerConfig,
 } from "../common/server.config";
-import logger from "../logger";
 
 export const KNOWN_CONFIGURATIONS: Map<string, IKnownServerConfig> = new Map();
 
@@ -129,7 +128,7 @@ KNOWN_CONFIGURATIONS.set("msn.com", KNOWN_CONFIGURATIONS.get("outlook.com"));
  * YAHOO
  */
 KNOWN_CONFIGURATIONS.set("yahoo.com", {
-	getUsername: useEmailAsUsername(/\-/),
+	getUsername: useEmailAsUsername(/-/),
 	incoming: buildIncomingServerConfig("imap.mail.yahoo.com"),
 	outgoing: buildOutgoingServerConfig("smtp.mail.yahoo.com"),
 });

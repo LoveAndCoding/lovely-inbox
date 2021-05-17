@@ -51,7 +51,7 @@ export default class IMAPConnection extends ServerConnection {
 		});
 	}
 
-	public get connected() {
+	public get connected(): boolean {
 		return this.imap && this.imap.state !== "disconnected";
 	}
 
@@ -155,7 +155,7 @@ export default class IMAPConnection extends ServerConnection {
 				}),
 			);
 			// If we get an error, probably means we're not a server
-			sock.on("error", (e) => {
+			sock.on("error", () => {
 				cleanup();
 				finalize();
 			});
@@ -173,7 +173,7 @@ export default class IMAPConnection extends ServerConnection {
 		});
 	}
 
-	public disconnect(force: boolean) {
+	public disconnect(): void {
 		if (this.imap) {
 			this.imap.destroy();
 			this.emit("disconnected");

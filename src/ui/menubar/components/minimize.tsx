@@ -1,18 +1,20 @@
-import { faWindowMinimize } from "@fortawesome/free-solid-svg-icons";
-import * as React from "react";
+import {
+	faWindowMinimize,
+	IconDefinition,
+} from "@fortawesome/free-solid-svg-icons";
 
 import * as ipc from "../../communication/ipc";
 import WindowBarButton from "./button";
 
 export default class WindowMinimize extends WindowBarButton {
-	protected get icon() {
+	protected get icon(): IconDefinition {
 		return faWindowMinimize;
 	}
-	protected get text() {
+	protected get text(): string {
 		return "Minimize Window";
 	}
 
-	protected handleClick() {
+	protected handleClick(): void {
 		ipc.notify("window.minimize");
 	}
 }

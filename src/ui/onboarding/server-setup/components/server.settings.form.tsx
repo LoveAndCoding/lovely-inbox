@@ -1,13 +1,12 @@
 import * as React from "react";
 
 import Email from "../../../../common/email";
-import HeartBeatLoadingIcon from "../../../communication/loading";
 import InputField, {
 	InputFieldSizes,
 } from "../../../forms/components/input.field";
 import View, { ViewTags } from "../../../layout/components/view";
-import { COLORS, css, StyleSheet } from "../../../styles";
-import { CONFIG_SOURCE, IServerConfig } from "../../store/server-config/types";
+import { StyleSheet } from "../../../styles";
+import { IServerConfig } from "../../store/server-config/types";
 
 export interface IServerSettingsFormDispatchProps {
 	onIncomingHostChange: (host: string) => void;
@@ -23,10 +22,8 @@ export interface IServerSettingsFormProps {
 export default class ServerSettingsForm extends React.Component<
 	IServerSettingsFormProps & IServerSettingsFormDispatchProps
 > {
-	public render() {
+	public render(): React.ReactElement {
 		const { incoming, outgoing, username } = this.props.config;
-		const fieldsetClass = css(styles.fieldset);
-		const configGroupLabelClass = css(styles.configGroupLabel);
 
 		return (
 			<View styles={[styles.configGroup]} tag={ViewTags.form}>
@@ -61,13 +58,13 @@ export default class ServerSettingsForm extends React.Component<
 		);
 	}
 
-	public handleIncomingServerHostChange = (host: string) => {
+	public handleIncomingServerHostChange = (host: string): void => {
 		this.props.onIncomingHostChange(host);
 	};
-	public handleOutgoingServerHostChange = (host: string) => {
+	public handleOutgoingServerHostChange = (host: string): void => {
 		this.props.onOutgoingHostChange(host);
 	};
-	public handleUsernameChange = (username: string) => {
+	public handleUsernameChange = (username: string): void => {
 		this.props.onUsernameChange(username);
 	};
 }

@@ -1,6 +1,6 @@
-import { app, BrowserWindow, Tray } from "electron";
+import { app } from "electron";
 
-import { ApplicationConfig, UserConfig } from "./config";
+import { UserConfig } from "./config";
 import logger from "./logger";
 import setupUnhandledListeners from "./process.error.handlers";
 import WindowManager from "./window";

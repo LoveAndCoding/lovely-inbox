@@ -1,5 +1,3 @@
-import { faArrowLeft, faArrowRight } from "@fortawesome/free-solid-svg-icons";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import * as React from "react";
 import { Link } from "react-router-dom";
 
@@ -7,8 +5,7 @@ import Email from "../../../../common/email";
 import { IServerConfig } from "../../../../common/server.config";
 import { notify, request } from "../../../communication/ipc";
 import { ButtonSizes } from "../../../forms/components/button";
-import Spring from "../../../layout/components/spring";
-import View, { ViewTags } from "../../../layout/components/view";
+import View from "../../../layout/components/view";
 import { COLORS, css, StyleSheet } from "../../../styles";
 import ActionPaneSmall from "../../common/components/action.pane.small";
 import GuessNextButton from "../containers/guess.next.button";
@@ -19,19 +16,13 @@ export interface IServerSettingsProps {
 	email: Email;
 }
 
-export default class OnboardServerSettings extends React.Component<
-	IServerSettingsProps
-> {
-	handlePress = async () => {
-		const account = await request(
-			"/account/create",
-			this.props.config,
-			this.props.email,
-		);
+export default class OnboardServerSettings extends React.Component<IServerSettingsProps> {
+	handlePress = async (): Promise<void> => {
+		await request("/account/create", this.props.config, this.props.email);
 		notify("config.onboarding", true);
 	};
 
-	public render() {
+	public render(): React.ReactElement {
 		return (
 			<ActionPaneSmall>
 				<GuessServerSettings />
