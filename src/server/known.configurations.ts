@@ -82,6 +82,19 @@ KNOWN_CONFIGURATIONS.set("comcast.net", {
 });
 
 /**
+ * FASTMAIL
+ */
+KNOWN_CONFIGURATIONS.set("fastmail.com", {
+	getUsername: useEmailAsUsername(/\+/),
+	incoming: buildIncomingServerConfig("imap.fastmail.com"),
+	outgoing: buildOutgoingServerConfig("smtp.fastmail.com"),
+});
+KNOWN_CONFIGURATIONS.set(
+	"messagingengine.com",
+	KNOWN_CONFIGURATIONS.get("fastmail.com"),
+);
+
+/**
  * GMAIL
  */
 KNOWN_CONFIGURATIONS.set("gmail.com", {
