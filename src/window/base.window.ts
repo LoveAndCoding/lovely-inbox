@@ -7,6 +7,7 @@ import {
 } from "electron";
 import * as path from "path";
 
+import { IServerNotifyChannels } from "../common/notify.channels";
 import logger from "../logger";
 
 import WindowPreloadScript from "file-loader!./window.preload.js";
@@ -35,7 +36,12 @@ export default class LovelyWindow {
 	}
 
 	public readonly browserWindow: BrowserWindow;
-	protected ipcListeners: Map<string, ((event: IpcMainEvent) => void)[]>;
+	protected ipcListeners: Map<
+		string,
+		// `any` type here matches what is expected for the IPC listener
+		// eslint-disable-next-line @typescript-eslint/no-explicit-any
+		((event: IpcMainEvent, ...args: any[]) => void)[]
+	>;
 
 	public constructor(options: BrowserWindowConstructorOptions) {
 		options = Object.assign({}, this.defaultWindowOptions, options);
@@ -43,7 +49,9 @@ export default class LovelyWindow {
 		this.browserWindow = new BrowserWindow(options);
 		this.ipcListeners = new Map<
 			string,
-			((event: IpcMainEvent) => void)[]
+			// `any` type here matches what is expected for the IPC listener
+			// eslint-disable-next-line @typescript-eslint/no-explicit-any
+			((event: IpcMainEvent, ...args: any[]) => void)[]
 		>();
 
 		this.init();
@@ -53,16 +61,19 @@ export default class LovelyWindow {
 		this.browserWindow.close();
 	}
 
-	public onMsg(
-		name: string,
-		callback: (event: IpcMainEvent) => void,
-	): (event: IpcMainEvent) => void {
+	public onMsg<
+		T extends keyof IServerNotifyChannels,
+		K extends IServerNotifyChannels[T],
+	>(
+		name: T,
+		callback: (event: IpcMainEvent, ...args: K) => void,
+	): (event: IpcMainEvent, ...args: K) => void {
 		logger.debug(
 			`Adding ${name} IPC listener from ${this.constructor.name}`,
 		);
-		const wrappedCB = (event: IpcMainEvent) => {
+		const wrappedCB = (event: IpcMainEvent, ...args: K) => {
 			if (this.browserWindow.webContents === event.sender) {
-				return callback(event);
+				return callback(event, ...args);
 			}
 		};
 
