@@ -32,7 +32,7 @@ export async function generateSecureRandomKey(size = 256): Promise<string> {
 export async function getKeychainSecret(key: string): Promise<string> {
 	let secret = await keytar.getPassword(KEYCHAIN_SERVICE_NAME, key);
 	if (secret === null || secret === undefined) {
-		secret = await generateSecureRandomKey();
+		secret = (await generateSecureRandomKey(48)).slice(0, 32);
 		await keytar.setPassword(KEYCHAIN_SERVICE_NAME, key, secret);
 	}
 	return secret;
@@ -42,7 +42,7 @@ export async function encryptTextValue(
 	toEncrypt: string,
 	keychainLookupKey: string,
 ): Promise<string> {
-	const iv = await generateSecureRandomKey(64);
+	const iv = await generateSecureRandomKey(8);
 	const keychainSecret = await getKeychainSecret(keychainLookupKey);
 	const cipher = crypto.createCipheriv("aes-256-cbc", keychainSecret, iv);
 	let encrypted = cipher.update(toEncrypt, "utf8", "hex");
