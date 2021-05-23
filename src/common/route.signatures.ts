@@ -15,4 +15,11 @@ export interface IRouteHandler {
 		event: IpcMainInvokeEvent,
 		email: string,
 	) => IServerConfig;
+
+	"/auth/plain/submit": (
+		event: IpcMainInvokeEvent,
+		id: number,
+		password: string,
+		save: boolean,
+	) => boolean;
 }
