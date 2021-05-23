@@ -1,10 +1,12 @@
 import { BrowserWindowConstructorOptions } from "electron";
+import { URLSearchParams } from "url";
 
 import { ApplicationConfig } from "../config";
 import logger from "../logger";
 import Notifier from "../notify/notifier";
 import Router from "../route/router";
 import LovelyWindow from "./base.window";
+import ModalWindow from "./modal.window";
 import OnboardingWindow from "./onboard.window";
 
 export default class WindowManager {
@@ -76,6 +78,23 @@ export default class WindowManager {
 				ApplicationConfig.entrypoints.onboarding,
 				OnboardingWindow,
 			),
+		);
+	}
+
+	public popupModal<T extends ModalWindow>(
+		modalClass: {
+			new (options: BrowserWindowConstructorOptions): T;
+			url: string;
+		},
+		parameters?: NodeJS.Dict<string | string[]>,
+	): T {
+		const queryParams = new URLSearchParams(parameters || {});
+		return this.create(
+			`${modalClass.url}?${queryParams.toString()}`,
+			modalClass,
+			{
+				parent: this.mainWindow.browserWindow,
+			},
 		);
 	}
 

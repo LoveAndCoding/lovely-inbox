@@ -5,6 +5,7 @@ import * as fs from "fs";
 // Delcaring some globals defined by tooling
 declare const INBOX_WEBPACK_ENTRY: string;
 declare const ONBOARDING_WEBPACK_ENTRY: string;
+declare const PASSWORD_MODAL_WEBPACK_ENTRY: string;
 
 const APP_NAME = app && app.isPackaged ? "Lovely Inbox" : "Lovely Inbox (Dev)";
 const AUTHOR_NAME = "Love & Coding";
@@ -28,6 +29,10 @@ interface IApplicationConfig {
 		main: string;
 		onboarding: string;
 	};
+
+	modals: {
+		password: string;
+	};
 }
 
 export const ApplicationConfig: Readonly<IApplicationConfig> = {
@@ -43,6 +48,10 @@ export const ApplicationConfig: Readonly<IApplicationConfig> = {
 	entrypoints: {
 		main: INBOX_WEBPACK_ENTRY,
 		onboarding: ONBOARDING_WEBPACK_ENTRY,
+	},
+
+	modals: {
+		password: PASSWORD_MODAL_WEBPACK_ENTRY,
 	},
 };
 

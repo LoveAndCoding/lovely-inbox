@@ -66,6 +66,22 @@ module.exports = {
 							js: "./src/onboarding.tsx",
 							name: "Onboarding",
 						},
+
+						// The Password Modal CSS file
+						{
+							js: "./styles/password.css",
+							name: "password-styles",
+						},
+
+						// Password Modal Window
+						{
+							additionalChunks: ["password-styles"],
+							// Use special template so we can isolate password
+							// code from third party code as much as possible
+							html: "./templates/password.html",
+							js: "./src/ui/modals/password/app.tsx",
+							name: "Password_Modal",
+						},
 					],
 				},
 			},
