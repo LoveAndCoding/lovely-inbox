@@ -58,10 +58,23 @@ let nextIPCRequestId = 1;
  *
  * For a list of routes, refer to src/common/route.signatures.ts
  *
+ * @param {number} [timeoutInMs] Timeout for the request. Default: 30000
  * @param url IPC route to request. Called URL for parity with server requests
  * @param args The arguments that this route expects
  * @returns Promise<mixed> The results of the request
  */
+export function request<
+	T extends keyof IRouteHandler,
+	K extends Tail<Parameters<IRouteHandler[T]>>,
+>(url: T, ...args: K): Promise<ReturnType<IRouteHandler[T]>>;
+export function request<
+	T extends keyof IRouteHandler,
+	K extends Tail<Parameters<IRouteHandler[T]>>,
+>(
+	timeoutInMs: number,
+	url: T,
+	...args: K
+): Promise<ReturnType<IRouteHandler[T]>>;
 export function request<
 	/*
 		These types are a bit wild. The goal of these types is type checking
@@ -82,15 +95,35 @@ export function request<
 	*/
 	T extends keyof IRouteHandler,
 	K extends Tail<Parameters<IRouteHandler[T]>>,
->(url: T, ...args: K): Promise<ReturnType<IRouteHandler[T]>> {
+>(
+	timeoutInMsOrUrl: number | T,
+	urlOrFirstArg: T | K[0],
+	...restArgs: K | Tail<K>
+): Promise<ReturnType<IRouteHandler[T]>> {
+	// If we didn't get a timeout, shift things and give it the default
+	let timeoutInMs = 30000;
+	let url: T;
+	let args: K;
+	if (typeof timeoutInMsOrUrl !== "number") {
+		url = timeoutInMsOrUrl as T;
+		args = [urlOrFirstArg, ...restArgs] as K;
+	} else {
+		timeoutInMs = timeoutInMsOrUrl;
+		url = urlOrFirstArg as T;
+		args = restArgs as K;
+	}
+
 	return new Promise<ReturnType<IRouteHandler[T]>>((resolve, reject) => {
 		const requestId = nextIPCRequestId++;
 
-		// Timeout the request if we don't get a response in 30 seconds
-		const tmr = setTimeout(() => {
-			window.removeEventListener("ipcResponse", checkResponse);
-			reject(new IPCRequestTimeoutError(url));
-		}, 30000);
+		// Timeout the request if we don't get a response in time
+		let tmr: number;
+		if (timeoutInMs && timeoutInMs !== Infinity) {
+			tmr = window.setTimeout(() => {
+				window.removeEventListener("ipcResponse", checkResponse);
+				reject(new IPCRequestTimeoutError(url));
+			}, timeoutInMs);
+		}
 
 		// Check if the response we get is the one we're waiting for
 		const checkResponse = (

@@ -1,4 +1,5 @@
 import Account, { AccountId } from "./account";
+import { IEmailProperties } from "../common/email";
 import { IServerConfig } from "../common/server.config";
 import { UserConfig } from "../config/user";
 import logger from "../logger";
@@ -37,8 +38,15 @@ export default class AccountManager {
 		});
 	}
 
-	public async createAccount(config: IServerConfig): Promise<Account> {
-		const acct = await Account.create(config);
+	public async createAccount(
+		config: IServerConfig,
+		email: IEmailProperties,
+	): Promise<Account | void> {
+		const acct = await Account.create(config, email);
+		if (!acct) {
+			return null;
+		}
+
 		this.accounts.set(acct.id, acct);
 		await UserConfig.addAccount(acct.id);
 

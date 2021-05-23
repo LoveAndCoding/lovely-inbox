@@ -9,7 +9,7 @@ export interface IRouteHandler {
 		event: IpcMainInvokeEvent,
 		config: IServerConfig,
 		email: IEmailProperties,
-	) => IAccountProperties;
+	) => IAccountProperties | void;
 
 	"/account/server/settings/guess": (
 		event: IpcMainInvokeEvent,
